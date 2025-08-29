@@ -14,11 +14,11 @@ const Scroll = lazy(() => import("./components/Scroll"));
 const router = createBrowserRouter([
   {
     path: "/burhans-portofolio/",
-    element: <Landing />,
+    element: <DashUser />,
   },
   {
     path: "/burhans-portofolio/dashuser",
-    element: <DashUser />,
+    element: <Landing />,
   },
   {
     path: "/burhans-portofolio/scroll",
