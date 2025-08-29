@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  FaPaperPlane,
-  FaClock,
-  FaCheckCircle,
-  FaPencilAlt,
+  // FaPaperPlane,
+  // FaClock,
+  // FaCheckCircle,
+  // FaPencilAlt,
   FaBell,
   FaBars, // Tambahkan ikon burger
   FaTimes, // Tambahkan ikon close
 } from "react-icons/fa";
-import TabMenu from "./TabMenu";
+// import TabMenu from "./TabMenu";
 
 interface NavbarProps {
   activeNavbar: number;
@@ -26,16 +26,16 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isTop, setIsTop] = useState(true);
   const lastScrollY = useRef(0);
-  const [activeStatus, setActiveStatus] = useState("");
+  // const [activeStatus, setActiveStatus] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("about-burhan");
 
-  const tickets = [
-    { id: 1, status: "Diverifikasi", title: "Tiket 1" },
-    { id: 2, status: "Diproses", title: "Tiket 2" },
-    { id: 3, status: "Selesai", title: "Tiket 3" },
-    { id: 4, status: "Diproses", title: "Tiket 4" },
-  ];
+  // const tickets = [
+  //   { id: 1, status: "Diverifikasi", title: "Tiket 1" },
+  //   { id: 2, status: "Diproses", title: "Tiket 2" },
+  //   { id: 3, status: "Selesai", title: "Tiket 3" },
+  //   { id: 4, status: "Diproses", title: "Tiket 4" },
+  // ];
 
   // const TabUmumList = [
   //   {
@@ -55,29 +55,29 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   //   },
   // ];
 
-  const TabStatusList = [
-    {
-      label: "Diverifikasi",
-      icon: <FaPaperPlane />,
-      color: "#D23F35",
-      hasCount: true,
-      isNew: true,
-    },
-    {
-      label: "Diproses",
-      icon: <FaClock />,
-      color: "#D2B335",
-      hasCount: true,
-      isNew: false,
-    },
-    {
-      label: "Selesai",
-      icon: <FaCheckCircle />,
-      color: "#5CD235",
-      hasCount: true,
-      isNew: true,
-    },
-  ];
+  // const TabStatusList = [
+  //   {
+  //     label: "Diverifikasi",
+  //     icon: <FaPaperPlane />,
+  //     color: "#D23F35",
+  //     hasCount: true,
+  //     isNew: true,
+  //   },
+  //   {
+  //     label: "Diproses",
+  //     icon: <FaClock />,
+  //     color: "#D2B335",
+  //     hasCount: true,
+  //     isNew: false,
+  //   },
+  //   {
+  //     label: "Selesai",
+  //     icon: <FaCheckCircle />,
+  //     color: "#5CD235",
+  //     hasCount: true,
+  //     isNew: true,
+  //   },
+  // ];
 
   // Scroll spy untuk mendeteksi section aktif
   useEffect(() => {
@@ -310,7 +310,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               </div>
             </div> */}
           </div>
-          <div
+          {/* <div
             className={`fixed right-1 items-center justify-center min-[441px]:hidden transition-all duration-300 ${
               showNavbar ? "bottom-[72px]" : "bottom-[52px]"
             }`}
@@ -332,8 +332,8 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 Buat Laporan
               </p>
             </a>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className={`fixed w-full pb-2 bottom-0 bg-white min-[701px]:hidden transition-all duration-300 ${
               showNavbar ? "h-[68px]" : "h-[48px]"
             }`}
@@ -346,22 +346,23 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   : undefined;
 
                 return (
-                  <TabMenu
-                    key={TabUmum.label}
-                    icon={TabUmum.icon || null}
-                    label={TabUmum.label}
-                    color={TabUmum.color}
-                    isActive={activeStatus === TabUmum.label}
-                    onClick={() => setActiveStatus(TabUmum.label)}
-                    newClass="w-[120px]"
-                    {...(TabUmum.hasCount
-                      ? { count, isNew: TabUmum.isNew }
-                      : {})}
-                  />
+                  // <TabMenu
+                  //   key={TabUmum.label}
+                  //   icon={TabUmum.icon || null}
+                  //   label={TabUmum.label}
+                  //   color={TabUmum.color}
+                  //   isActive={activeStatus === TabUmum.label}
+                  //   onClick={() => setActiveStatus(TabUmum.label)}
+                  //   newClass="w-[120px]"
+                  //   {...(TabUmum.hasCount
+                  //     ? { count, isNew: TabUmum.isNew }
+                  //     : {})}
+                  // />
+                  <></>
                 );
               })}
             </div>
-          </div>
+          </div> */}
         </div>
       )}
       {activeNavbar === 3 && (
