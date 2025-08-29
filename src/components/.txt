@@ -1,0 +1,12 @@
+  const tickets = [
+    { id: 1, status: "Diverifikasi", title: "Tiket 1" },
+    { id: 2, status: "Diproses", title: "Tiket 2" },
+    { id: 3, status: "Selesai", title: "Tiket 3" },
+    { id: 4, status: "Diproses", title: "Tiket 4" },
+  ];
+
+  const filteredTickets = tickets.filter(
+    (ticket) => ticket.status === activeStatus
+  );
+
+  
