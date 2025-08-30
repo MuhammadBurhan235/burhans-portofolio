@@ -8,6 +8,8 @@ import {
   FaBars, // Tambahkan ikon burger
   FaTimes, // Tambahkan ikon close
 } from "react-icons/fa";
+import { Link } from "react-scroll";
+
 // import TabMenu from "./TabMenu";
 
 interface NavbarProps {
@@ -17,8 +19,8 @@ interface NavbarProps {
 
 const portfolioSections = [
   { id: "about-burhan", label: "About Burhan" },
-  { id: "work-experience", label: "Work Experience" },
   { id: "project-experience", label: "Project Experience" },
+  { id: "work-experience", label: "Work Experience" },
   { id: "org-experience", label: "Organizational Experience" },
 ];
 
@@ -30,59 +32,10 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("about-burhan");
 
-  // const tickets = [
-  //   { id: 1, status: "Diverifikasi", title: "Tiket 1" },
-  //   { id: 2, status: "Diproses", title: "Tiket 2" },
-  //   { id: 3, status: "Selesai", title: "Tiket 3" },
-  //   { id: 4, status: "Diproses", title: "Tiket 4" },
-  // ];
-
-  // const TabUmumList = [
-  //   {
-  //     label: "Semua",
-  //     icon: null,
-  //     color: "#3D8BFD",
-  //   },
-  //   {
-  //     label: "Kawalan",
-  //     icon: null,
-  //     color: "#3D8BFD",
-  //   },
-  //   {
-  //     label: "Terhangat",
-  //     icon: null,
-  //     color: "#3D8BFD",
-  //   },
-  // ];
-
-  // const TabStatusList = [
-  //   {
-  //     label: "Diverifikasi",
-  //     icon: <FaPaperPlane />,
-  //     color: "#D23F35",
-  //     hasCount: true,
-  //     isNew: true,
-  //   },
-  //   {
-  //     label: "Diproses",
-  //     icon: <FaClock />,
-  //     color: "#D2B335",
-  //     hasCount: true,
-  //     isNew: false,
-  //   },
-  //   {
-  //     label: "Selesai",
-  //     icon: <FaCheckCircle />,
-  //     color: "#5CD235",
-  //     hasCount: true,
-  //     isNew: true,
-  //   },
-  // ];
-
   // Scroll spy untuk mendeteksi section aktif
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 4;
+      const scrollPos = window.scrollY + window.innerHeight / 1.5;
       for (const sec of portfolioSections) {
         const el = document.getElementById(sec.id);
         if (el) {
@@ -119,15 +72,6 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-    setActive(id);
-    setMenuOpen(false);
-  };
-
   return (
     <>
       {" "}
@@ -145,11 +89,11 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Open menu"
-                className="flex items-center gap-2 w-fit bg-blue-600 px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
+                className="flex items-center gap-2 w-fit bg-blue-600 p-3 rounded-[8px] hover:bg-white transition-all duration-300 group"
               >
-                <span className="text-white text-sm font-medium group-hover:text-blue-600">
+                {/* <span className="text-white text-sm font-medium group-hover:text-blue-600">
                   Experience
-                </span>
+                </span> */}
                 <span className="text-white text-2xl group-hover:text-blue-600">
                   {menuOpen ? <FaTimes /> : <FaBars />}
                 </span>
@@ -159,36 +103,53 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               {menuOpen && (
                 <div className="absolute top-[64px] right-4 bg-white rounded shadow-lg flex flex-col gap-2 p-4 z-50 min-w-[180px]">
                   {portfolioSections.map((sec) => (
-                    <button
+                    <Link
                       key={sec.id}
-                      onClick={() => handleClick(sec.id)}
-                      className={`px-3 py-2 rounded-md cursor-pointer transition-colors duration-200 text-xs text-left ${
+                      to={sec.id}
+                      spy={true}
+                      smooth={true}
+                      offset={-64} // sesuaikan dengan tinggi navbar
+                      duration={500}
+                      className={`px-3 py-2 rounded-md mx-3 nav-link transition-colors duration-200 text-xs text-left cursor-pointer ${
                         active === sec.id
                           ? "bg-blue-600 text-white"
                           : "bg-white text-blue-600 hover:bg-blue-100"
                       }`}
+                      onClick={() => {
+                        setActive(sec.id);
+                        setMenuOpen(false);
+                        // HAPUS: scrollIntoView
+                      }}
                     >
                       {sec.label}
-                    </button>
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
 
             {/* Tombol scroll section untuk desktop */}
-            <div className="hidden md:flex flex-row gap-4 w-auto">
+            <div className="hidden md:flex flex-row gap-2 w-auto">
               {portfolioSections.map((sec) => (
-                <button
+                <Link
                   key={sec.id}
-                  onClick={() => handleClick(sec.id)}
-                  className={`px-4 py-2 rounded-md cursor-pointer transition-colors duration-200 text-base ${
+                  to={sec.id}
+                  spy={true}
+                  smooth={true}
+                  offset={-64} // sesuaikan dengan tinggi navbar
+                  duration={500}
+                  className={`px-4 py-2 rounded-md nav-link transition-colors duration-200 text-base cursor-pointer ${
                     active === sec.id
                       ? "bg-blue-600 text-white"
                       : "bg-white text-blue-600 hover:bg-blue-100"
                   }`}
+                  onClick={() => {
+                    setActive(sec.id);
+                    setMenuOpen(false);
+                  }}
                 >
                   {sec.label}
-                </button>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,10 +1,5 @@
-/* ✅ HARUS di baris pertama (kecuali @charset atau @layer) */
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap");
 @import "tailwindcss";
-
-html {
-  scroll-behavior: smooth;
-}
 
 /* Setelah itu baru custom class */
 .font-bebas {
