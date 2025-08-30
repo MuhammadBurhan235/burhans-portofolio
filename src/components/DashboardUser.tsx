@@ -33,7 +33,14 @@ const workExperiences = [
     images: ["Mug", "Baju1", "Mug", "Baju1"],
     location: "Telkom University - Al Lathif Islamic School",
     date: "Nov 2024 - Jan 2025",
-    skills: ["sass", "php", "mysql", "frontend-development", "lean-ux"],
+    skills: [
+      "sass",
+      "php",
+      "mysql",
+      "frontend-development",
+      "lean-ux",
+      "agile",
+    ],
     output: [
       {
         url: "https://lms.allathif-islamicschool.id/",
@@ -58,7 +65,76 @@ const workExperiences = [
     images: ["Mug", "Baju1", "Mug", "Baju1"],
     location: "Telkom University",
     date: "Jun 2024 - Aug 2024",
-    skills: ["sass", "php", "mysql", "frontend-development", "lean-ux"],
+    skills: [
+      "sass",
+      "php",
+      "mysql",
+      "frontend-development",
+      "lean-ux",
+      "agile",
+    ],
+    output: [
+      {
+        url: "https://lms.mynextskill.com/",
+        label: "https://lms.mynextskill.com/",
+      },
+    ],
+  },
+];
+
+const projectExperiences = [
+  {
+    title: "Frontend Developer",
+    description: [
+      "Developed and customized front-end components of Moodle LMS to enhance user experience and engagement.",
+      "Assisted in planning, coordination, and deployment of a Learning Management System (LMS) based on Moodle.",
+      "Supported the integration of gamification features to improve learning engagement for school teachers and students.",
+      "Collaborated with the academic team to deliver workshops and technical support to target users.",
+      "Contributed to the socialization and technical implementation of Moodle in the school environment.",
+    ],
+    images: ["Mug", "Baju1", "Mug", "Baju1"],
+    location: "Telkom University - Al Lathif Islamic School",
+    date: "Nov 2024 - Jan 2025",
+    skills: [
+      "sass",
+      "php",
+      "mysql",
+      "frontend-development",
+      "lean-ux",
+      "agile",
+    ],
+    output: [
+      {
+        url: "https://lms.allathif-islamicschool.id/",
+        label: "https://lms.allathif-islamicschool.id/",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/overlay/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1756189505012",
+        label: "HKI Certificate",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1744482492759",
+        label: "Community Service Certificate",
+      },
+    ],
+  },
+  {
+    title: "Frontend Developer",
+    description: [
+      "Using the Lean UX Method, the development process was conducted without prototypes or initial designs in Figma. Feedback from lecturers was directly applied by modifying the code on the Moodle platform, which was already hosted on Hostinger.",
+      "LMS interface customization, including color adjustments, layout modifications, and other visual design elements to meet institutional branding and accessibility needs.",
+    ],
+    images: ["Mug", "Baju1", "Mug", "Baju1"],
+    location: "Telkom University",
+    date: "Jun 2024 - Aug 2024",
+    skills: [
+      "sass",
+      "php",
+      "mysql",
+      "frontend-development",
+      "lean-ux",
+      "agile",
+    ],
     output: [
       {
         url: "https://lms.mynextskill.com/",
@@ -71,10 +147,10 @@ const workExperiences = [
 const orgExperiences = [
   {
     title: "Broadcaster",
-    images: ["Mug"],
-    location: "Lembaga Dakwah Kampus Telkom University",
+    images: [],
+    location: "Lembaga Dakwah Kampus Al Fath Telkom University",
     date: "Jan 2024 - Jan 2025",
-    skills: ["public-broadcasting", "broadcast-media"],
+    skills: ["teamwork", "public-broadcasting", "broadcast-media"],
     output: [
       {
         url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/1745245873398/single-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo",
@@ -83,10 +159,39 @@ const orgExperiences = [
     ],
   },
   {
-    title: "Anggota BEM",
-    description: "Berpartisipasi dalam program kerja BEM Universitas.",
-    images: ["Mug", "Mug"],
-    buttonLabel: "Detail",
+    title: "Head of Public Relations Division",
+    images: [],
+    description: "Muslim Youth Sessions 2024",
+    location: "Lembaga Dakwah Kampus Al Fath Telkom University",
+    date: "Apr 2024 - May 2024",
+    skills: ["lead", "teamwork", "public-broadcasting", "broadcast-media"],
+    output: [
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/1745245873398/single-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo",
+        label: "LDK Al Fath Gen11th Certificate",
+      },
+    ],
+  },
+  {
+    title: "Volunteer",
+    images: [],
+    location: "Lembaga Dakwah Kampus Al Fath Telkom University",
+    date: "Aug 2022 - Apr 2024",
+    skills: ["teamwork"],
+  },
+  {
+    title: "Secretary of Data Collection Division",
+    images: [],
+    description: "New Student Admission Committee - Islamic, 2023",
+    location: "Lembaga Dakwah Kampus Al Fath Telkom University",
+    date: "Aug 2023 - Sep 2023",
+    skills: ["lead", "teamwork"],
+    output: [
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/1745246323985/single-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo",
+        label: "Certificate of Contribution",
+      },
+    ],
   },
 ];
 
@@ -159,7 +264,7 @@ function ExperienceItem({
           ) : (
             <p className="text-justify">{description}</p>
           )}
-          <div className="py-4">
+          <div className="mt-4">
             {skills?.length > 0 && (
               <div className="flex flex-col gap-2 ">
                 <span className="text-xs md:text-sm font-bold">
@@ -172,7 +277,7 @@ function ExperienceItem({
                     skills.includes("php") ||
                     skills.includes("mysql")) && (
                     <span
-                      className="w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]"
+                      className="w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl "
                       title={[
                         skills.includes("sass") && "Sass",
                         skills.includes("react") && "React.js",
@@ -200,7 +305,7 @@ function ExperienceItem({
                       )}
                     </span>
                   )}
-                  <span className="w-fit max-[485px]:w-full font-medium text-xs text-center flex items-center justify-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+                  <span className="w-fit max-[485px]:w-full font-medium text-xs text-center flex items-center justify-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl ">
                     {[
                       skills.includes("frontend-development") &&
                         "Frontend Development",
@@ -212,6 +317,7 @@ function ExperienceItem({
                       skills.includes("public-broadcasting") &&
                         "Public Broadcasting",
                       skills.includes("broadcast-media") && "Broadcast Media",
+                      skills.includes("teamwork") && "Teamwork",
                     ]
                       .filter(Boolean) // buang false/null
                       .join(", ")}
@@ -220,19 +326,19 @@ function ExperienceItem({
               </div>
             )}
 
-            {output && (
+            {output.length > 0 && (
               <div className="flex flex-col gap-2 mt-4">
                 <span className="text-xs md:text-sm font-bold">
                   Output - Just Click It!
                 </span>
-                <div className="flex flex-wrap gap-2 text-center">
+                <div className="flex flex-wrap gap-3 text-center md:gap-2">
                   {output.map((item: OutputItem, idx: string) => (
                     <a
                       key={idx}
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-fit max-[485px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
+                      className="w-fit max-[485px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
                     >
                       {item.label ?? item.url}
                     </a>
@@ -243,37 +349,41 @@ function ExperienceItem({
           </div>
         </div>
 
-        <div className="flex flex-col items-center w-full md:w-1/3 gap-2">
-          {/* Gambar utama */}
-          <img
-            src={imagess[images[imgIdx]]}
-            className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300"
-            alt=""
-          />
-          {/* Baris preview dan tombol */}
-          <div className="flex flex-row items-center gap-2 mt-2">
-            {/* preview images */}
-            {images.slice(0, sliceCount).map((img: string, idx: number) => (
-              <img
-                key={idx}
-                src={imagess[img]}
-                className="w-14 h-9 md:w-20 md:h-14 lg:w-18 lg:h-16 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300"
-                alt=""
-                onClick={() => setImgIdx(idx)}
-              />
-            ))}
-            {/* tombol lihat selengkapnya */}
-            <button
-              className="w-14 h-9 md:w-20 md:h-14 lg:w-18 lg:h-16 bg-blue-500 text-white rounded flex items-center justify-center text-base"
-              onClick={() =>
-                alert("Tampilkan semua gambar (implementasi modal di sini)")
-              }
-              style={{ minWidth: "36px", minHeight: "36px" }}
-            >
-              <FaBars />
-            </button>
+        {images.length > 0 && (
+          <div className="flex flex-col items-center w-full mt-4 md:w-1/3 gap-2">
+            {/* Gambar utama */}
+            <img
+              src={imagess[images[imgIdx]]}
+              className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300"
+              alt=""
+            />
+            {images.length > 1 && (
+              <div className="flex flex-row items-center gap-2 mt-2">
+                {/* preview images */}
+                {images.slice(0, sliceCount).map((img: string, idx: number) => (
+                  <img
+                    key={idx}
+                    src={imagess[img]}
+                    className="w-14 h-9 shadow-[0_3px_6px_rgba(8,74,131,0.5)] md:w-20 md:h-14 lg:w-18 lg:h-16 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300"
+                    alt=""
+                    onClick={() => setImgIdx(idx)}
+                  />
+                ))}
+
+                {/* tombol lihat selengkapnya */}
+                <button
+                  className="w-14 h-9 shadow-[0_3px_6px_rgba(8,74,131,0.5)] md:w-20 md:h-14 lg:w-18 lg:h-16 bg-blue-500 text-white rounded flex items-center justify-center text-base"
+                  onClick={() =>
+                    alert("Tampilkan semua gambar (implementasi modal di sini)")
+                  }
+                  style={{ minWidth: "36px", minHeight: "36px" }}
+                >
+                  <FaBars />
+                </button>
+              </div>
+            )}
           </div>
-        </div>
+        )}
       </div>
       {/* <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded text-sm md:text-base">
         {buttonLabel}
@@ -326,7 +436,7 @@ function DashboardUser() {
           <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4">
             Project Experience
           </h2>
-          {orgExperiences.map((exp, idx) => (
+          {projectExperiences.map((exp, idx) => (
             <ExperienceItem key={idx} {...exp} />
           ))}
         </div>
