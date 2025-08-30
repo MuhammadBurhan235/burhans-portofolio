@@ -145,12 +145,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Open menu"
-                className="flex items-center gap-2 w-fit bg-[#3D8BFD] px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
+                className="flex items-center gap-2 w-fit bg-blue-600 px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
               >
-                <span className="text-white text-sm font-medium group-hover:text-[#3D8BFD]">
+                <span className="text-white text-sm font-medium group-hover:text-blue-600">
                   Experience
                 </span>
-                <span className="text-white text-2xl group-hover:text-[#3D8BFD]">
+                <span className="text-white text-2xl group-hover:text-blue-600">
                   {menuOpen ? <FaTimes /> : <FaBars />}
                 </span>
               </button>
@@ -213,7 +213,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 className="w-[140px] h-12 bg-white rounded-2xl max-[441px]:hidden"
               ></a>
               <div className="w-full max-w-[720px] flex flex-row items-center justify-between border-2 px-2 py-2 bg-white rounded-3xl shadow-[0_0_15px_rgba(255,255,255,0.5)] text-sm outline-none text-black transition-all duration-300 overflow-hidden hover:shadow-[0_0_15px_rgba(255,255,255,1)] hover:border-[#084A83]/50 focus:shadow-[0_0_15px_rgba(255,255,255,1)] focus:border-[#084A83]">
-                <FaBell className="w-8 h-6 text-[#3D8BFD] hover:text-white transition-all duration-300 min-[441px]:hidden group" />
+                <FaBell className="w-8 h-6 text-blue-600 hover:text-white transition-all duration-300 min-[441px]:hidden group" />
                 <input
                   type="text"
                   className="w-full px-4"
@@ -222,7 +222,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 />
                 <a
                   href=""
-                  className="w-10 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 min-[441px]:hidden group"
+                  className="w-10 h-8 bg-blue-600 rounded-2xl hover:bg-white transition-all duration-300 min-[441px]:hidden group"
                 ></a>
               </div>
               <div className="w-fit h-full flex gap-4 items-center max-[441px]:hidden">
@@ -232,7 +232,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   </a>
                   <a
                     href=""
-                    className="w-8 h-8 bg-[#3D8BFD] rounded-[8px] hover:bg-white transition-all duration-300 group"
+                    className="w-8 h-8 bg-blue-600 rounded-[8px] hover:bg-white transition-all duration-300 group"
                   ></a>
                 </div>
               </div>
@@ -243,9 +243,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   <div className="text-2xl font-medium">LAPORAN</div>
                   <a
                     href=""
-                    className="w-fit h-fit px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
+                    className="w-fit h-fit px-4 py-2 bg-blue-600 border-2 border-blue-600 rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
                   >
-                    <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-[#3D8BFD]">
+                    <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-blue-600">
                       <span className="text-lg">
                         <FaPencilAlt />
                       </span>
@@ -296,9 +296,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   <div className="flex flex-row min-[701px]:hidden max-[441px]:hidden">
                     <a
                       href=""
-                      className="w-fit h-fit px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
+                      className="w-fit h-fit px-4 py-2 bg-blue-600 border-2 border-blue-600 rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
                     >
-                      <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-[#3D8BFD]">
+                      <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-blue-600">
                         <span className="text-lg">
                           <FaPencilAlt />
                         </span>
@@ -317,7 +317,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
           >
             <a
               href=""
-              className={`h-[44px] px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] text-white flex gap-3 items-center hover:bg-white hover:border-2 transition-all duration-300 group ${
+              className={`h-[44px] px-4 py-2 bg-blue-600 border-2 border-blue-600 rounded-[8px] text-white flex gap-3 items-center hover:bg-white hover:border-2 transition-all duration-300 group ${
                 showNavbar ? "w-[163px]" : "w-[53px] "
               }`}
             >
@@ -325,7 +325,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 <FaPencilAlt />
               </span>
               <p
-                className={`text-base text-white font-medium items-center whitespace-nowrap group-hover:text-[#3D8BFD] transition-all duration-300 ${
+                className={`text-base text-white font-medium items-center whitespace-nowrap group-hover:text-blue-600 transition-all duration-300 ${
                   showNavbar ? "block" : "hidden"
                 }`}
               >
@@ -402,9 +402,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               <div className="w-fit h-full flex items-center">
                 <a
                   href=""
-                  className="w-fit bg-[#3D8BFD] px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
+                  className="w-fit bg-blue-600 px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
                 >
-                  <p className="text-base text-white font-medium group-hover:text-[#3D8BFD]">
+                  <p className="text-base text-white font-medium group-hover:text-blue-600">
                     MASUK
                   </p>
                 </a>

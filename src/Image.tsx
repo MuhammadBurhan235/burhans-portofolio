@@ -5,7 +5,7 @@ import Verif from "/check.png";
 import Neo1 from "/Neo1.png";
 import YTLogo from "/YTLogo.png";
 
-export const images: { [key: string]: string } = {
+export const imagess: { [key: string]: string } = {
   Warung: Warung,
   Baju1: Baju1,
   Mug: Mug,

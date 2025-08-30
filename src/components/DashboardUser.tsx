@@ -1,25 +1,19 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { FaBars } from "react-icons/fa";
 import Navbar from "./Navbar";
-
+import { imagess } from "../Image";
 const aboutBurhan = [
   {
     title: "Frontend Developer - PT. Teknologi Maju",
     description:
       "Mengembangkan aplikasi web menggunakan React dan Tailwind CSS.",
-    images: [
-      "https://via.placeholder.com/120x80?text=Work1",
-      "https://via.placeholder.com/120x80?text=Work2",
-    ],
+    images: ["Mug", "Mug"],
     buttonLabel: "Detail",
   },
   {
     title: "UI/UX Designer - Kreatif Studio",
     description: "Mendesain antarmuka aplikasi mobile dan website.",
-    images: [
-      "https://via.placeholder.com/120x80?text=Design1",
-      "https://via.placeholder.com/120x80?text=Design2",
-    ],
+    images: ["Mug", "Mug"],
     buttonLabel: "Detail",
   },
 ];
@@ -33,19 +27,13 @@ const workExperiences = [
       "- Bekerja sama dengan tim akademik untuk memberikan lokakarya dan dukungan teknis kepada pengguna sasaran.",
       "- Berkontribusi pada sosialisasi dan implementasi teknis Moodle di lingkungan sekolah.",
     ],
-    images: [
-      "https://via.placeholder.com/120x80?text=Work1",
-      "https://via.placeholder.com/120x80?text=Work2",
-    ],
+    images: ["Mug", "Baju1", "Mug", "Baju1"], // path dari public
     buttonLabel: "Detail",
   },
   {
     title: "UI/UX Designer - Kreatif Studio",
     description: "Mendesain antarmuka aplikasi mobile dan website.",
-    images: [
-      "https://via.placeholder.com/120x80?text=Design1",
-      "https://via.placeholder.com/120x80?text=Design2",
-    ],
+    images: ["Mug", "Mug"],
     buttonLabel: "Detail",
   },
 ];
@@ -55,65 +43,87 @@ const orgExperiences = [
     title: "Ketua Himpunan Mahasiswa Informatika",
     description:
       "Memimpin organisasi mahasiswa dan mengelola berbagai kegiatan.",
-    images: [
-      "https://via.placeholder.com/120x80?text=Org1",
-      "https://via.placeholder.com/120x80?text=Org2",
-    ],
+    images: ["Mug", "Mug"],
     buttonLabel: "Detail",
   },
   {
     title: "Anggota BEM",
     description: "Berpartisipasi dalam program kerja BEM Universitas.",
-    images: [
-      "https://via.placeholder.com/120x80?text=BEM1",
-      "https://via.placeholder.com/120x80?text=BEM2",
-    ],
+    images: ["Mug", "Mug"],
     buttonLabel: "Detail",
   },
 ];
 
-function ExperienceItem({ title, description, images, buttonLabel }: any) {
+function ExperienceItem({ title, description, images }: any) {
   const [imgIdx, setImgIdx] = useState(0);
+  const [sliceCount, setSliceCount] = useState(2);
 
-  const nextImg = () => setImgIdx((idx) => (idx + 1) % images.length);
-  const prevImg = () =>
-    setImgIdx((idx) => (idx - 1 + images.length) % images.length);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 320) {
+        setSliceCount(3);
+      } else if (window.innerWidth <= 425) {
+        setSliceCount(4);
+      } else if (window.innerWidth <= 768) {
+        setSliceCount(2);
+      } else {
+        setSliceCount(3);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="bg-gray-50 rounded-xl p-4 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
-      <h3 className="w-fit font-bold text-base md:text-lg lg:text-xl ml-[-56px] px-[24px] py-[12px] pl-14 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+    <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
+      <h3 className="w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
         {title}
       </h3>
       {/* Jika description array, map per baris */}
-      <div className="text-sm md:text-base lg:text-lg flex flex-col gap-1">
-        {Array.isArray(description) ? (
-          description.map((line, idx) => <p key={idx}>{line}</p>)
-        ) : (
-          <p>{description}</p>
-        )}
+      <div className="flex flex-col md:flex-row gap-4w-full">
+        <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3">
+          {Array.isArray(description) ? (
+            description.map((line, idx) => <p key={idx}>{line}</p>)
+          ) : (
+            <p>{description}</p>
+          )}
+        </div>
+        <div className="flex flex-col items-center w-full md:w-1/3 gap-2">
+          {/* Gambar utama */}
+          <img
+            src={imagess[images[imgIdx]]}
+            className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300"
+            alt=""
+          />
+          {/* Baris preview dan tombol */}
+          <div className="flex flex-row items-center gap-2 mt-2">
+            {/* preview images */}
+            {images.slice(0, sliceCount).map((img: string, idx: number) => (
+              <img
+                key={idx}
+                src={imagess[img]}
+                className="w-14 h-9 md:w-20 md:h-14 lg:w-18 lg:h-16 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300"
+                alt=""
+                onClick={() => setImgIdx(idx)}
+              />
+            ))}
+            {/* tombol lihat selengkapnya */}
+            <button
+              className="w-14 h-9 md:w-20 md:h-14 lg:w-18 lg:h-16 bg-blue-500 text-white rounded flex items-center justify-center text-base"
+              onClick={() =>
+                alert("Tampilkan semua gambar (implementasi modal di sini)")
+              }
+              style={{ minWidth: "36px", minHeight: "36px" }}
+            >
+              <FaBars />
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={prevImg}
-          className="px-2 py-1 bg-blue-100 rounded text-xs md:text-sm"
-        >
-          Prev
-        </button>
-        <img
-          src={images[imgIdx]}
-          alt={title}
-          className="w-[120px] h-[80px] object-cover rounded"
-        />
-        <button
-          onClick={nextImg}
-          className="px-2 py-1 bg-blue-100 rounded text-xs md:text-sm"
-        >
-          Next
-        </button>
-      </div>
-      <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded text-sm md:text-base">
+      {/* <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded text-sm md:text-base">
         {buttonLabel}
-      </button>
+      </button> */}
     </div>
   );
 }

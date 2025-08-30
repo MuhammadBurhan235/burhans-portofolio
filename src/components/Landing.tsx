@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { MdClose } from "react-icons/md";
 
-import { images } from "../Image";
+import { imagess } from "../Image";
 
 function Landing() {
   const [isTop, setIsTop] = useState(true);
@@ -158,7 +158,7 @@ function Landing() {
           </h1>
           <div className="relative w-full">
             <img
-              src={images["Warung"]}
+              src={imagess["Warung"]}
               alt="Deskripsi Gambar"
               className="w-full rounded-2xl"
             />
@@ -380,7 +380,7 @@ function Landing() {
                             <div className="w-fit flex items-center justify-center max-[440px]:w-full ">
                               <div className="w-56 h-56 flex items-center justify-center ">
                                 <img
-                                  src={images["Baju1"]}
+                                  src={imagess["Baju1"]}
                                   alt="Deskripsi Gambar"
                                   className="w-full rounded-2xl shadow-[0_8px_8px_1px_gray]"
                                 />
@@ -432,7 +432,7 @@ function Landing() {
                             <div className="w-fit flex items-center justify-center max-[440px]:w-full ">
                               <div className="w-56 h-56 flex items-center justify-center ">
                                 <img
-                                  src={images["Mug"]}
+                                  src={imagess["Mug"]}
                                   alt="Deskripsi Gambar"
                                   className="w-full rounded-2xl shadow-[0_8px_8px_1px_gray]"
                                 />
@@ -543,7 +543,7 @@ function Landing() {
                             <div className="relative w-full flex items-center justify-center max-[440px]:w-full ">
                               <div className=" w-56 h-56 flex items-center justify-center ">
                                 <img
-                                  src={images["Neo1"]}
+                                  src={imagess["Neo1"]}
                                   alt="Deskripsi Gambar"
                                   className="h-80 rounded-2xl "
                                 />
@@ -608,7 +608,7 @@ function Landing() {
                                 </h3>{" "}
                                 <div className="">
                                   <img
-                                    src={images["Verif"]}
+                                    src={imagess["Verif"]}
                                     alt="Deskripsi Gambar"
                                     className="h-3 mb-1 "
                                   />
@@ -633,7 +633,7 @@ function Landing() {
                               <div className=" h-56 flex items-center justify-center ">
                                 <a href="https://www.youtube.com/@NeoJapan">
                                   <img
-                                    src={images["YTLogo"]}
+                                    src={imagess["YTLogo"]}
                                     alt="Deskripsi Gambar"
                                     className="h-80 rounded-2xl "
                                   />
