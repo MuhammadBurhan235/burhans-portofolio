@@ -9,13 +9,13 @@ const aboutBurhan = [
     description:
       "Mengembangkan aplikasi web menggunakan React dan Tailwind CSS.",
     images: ["Mug", "Mug"],
-    buttonLabel: "Detail",
+    skills: [],
   },
   {
     title: "UI/UX Designer - Kreatif Studio",
     description: "Mendesain antarmuka aplikasi mobile dan website.",
     images: ["Mug", "Mug"],
-    buttonLabel: "Detail",
+    skills: [],
   },
 ];
 
@@ -25,18 +25,18 @@ const workExperiences = [
     description: [
       "Membantu perencanaan, koordinasi, dan penerapan Sistem Manajemen Pembelajaran (LMS) berbasis Moodle.",
       "Mendukung integrasi fitur gamifikasi untuk meningkatkan keterlibatan belajar bagi guru dan siswa.",
-      "Bekerja sama dengan tim akademik untuk memberikan lokakarya dan dukungan teknis kepada pengguna sasaran.",
-      "Berkontribusi pada sosialisasi dan implementasi teknis Moodle di lingkungan sekolah.",
     ],
-    images: ["Mug", "Baju1", "Mug", "Baju1"], // path dari public
-    buttonLabel: "Detail",
-    skills: ["react", "typescript", "php", "mysql"],
+    images: ["Mug", "Baju1"],
+    location: "Telkom University",
+    date: "Juni - Agustus 2024",
+    skills: ["react", "typescript", "php", "mysql", "lean-ux"],
+    output: "https://lms.allathif-islamicschool.id/",
   },
   {
     title: "UI/UX Designer - Kreatif Studio",
     description: "Mendesain antarmuka aplikasi mobile dan website.",
     images: ["Mug", "Mug"],
-    buttonLabel: "Detail",
+    skills: [],
   },
 ];
 
@@ -56,7 +56,15 @@ const orgExperiences = [
   },
 ];
 
-function ExperienceItem({ title, description, images, skills = [] }: any) {
+function ExperienceItem({
+  title,
+  description,
+  images,
+  skills = [],
+  location,
+  date,
+  output,
+}: any) {
   const [imgIdx, setImgIdx] = useState(0);
   const [sliceCount, setSliceCount] = useState(2);
 
@@ -79,31 +87,26 @@ function ExperienceItem({ title, description, images, skills = [] }: any) {
 
   return (
     <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
-      <h3 className="w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+      <h3
+        className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
+             bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
+             before:content-[''] before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 
+             before:w-4 before:h-4 before:rounded-full before:bg-blue-500"
+      >
         {title}
       </h3>
-
-      {/* Jika description array, map per baris */}
       <div className="flex flex-col md:flex-row gap-4w-full bg-amber-0">
         <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 bg-red-0">
-          <div className="flex flex-row gap-3 items-center mb-2 ml-2">
-            {skills.includes("react") && (
-              <FaReact className="text-blue-500 text-xl" title="React.js" />
+          {/* Lokasi dan Tanggal */}
+          <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
+            {location && date && (
+              <span className="text-xs md:text-sm font-bold">
+                {location} | {date}
+              </span>
             )}
-            {skills.includes("typescript") && (
-              <SiTypescript
-                className="text-blue-700 text-xl"
-                title="TypeScript"
-              />
-            )}
-            {skills.includes("php") && (
-              <SiPhp className="text-indigo-700 text-xl" title="PHP" />
-            )}
-            {skills.includes("mysql") && (
-              <SiMysql className="text-yellow-700 text-xl" title="MySQL" />
-            )}
-            {/* Tambahkan skill lain sesuai kebutuhan */}
           </div>
+
+          {/* Deskripsi */}
           {Array.isArray(description) ? (
             <ul>
               {description.map((line, idx) => (
@@ -116,7 +119,63 @@ function ExperienceItem({ title, description, images, skills = [] }: any) {
           ) : (
             <p className="text-justify">{description}</p>
           )}
+          {skills?.length > 0 && (
+            <div className="flex flex-col gap-2 ">
+              <span className="text-xs md:text-sm font-bold">Skills Focus</span>
+              <div className="flex flex-wrap gap-2 items-center">
+                <span
+                  className="w-fit font-medium text-xs flex flex-row gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]"
+                  title={[
+                    skills.includes("react") && "React.js",
+                    skills.includes("typescript") && "TypeScript",
+                    skills.includes("php") && "PHP",
+                    skills.includes("mysql") && "MySQL",
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                >
+                  {skills.includes("react") && (
+                    <FaReact className="text-blue-500 text-2xl" />
+                  )}
+                  {skills.includes("typescript") && (
+                    <SiTypescript className="text-blue-700 text-2xl" />
+                  )}
+                  {skills.includes("php") && (
+                    <SiPhp className="text-indigo-700 text-2xl" />
+                  )}
+                  {skills.includes("mysql") && (
+                    <SiMysql className="text-yellow-700 text-2xl" />
+                  )}
+                </span>
+
+                {skills.includes("lean-ux") && (
+                  <span className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+                    Lean UX
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+          {output && (
+            <div className="flex flex-col gap-2 mt-2">
+              <span className="text-xs md:text-sm font-bold">
+                Output - Just Click!
+              </span>
+
+              <a
+                href="https://lms.allathif-islamicschool.id/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-fit max-[425px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
+              >
+                <span className="block whitespace-nowrap overflow-hidden text-ellipsis">
+                  {output}
+                </span>
+              </a>
+            </div>
+          )}
         </div>
+
         <div className="flex flex-col items-center w-full md:w-1/3 gap-2">
           {/* Gambar utama */}
           <img
