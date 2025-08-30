@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { FaBars, FaReact } from "react-icons/fa";
+import { FaBars, FaReact, FaSass } from "react-icons/fa";
 import { SiTypescript, SiPhp, SiMysql } from "react-icons/si";
 import Navbar from "./Navbar";
 import { imagess } from "../Image";
+
 const aboutBurhan = [
   {
     title: "Frontend Developer - PT. Teknologi Maju",
@@ -21,32 +22,65 @@ const aboutBurhan = [
 
 const workExperiences = [
   {
-    title: "Frontend Developer - PT. Teknologi Maju",
+    title: "Frontend Developer",
     description: [
-      "Membantu perencanaan, koordinasi, dan penerapan Sistem Manajemen Pembelajaran (LMS) berbasis Moodle.",
-      "Mendukung integrasi fitur gamifikasi untuk meningkatkan keterlibatan belajar bagi guru dan siswa.",
+      "Developed and customized front-end components of Moodle LMS to enhance user experience and engagement.",
+      "Assisted in planning, coordination, and deployment of a Learning Management System (LMS) based on Moodle.",
+      "Supported the integration of gamification features to improve learning engagement for school teachers and students.",
+      "Collaborated with the academic team to deliver workshops and technical support to target users.",
+      "Contributed to the socialization and technical implementation of Moodle in the school environment.",
     ],
-    images: ["Mug", "Baju1"],
-    location: "Telkom University",
-    date: "Juni - Agustus 2024",
-    skills: ["react", "typescript", "php", "mysql", "lean-ux"],
-    output: "https://lms.allathif-islamicschool.id/",
+    images: ["Mug", "Baju1", "Mug", "Baju1"],
+    location: "Telkom University - Al Lathif Islamic School",
+    date: "Nov 2024 - Jan 2025",
+    skills: ["sass", "php", "mysql", "frontend-development", "lean-ux"],
+    output: [
+      {
+        url: "https://lms.allathif-islamicschool.id/",
+        label: "https://lms.allathif-islamicschool.id/",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/overlay/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1756189505012",
+        label: "HKI Certificate",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1744482492759",
+        label: "Community Service Certificate",
+      },
+    ],
   },
   {
-    title: "UI/UX Designer - Kreatif Studio",
-    description: "Mendesain antarmuka aplikasi mobile dan website.",
-    images: ["Mug", "Mug"],
-    skills: [],
+    title: "Frontend Developer",
+    description: [
+      "Using the Lean UX Method, the development process was conducted without prototypes or initial designs in Figma. Feedback from lecturers was directly applied by modifying the code on the Moodle platform, which was already hosted on Hostinger.",
+      "LMS interface customization, including color adjustments, layout modifications, and other visual design elements to meet institutional branding and accessibility needs.",
+    ],
+    images: ["Mug", "Baju1", "Mug", "Baju1"],
+    location: "Telkom University",
+    date: "Jun 2024 - Aug 2024",
+    skills: ["sass", "php", "mysql", "frontend-development", "lean-ux"],
+    output: [
+      {
+        url: "https://lms.mynextskill.com/",
+        label: "https://lms.mynextskill.com/",
+      },
+    ],
   },
 ];
 
 const orgExperiences = [
   {
-    title: "Ketua Himpunan Mahasiswa Informatika",
-    description:
-      "Memimpin organisasi mahasiswa dan mengelola berbagai kegiatan.",
-    images: ["Mug", "Mug"],
-    buttonLabel: "Detail",
+    title: "Broadcaster",
+    images: ["Mug"],
+    location: "Lembaga Dakwah Kampus Telkom University",
+    date: "Jan 2024 - Jan 2025",
+    skills: ["public-broadcasting", "broadcast-media"],
+    output: [
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/1745245873398/single-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo",
+        label: "LDK Al Fath Gen11th Certificate",
+      },
+    ],
   },
   {
     title: "Anggota BEM",
@@ -56,30 +90,36 @@ const orgExperiences = [
   },
 ];
 
+interface OutputItem {
+  url: string;
+  label?: string;
+}
+
 function ExperienceItem({
   title,
   description,
   images,
-  skills = [],
   location,
   date,
-  output,
+  output: output = [] as OutputItem[],
+  skills = [],
 }: any) {
   const [imgIdx, setImgIdx] = useState(0);
   const [sliceCount, setSliceCount] = useState(2);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 320) {
+      if (window.innerWidth <= 368) {
         setSliceCount(3);
-      } else if (window.innerWidth <= 425) {
-        setSliceCount(4);
       } else if (window.innerWidth <= 768) {
+        setSliceCount(4);
+      } else if (window.innerWidth <= 1000) {
         setSliceCount(2);
       } else {
         setSliceCount(3);
       }
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -119,61 +159,88 @@ function ExperienceItem({
           ) : (
             <p className="text-justify">{description}</p>
           )}
-          {skills?.length > 0 && (
-            <div className="flex flex-col gap-2 ">
-              <span className="text-xs md:text-sm font-bold">Skills Focus</span>
-              <div className="flex flex-wrap gap-2 items-center">
-                <span
-                  className="w-fit font-medium text-xs flex flex-row gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]"
-                  title={[
-                    skills.includes("react") && "React.js",
-                    skills.includes("typescript") && "TypeScript",
-                    skills.includes("php") && "PHP",
-                    skills.includes("mysql") && "MySQL",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")}
-                >
-                  {skills.includes("react") && (
-                    <FaReact className="text-blue-500 text-2xl" />
-                  )}
-                  {skills.includes("typescript") && (
-                    <SiTypescript className="text-blue-700 text-2xl" />
-                  )}
-                  {skills.includes("php") && (
-                    <SiPhp className="text-indigo-700 text-2xl" />
-                  )}
-                  {skills.includes("mysql") && (
-                    <SiMysql className="text-yellow-700 text-2xl" />
-                  )}
+          <div className="py-4">
+            {skills?.length > 0 && (
+              <div className="flex flex-col gap-2 ">
+                <span className="text-xs md:text-sm font-bold">
+                  Skills Focus
                 </span>
-
-                {skills.includes("lean-ux") && (
-                  <span className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
-                    Lean UX
+                <div className="flex flex-wrap gap-2 items-center">
+                  {(skills.includes("sass") ||
+                    skills.includes("react") ||
+                    skills.includes("typescript") ||
+                    skills.includes("php") ||
+                    skills.includes("mysql")) && (
+                    <span
+                      className="w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]"
+                      title={[
+                        skills.includes("sass") && "Sass",
+                        skills.includes("react") && "React.js",
+                        skills.includes("typescript") && "TypeScript",
+                        skills.includes("php") && "PHP",
+                        skills.includes("mysql") && "MySQL",
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    >
+                      {skills.includes("sass") && (
+                        <FaSass className="text-pink-500 text-2xl" />
+                      )}
+                      {skills.includes("react") && (
+                        <FaReact className="text-blue-500 text-2xl" />
+                      )}
+                      {skills.includes("typescript") && (
+                        <SiTypescript className="text-blue-700 text-2xl" />
+                      )}
+                      {skills.includes("php") && (
+                        <SiPhp className="text-indigo-700 text-2xl" />
+                      )}
+                      {skills.includes("mysql") && (
+                        <SiMysql className="text-yellow-700 text-2xl" />
+                      )}
+                    </span>
+                  )}
+                  <span className="w-fit max-[485px]:w-full font-medium text-xs text-center flex items-center justify-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+                    {[
+                      skills.includes("frontend-development") &&
+                        "Frontend Development",
+                      skills.includes("lean-ux") && "Lean UX",
+                      skills.includes("ui-design") && "UI Design",
+                      skills.includes("agile") && "Agile",
+                      skills.includes("scrum") && "Scrum",
+                      skills.includes("lead") && "Leadership",
+                      skills.includes("public-broadcasting") &&
+                        "Public Broadcasting",
+                      skills.includes("broadcast-media") && "Broadcast Media",
+                    ]
+                      .filter(Boolean) // buang false/null
+                      .join(", ")}
                   </span>
-                )}
+                </div>
               </div>
-            </div>
-          )}
-          {output && (
-            <div className="flex flex-col gap-2 mt-2">
-              <span className="text-xs md:text-sm font-bold">
-                Output - Just Click!
-              </span>
+            )}
 
-              <a
-                href="https://lms.allathif-islamicschool.id/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-fit max-[425px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
-              >
-                <span className="block whitespace-nowrap overflow-hidden text-ellipsis">
-                  {output}
+            {output && (
+              <div className="flex flex-col gap-2 mt-4">
+                <span className="text-xs md:text-sm font-bold">
+                  Output - Just Click It!
                 </span>
-              </a>
-            </div>
-          )}
+                <div className="flex flex-wrap gap-2 text-center">
+                  {output.map((item: OutputItem, idx: string) => (
+                    <a
+                      key={idx}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-fit max-[485px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
+                    >
+                      {item.label ?? item.url}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col items-center w-full md:w-1/3 gap-2">
@@ -238,6 +305,19 @@ function DashboardUser() {
           ))}
         </div>
 
+        {/* section work experience */}
+        <div
+          id="work-experience"
+          className="w-full scroll-mt-24 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
+        >
+          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4">
+            Work Experience
+          </h2>
+          {workExperiences.map((exp, idx) => (
+            <ExperienceItem key={idx} {...exp} />
+          ))}
+        </div>
+
         {/* section project experience */}
         <div
           id="project-experience"
@@ -251,18 +331,6 @@ function DashboardUser() {
           ))}
         </div>
 
-        {/* section work experience */}
-        <div
-          id="work-experience"
-          className="w-full scroll-mt-24 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4">
-            Work Experience
-          </h2>
-          {workExperiences.map((exp, idx) => (
-            <ExperienceItem key={idx} {...exp} />
-          ))}
-        </div>
         {/* section organizational and volunteer experience */}
         <div
           id="org-experience"

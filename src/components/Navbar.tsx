@@ -19,8 +19,8 @@ interface NavbarProps {
 
 const portfolioSections = [
   { id: "about-burhan", label: "About Burhan" },
-  { id: "project-experience", label: "Project Experience" },
   { id: "work-experience", label: "Work Experience" },
+  { id: "project-experience", label: "Project Experience" },
   { id: "org-experience", label: "Organizational Experience" },
 ];
 
