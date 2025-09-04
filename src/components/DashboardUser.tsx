@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
-import { FaBars, FaReact, FaSass } from "react-icons/fa";
+import {
+  FaBars,
+  FaReact,
+  FaSass,
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
 import { SiTypescript, SiPhp, SiMysql } from "react-icons/si";
 import Navbar from "./Navbar";
 import { imagess } from "../Image";
 
 const aboutBurhan = [
   {
-    title: "Frontend Developer - PT. Teknologi Maju",
+    title: "UNDER CONSTRUCTION *All photos are dummy placeholders",
     description:
-      "Mengembangkan aplikasi web menggunakan React dan Tailwind CSS.",
-    images: ["Mug", "Mug"],
-    skills: [],
-  },
-  {
-    title: "UI/UX Designer - Kreatif Studio",
-    description: "Mendesain antarmuka aplikasi mobile dan website.",
-    images: ["Mug", "Mug"],
+      "Here you can read the descriptions or access the links to my Work and Organizational Experience. For complete details about my work, projects, organizational experience, and certificate, please visit my LinkedIn, GitHub, or Glints profiles if you are a recruiter.",
+    images: [],
     skills: [],
   },
 ];
@@ -241,7 +242,7 @@ function ExperienceItem({
         {title}
       </h3>
       <div className="flex flex-col md:flex-row gap-4w-full bg-amber-0">
-        <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 bg-red-0">
+        <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
           {/* Lokasi dan Tanggal */}
           <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
             {location && date && (
@@ -348,6 +349,35 @@ function ExperienceItem({
             )}
           </div>
         </div>
+
+        {title === "UNDER CONSTRUCTION" && (
+          <div className="flex flex-row items-center w-full mt-4 md:w-1/3 gap-4  justify-center p-3 rounded-lg shadow">
+            <a
+              href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 hover:text-blue-700 transition-colors"
+            >
+              <FaLinkedin className="text-4xl" />
+            </a>
+            <a
+              href="https://github.com/MuhammadBurhan235/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 hover:text-black transition-colors"
+            >
+              <FaGithub className="text-4xl" />
+            </a>
+            <a
+              href="https://www.instagram.com/muhammadburhan_253/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 hover:text-pink-600 transition-colors"
+            >
+              <FaInstagram className="text-4xl" />
+            </a>
+          </div>
+        )}
 
         {images.length > 0 && (
           <div className="flex flex-col items-center w-full mt-4 md:w-1/3 gap-2">
