@@ -350,7 +350,7 @@ function ExperienceItem({
           </div>
         </div>
 
-        {title === "UNDER CONSTRUCTION" && (
+        {title === "UNDER CONSTRUCTION *All photos are dummy placeholders" && (
           <div className="flex flex-row items-center w-full mt-4 md:w-1/3 gap-4  justify-center p-3 rounded-lg shadow">
             <a
               href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
