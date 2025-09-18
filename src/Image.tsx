@@ -4,6 +4,7 @@ import Mug from "/Gelas1.png";
 import Verif from "/check.png";
 import Neo1 from "/Neo1.png";
 import YTLogo from "/YTLogo.png";
+import BurhanLab from "/Burhan_Lab.png";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -12,4 +13,5 @@ export const imagess: { [key: string]: string } = {
   Verif: Verif,
   Neo1: Neo1,
   YTLogo: YTLogo,
+  Profile: BurhanLab,
 };
