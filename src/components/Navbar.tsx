@@ -26,8 +26,8 @@ const portfolioSections = [
 ];
 
 function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [isTop, setIsTop] = useState(true);
+  // const [showNavbar, setShowNavbar] = useState(true);
+  // const [isTop, setIsTop] = useState(true);
   const lastScrollY = useRef(0);
   // const [activeStatus, setActiveStatus] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,8 +78,8 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
         requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
 
-          setShowNavbar(currentScrollY < lastScrollY.current);
-          setIsTop(currentScrollY <= 10);
+          // setShowNavbar(currentScrollY < lastScrollY.current);
+          // setIsTop(currentScrollY <= 10);
           lastScrollY.current = currentScrollY;
 
           ticking = false;
@@ -226,7 +226,40 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
           </div>
         </div>
       )}
-      {activeNavbar === 2 && <></>}
+      {activeNavbar === 2 && (
+        <>
+          <div className="w-fit h-full flex gap-4 items-center">
+            <button
+              className="w-fit h-full flex items-center bg-yellow-500 px-4 py-2"
+              onClick={() => setActiveNavbar(1)}
+            >
+              Nav1
+            </button>
+            <button
+              className="w-fit h-full flex items-center bg-green-500 px-4 py-2"
+              onClick={() => setActiveNavbar(2)}
+            >
+              Nav2
+            </button>
+            <button
+              className="w-fit h-full flex items-center bg-blue-500 px-4 py-2"
+              onClick={() => setActiveNavbar(3)}
+            >
+              Nav3
+            </button>
+            <div className="w-fit h-full flex items-center">
+              <a
+                href=""
+                className="w-fit bg-blue-600 px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
+              >
+                <p className="text-base text-white font-medium group-hover:text-blue-600">
+                  MASUK
+                </p>
+              </a>
+            </div>
+          </div>
+        </>
+      )}
       {activeNavbar === 3 && <></>}
     </>
   );
