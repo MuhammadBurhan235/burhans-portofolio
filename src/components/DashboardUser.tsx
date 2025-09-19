@@ -97,12 +97,12 @@ function ExperienceItem({
               {description.map((line, idx) => (
                 <li key={idx} className="flex items-start gap-2 mb-1 list-none">
                   <span className="mt-1 w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
-                  <span className="text-justify">{line}</span>
+                  <span className="text-left">{line}</span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-justify">{description}</p>
+            <p className="text-left">{description}</p>
           )}
           <div className="mt-4">
             {skills?.length > 0 && (
@@ -373,7 +373,7 @@ function DashboardUser() {
                 </div>
                 {/* Responsive Description */}
                 <div className="bg-white p-4 md:p-6 rounded-lg shadow-[0_3px_6px_rgba(8,74,131,0.5)] mt-2 md:ml-[-70px] md:pl-18">
-                  <p className="text-xs sm:text-sm md:text-base text-justify">
+                  <p className="text-xs sm:text-sm md:text-base text-center">
                     I am a Bachelor’s graduate in Software Engineering from
                     Telkom University (2025) with a strong passion for Frontend
                     Development and UI/UX Design with Agile/Lean UX Method. I
