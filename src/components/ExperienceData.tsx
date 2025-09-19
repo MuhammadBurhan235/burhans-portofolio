@@ -36,7 +36,7 @@ const workExperiences = [
       "Collaborated with the academic team to deliver workshops and technical support to target users.",
       "Contributed to the socialization and technical implementation of Moodle in the school environment.",
     ],
-    images: ["Mug", "Baju1", "Mug", "Baju1"],
+    images: ["Test", "HKI", "Mug", "Baju1", "Mug", "Baju1", "Photo"],
     location: "Telkom University - Al Lathif Islamic School",
     date: "Nov 2024 - Jan 2025",
     skills: [

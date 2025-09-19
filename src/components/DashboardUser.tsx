@@ -10,6 +10,7 @@ import {
   FaBriefcase,
   FaFolderOpen,
   FaUsers,
+  FaTimes,
 } from "react-icons/fa";
 import { SiTypescript, SiPhp, SiMysql } from "react-icons/si";
 import Navbar from "./Navbar";
@@ -37,6 +38,7 @@ function ExperienceItem({
 }: any) {
   const [imgIdx, setImgIdx] = useState(0);
   const [sliceCount, setSliceCount] = useState(3);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +55,20 @@ function ExperienceItem({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showModal]);
 
   return (
     <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
@@ -180,8 +196,9 @@ function ExperienceItem({
             {/* Gambar utama */}
             <img
               src={imagess[images[imgIdx]]}
-              className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300"
+              className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300 cursor-pointer shadow-[0_0_6px_rgba(8,74,131,0.5)]"
               alt=""
+              onClick={handleOpenModal}
             />
             {images.length > 1 && (
               <div className="flex flex-row flex-nowrap items-center gap-2 ">
@@ -196,24 +213,93 @@ function ExperienceItem({
                   />
                 ))}
 
-                {/* tombol lihat selengkapnya */}
+                {/* tombol lihat images selengkapnya */}
                 <button
-                  className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 bg-blue-500 text-white rounded flex items-center justify-center text-base shadow-[0_3px_6px_rgba(8,74,131,0.5)]"
-                  onClick={() =>
-                    alert("Tampilkan semua gambar (implementasi modal di sini)")
-                  }
+                  className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 bg-blue-500 text-white rounded flex items-center justify-center text-base shadow-[0_3px_6px_rgba(8,74,131,0.5)] cursor-pointer hover:bg-blue-600 transition"
+                  onClick={handleOpenModal}
                   style={{ minWidth: "28px", minHeight: "28px" }}
+                  title="Lihat semua gambar"
                 >
                   <FaBars />
                 </button>
+
+                {/* Modal untuk semua gambar */}
+                {showModal && (
+                  <div
+                    className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
+                    onClick={handleCloseModal}
+                  >
+                    <div
+                      className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {/* Header */}
+                      <div className="flex justify-between items-center px-6 py-4 border-b">
+                        <span className="font-bold text-lg">Media</span>
+                        <button
+                          className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
+                          onClick={handleCloseModal}
+                          title="Tutup"
+                        >
+                          <FaTimes />
+                        </button>
+                      </div>
+                      {/* Content */}
+                      <div className="flex flex-col  gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
+                        {/* Image preview */}
+                        <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
+                          <img
+                            src={imagess[images[imgIdx]]}
+                            alt=""
+                            className="w-full h-full object-contain rounded shadow bg-white"
+                          />
+                        </div>
+                        {/* Detail */}
+                        <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
+                          <span className="font-semibold text-base mb-2">
+                            {images[imgIdx]
+                              .replace(/[_-]/g, " ")
+                              .replace(/\.[^/.]+$/, "")}
+                          </span>
+                          {/* Tambahkan detail lain jika ada */}
+                        </div>
+                      </div>
+                      {/* Footer navigation */}
+                      <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
+                        <span className="text-sm text-gray-600">
+                          {imgIdx + 1} of {images.length}
+                        </span>
+                        <div className="flex gap-2">
+                          <button
+                            className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                            onClick={() =>
+                              setImgIdx((idx) => Math.max(0, idx - 1))
+                            }
+                            disabled={imgIdx === 0}
+                          >
+                            Previous
+                          </button>
+                          <button
+                            className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                            onClick={() =>
+                              setImgIdx((idx) =>
+                                Math.min(images.length - 1, idx + 1)
+                              )
+                            }
+                            disabled={imgIdx === images.length - 1}
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
         )}
       </div>
-      {/* <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded text-sm md:text-base">
-        {buttonLabel}
-      </button> */}
     </div>
   );
 }
