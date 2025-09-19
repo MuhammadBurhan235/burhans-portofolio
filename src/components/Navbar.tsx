@@ -41,9 +41,10 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 700) setVisibleCount(2);
-      else if (width < 800) setVisibleCount(3);
-      else if (width < 900) setVisibleCount(4);
+      if (width < 600) setVisibleCount(1);
+      else if (width < 900) setVisibleCount(2);
+      else if (width < 1000) setVisibleCount(3);
+      else if (width < 1100) setVisibleCount(4);
       else setVisibleCount(portfolioSections.length);
     };
     handleResize();
@@ -51,24 +52,35 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Scroll spy untuk mendeteksi section aktif
   useEffect(() => {
     const handleScroll = () => {
-      // Perkecil area deteksi, misal gunakan window.scrollY + 100
-      const scrollPos = window.scrollY + 300;
+      const currentScrollY = window.scrollY;
+
+      // Tentukan arah scroll
+      const isScrollingDown = currentScrollY > lastScrollY.current;
+
+      // Offset berbeda tergantung arah
+      const offset = isScrollingDown ? 325 : 325;
+      const scrollPos = currentScrollY + offset;
+
       for (const sec of portfolioSections) {
         const el = document.getElementById(sec.id);
         if (el) {
           const { offsetTop, offsetHeight } = el;
           if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
             setActive(sec.id);
+            break;
           }
         }
       }
+
+      // Update posisi scroll terakhir
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [portfolioSections]);
 
   useEffect(() => {
     let ticking = false;
@@ -99,7 +111,6 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
 
   return (
     <>
-      {" "}
       {activeNavbar === 1 && (
         <div
           className={`fixed w-full h-[64px] bg-[#084a83]/30 flex justify-center transition-all duration-300 backdrop-blur-[5px] shadow-lg z-50`}
@@ -110,11 +121,11 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               className="w-full min-w-[160px] max-w-[320px] h-[48px] bg-gray-900 rounded-[16px] cursor-pointer"
             ></a>
             {/* Burger menu untuk mobile */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="hidden max-[500px]:flex items-center gap-2">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Open menu"
-                className="flex items-center gap-2 w-fit bg-blue-600 p-3 rounded-[8px] hover:bg-white transition-all duration-300 group"
+                className="flex items-center gap-2 w-fit bg-blue-600 p-3 rounded-[8px] hover:bg-blue-100 hover:cursor-pointer transition-all duration-300 group"
               >
                 {/* <span className="text-white text-sm font-medium group-hover:text-blue-600">
                   Experience
@@ -126,7 +137,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
 
               {/* Dropdown menu */}
               {menuOpen && (
-                <div className="absolute top-[64px] right-4 bg-white rounded shadow-lg flex flex-col gap-2 p-4 z-50 min-w-[180px]">
+                <div className="absolute top-[64px] right-4 bg-white rounded shadow-lg flex flex-col gap-2 p-2 z-50 min-w-[180px]">
                   {portfolioSections.map((sec) => (
                     <Link
                       key={sec.id}
@@ -135,7 +146,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                       smooth={true}
                       offset={-64} // sesuaikan dengan tinggi navbar
                       duration={500}
-                      className={`px-3 py-2 rounded-md mx-3 nav-link transition-colors duration-200 text-xs text-left cursor-pointer ${
+                      className={`p-3 rounded-md nav-link transition-colors duration-200 text-sm cursor-pointer whitespace-nowrap flex items-center gap-2 ${
                         active === sec.id
                           ? "bg-blue-600 text-white"
                           : "bg-white text-blue-600 hover:bg-blue-100"
@@ -146,6 +157,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                         // HAPUS: scrollIntoView
                       }}
                     >
+                      <span className="text-base">{sec.icon}</span>
                       {sec.label}
                     </Link>
                   ))}
@@ -154,7 +166,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
             </div>
 
             {/* Tombol scroll section untuk desktop */}
-            <div className="hidden md:flex flex-row items-center gap-2 w-auto max-w-full relative">
+            <div className="flex max-[500px]:hidden flex-row items-center gap-2 w-auto max-w-full relative">
               {portfolioSections.slice(0, visibleCount).map((sec) => (
                 <Link
                   key={sec.id}
@@ -163,13 +175,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   smooth={true}
                   offset={-64}
                   duration={500}
-                  className={`px-3 py-2 rounded-md nav-link transition-colors duration-200
-      text-sm md:text-base cursor-pointer whitespace-nowrap flex items-center gap-2
-      ${
-        active === sec.id
-          ? "bg-blue-600 text-white"
-          : "bg-white text-blue-600 hover:bg-blue-100"
-      }`}
+                  className={`px-3 py-2 rounded-md nav-link transition-colors duration-200 text-sm md:text-base cursor-pointer whitespace-nowrap flex items-center gap-2
+                  ${
+                    active === sec.id
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 hover:bg-blue-100"
+                  }`}
                   onClick={() => {
                     setActive(sec.id);
                     setMenuOpen(false);
@@ -182,19 +193,20 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               {visibleCount < portfolioSections.length && (
                 <div className="relative">
                   <button
-                    className={`px-3 py-2 rounded-md flex items-center transition-all duration-200
+                    className={`px-3 py-2 rounded-md flex text-sm md:text-base items-center transition-all duration-200 gap-2
                       ${
                         isActiveInDropdown
                           ? "bg-blue-600 text-white"
-                          : "bg-white text-blue-600"
+                          : "bg-white text-blue-600 hover:bg-blue-100 hover:cursor-pointer"
                       }
                     `}
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                   >
                     <FaBars />
+                    More
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute top-full right-0 bg-white rounded shadow-lg flex flex-col gap-2 p-2 z-50 min-w-[180px]">
+                    <div className="absolute top-[52px] right-0 bg-white rounded shadow-lg flex flex-col gap-2 p-2 z-50 min-w-[180px]">
                       {portfolioSections.slice(visibleCount).map((sec) => (
                         <Link
                           key={sec.id}
@@ -203,12 +215,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                           smooth={true}
                           offset={-64}
                           duration={500}
-                          className={`px-3 py-2 rounded-md nav-link transition-colors duration-200 text-sm cursor-pointer whitespace-nowrap flex items-center gap-2
-                  ${
-                    active === sec.id
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-blue-600 hover:bg-blue-100"
-                  }`}
+                          className={`p-3 rounded-md nav-link transition-colors duration-200 text-sm cursor-pointer whitespace-nowrap flex items-center gap-2
+                          ${
+                            active === sec.id
+                              ? "bg-blue-600 text-white"
+                              : "bg-white text-blue-600 hover:bg-blue-100 hover:cursor-pointer"
+                          }`}
                           onClick={() => {
                             setActive(sec.id);
                             setDropdownOpen(false);
