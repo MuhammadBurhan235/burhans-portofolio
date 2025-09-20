@@ -418,7 +418,7 @@ function DashboardUser() {
         >
           <div className="w-full flex flex-col gap-4 items-center">
             <div className="flex flex-col mt-4 md:flex-row gap-4 px-2 md:px-4 max-w-[1000px] items-center">
-              {/* Responsive Profile Image */}
+              {/* Responsive Profile Image & Social Media Icons */}
               <div className="relative mx-auto flex items-center justify-center mb-2">
                 <div className="border-4 border-white rounded-full bg-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] overflow-visible flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
                   <img
@@ -427,18 +427,61 @@ function DashboardUser() {
                       "https://avatars.githubusercontent.com/u/00000000?v=4"
                     }
                     alt="Muhammad Burhan"
-                    className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4
-              w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64
-              object-cover rounded-full shadow-xl"
+                    className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 object-cover rounded-full shadow-xl"
                     style={{ zIndex: 2 }}
                   />
+                  {/* Social Media Icons mengelilingi profile image di md dan atas */}
+                  <div className="hidden max-[425px]:block absolute inset-0 pointer-events-none">
+                    <div className="w-full h-full flex items-center justify-center relative">
+                      {/* LinkedIn - kanan atas */}
+                      <a
+                        href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-[-26.5px] top-[-17px] bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-blue-100 transition"
+                        title="LinkedIn"
+                      >
+                        <FaLinkedin className="text-3xl text-gray-800" />
+                      </a>
+                      {/* GitHub - kanan tengah */}
+                      <a
+                        href="https://github.com/MuhammadBurhan235/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-[-43px] top-[44px] -translate-y-1/2 bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-gray-100 transition"
+                        title="GitHub"
+                      >
+                        <FaGithub className="text-3xl text-gray-800" />
+                      </a>
+                      {/* Instagram - kanan bawah */}
+                      <a
+                        href="https://www.instagram.com/muhammadburhan_253/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-[-43px] bottom-[23.5px] bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-pink-50 transition"
+                        title="Instagram"
+                      >
+                        <FaInstagram className="text-3xl text-gray-800" />
+                      </a>
+                      {/* CV - bawah kanan */}
+                      <a
+                        href="https://drive.google.com/file/d/1NmYW_UoLKVmBdsHAI_TMM73Ck-QIJYDI/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-[-26.5px] bottom-[-17px] bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-green-50 transition"
+                        title="Download CV"
+                      >
+                        <FaFileAlt className="text-3xl text-gray-800" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="w-full">
                 {/* Responsive Name */}
-                <div className="relative w-full font-bold text-lg sm:text-2xl md:text-3xl lg:text-4xl ml-0 md:ml-[-64px] flex flex-row justify-between items-center">
-                  Muhammad Burhan{" "}
-                  <div className="flex gap-3 ">
+                <div className="relative w-full font-bold text-lg sm:text-2xl md:text-2xl lg:text-4xl ml-0 md:ml-[-64px] flex flex-row justify-between max-[425px]:justify-center items-center">
+                  Muhammad Burhan {/* Social Media Icons */}
+                  <div className="flex gap-4 max-[425px]:hidden">
                     <a
                       href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
                       target="_blank"
