@@ -8,6 +8,7 @@ import BurhanLab from "/Burhan_Lab.png";
 import Photo from "/photo.png";
 import Test from "./components/image.png";
 import HKI from "./components/Test.png";
+import dummy from "./components/Under3.png";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -20,4 +21,5 @@ export const imagess: { [key: string]: string } = {
   Photo: Photo,
   Test: Test,
   HKI: HKI,
+  dummy: dummy,
 };

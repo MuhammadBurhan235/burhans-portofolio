@@ -11,6 +11,7 @@ import {
   FaFolderOpen,
   FaUsers,
   FaTimes,
+  FaFileAlt,
 } from "react-icons/fa";
 import { SiTypescript, SiPhp, SiMysql } from "react-icons/si";
 import Navbar from "./Navbar";
@@ -368,6 +369,15 @@ function DashboardUser() {
                       title="Instagram"
                     >
                       <FaInstagram className="text-2xl md:text-3xl" />
+                    </a>
+                    <a
+                      href="https://drive.google.com/file/d/1NmYW_UoLKVmBdsHAI_TMM73Ck-QIJYDI/view?usp=sharing" // Ganti dengan link CV kamu
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-800 hover:text-green-700 hover:bg-white  transition-colors "
+                      title="Download CV"
+                    >
+                      <FaFileAlt className="text-2xl md:text-3xl" />
                     </a>
                   </div>
                 </div>
