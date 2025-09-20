@@ -12,8 +12,18 @@ import {
   FaUsers,
   FaTimes,
   FaFileAlt,
+  FaJs,
+  FaHtml5,
+  FaCss3,
 } from "react-icons/fa";
-import { SiTypescript, SiPhp, SiMysql } from "react-icons/si";
+import {
+  SiTypescript,
+  SiPhp,
+  SiMysql,
+  SiLaravel,
+  SiBootstrap,
+  SiTailwindcss,
+} from "react-icons/si";
 import Navbar from "./Navbar";
 import { imagess } from "../Image";
 import {
@@ -94,16 +104,35 @@ function ExperienceItem({
 
           {/* Deskripsi */}
           {Array.isArray(description) ? (
-            <ul>
+            <ul className="pl-0 md:pl-2 w-full break-words whitespace-pre-line">
               {description.map((line, idx) => (
-                <li key={idx} className="flex items-start gap-2 mb-1 list-none">
-                  <span className="mt-1 w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
-                  <span className="text-left">{line}</span>
+                <li
+                  key={idx}
+                  className="flex items-start gap-2 mb-1 list-none w-full break-words"
+                >
+                  <span className="mt-1 w-2 h-2 rounded-full bg-blue-500 inline-block flex-shrink-0"></span>
+                  <span className="text-left break-words whitespace-pre-line w-full">
+                    {/* Deteksi link dan render sebagai <a> */}
+                    {line.match(/https?:\/\/[^\s]+/) ? (
+                      <a
+                        href={line.match(/https?:\/\/[^\s]+/)?.[0]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-700 underline break-all"
+                      >
+                        {line}
+                      </a>
+                    ) : (
+                      line
+                    )}
+                  </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-left">{description}</p>
+            <p className="text-left break-words whitespace-pre-line">
+              {description}
+            </p>
           )}
           <div className="mt-4">
             {skills?.length > 0 && (
@@ -112,59 +141,131 @@ function ExperienceItem({
                   Skills Focus
                 </span>
                 <div className="flex flex-wrap gap-2 items-center">
-                  {(skills.includes("sass") ||
-                    skills.includes("react") ||
-                    skills.includes("typescript") ||
-                    skills.includes("php") ||
-                    skills.includes("mysql")) && (
-                    <span
-                      className="w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl "
-                      title={[
-                        skills.includes("sass") && "Sass",
-                        skills.includes("react") && "React.js",
-                        skills.includes("typescript") && "TypeScript",
-                        skills.includes("php") && "PHP",
-                        skills.includes("mysql") && "MySQL",
-                      ]
-                        .filter(Boolean)
-                        .join(", ")}
-                    >
-                      {skills.includes("sass") && (
-                        <FaSass className="text-pink-500 text-2xl" />
-                      )}
-                      {skills.includes("react") && (
-                        <FaReact className="text-blue-500 text-2xl" />
-                      )}
-                      {skills.includes("typescript") && (
-                        <SiTypescript className="text-blue-700 text-2xl" />
-                      )}
-                      {skills.includes("php") && (
-                        <SiPhp className="text-indigo-700 text-2xl" />
-                      )}
-                      {skills.includes("mysql") && (
-                        <SiMysql className="text-yellow-700 text-2xl" />
-                      )}
-                    </span>
-                  )}
-                  <span className="w-fit max-[485px]:w-full font-medium text-xs text-center flex items-center justify-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl ">
-                    {[
-                      skills.includes("frontend-development") &&
-                        "Frontend Development",
-                      skills.includes("lean-ux") && "Lean UX",
-                      skills.includes("ui-design") && "UI Design",
-                      skills.includes("agile") && "Agile",
-                      skills.includes("scrum") && "Scrum",
-                      skills.includes("science") && "Science",
-                      skills.includes("math") && "Mathematics",
-                      skills.includes("lead") && "Leadership",
-                      skills.includes("public-broadcasting") &&
-                        "Public Broadcasting",
-                      skills.includes("broadcast-media") && "Broadcast Media",
-                      skills.includes("teamwork") && "Teamwork",
-                    ]
-                      .filter(Boolean) // buang false/null
-                      .join(", ")}
-                  </span>
+                  {/* Skill Icons and Labels */}
+                  {(() => {
+                    const skillIcons = [
+                      {
+                        key: "javascript",
+                        icon: <FaJs className="text-yellow-500 text-2xl" />,
+                        label: "JavaScript",
+                      },
+                      {
+                        key: "html",
+                        icon: <FaHtml5 className="text-red-500 text-2xl" />,
+                        label: "HTML",
+                      },
+                      {
+                        key: "react",
+                        icon: <FaReact className="text-blue-500 text-2xl" />,
+                        label: "React.js",
+                      },
+                      {
+                        key: "typescript",
+                        icon: (
+                          <SiTypescript className="text-blue-700 text-2xl" />
+                        ),
+                        label: "TypeScript",
+                      },
+                      {
+                        key: "css",
+                        icon: <FaCss3 className="text-blue-500 text-2xl" />,
+                        label: "CSS",
+                      },
+                      {
+                        key: "sass",
+                        icon: <FaSass className="text-pink-500 text-2xl" />,
+                        label: "Sass",
+                      },
+                      {
+                        key: "php",
+                        icon: <SiPhp className="text-indigo-700 text-2xl" />,
+                        label: "PHP",
+                      },
+                      {
+                        key: "mysql",
+                        icon: <SiMysql className="text-yellow-700 text-2xl" />,
+                        label: "MySQL",
+                      },
+                      {
+                        key: "laravel",
+                        icon: <SiLaravel className="text-red-700 text-2xl" />,
+                        label: "Laravel",
+                      },
+                      {
+                        key: "bootstrap",
+                        icon: (
+                          <SiBootstrap className="text-purple-700 text-2xl" />
+                        ),
+                        label: "Bootstrap",
+                      },
+                      {
+                        key: "tailwindcss",
+                        icon: (
+                          <SiTailwindcss className="text-cyan-500 text-2xl" />
+                        ),
+                        label: "Tailwind CSS",
+                      },
+                    ].filter((item) => skills.includes(item.key));
+
+                    if (skillIcons.length === 0) return null;
+
+                    return (
+                      <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
+                        {skillIcons.map((item, idx) => (
+                          <span className="relative group" key={item.key}>
+                            {item.icon}
+                            <span
+                              className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
+                                idx % 2 === 0
+                                  ? "bottom-full mb-1"
+                                  : "top-full mt-1"
+                              }`}
+                            >
+                              {item.label}
+                            </span>
+                          </span>
+                        ))}
+                      </span>
+                    );
+                  })()}
+                  {/* Skill Text Labels for non-icon skills */}
+                  {(() => {
+                    const skillTextLabels = [
+                      {
+                        key: "frontend-development",
+                        label: "Frontend Development",
+                      },
+                      { key: "lean-ux", label: "Lean UX" },
+                      { key: "ui-design", label: "UI Design" },
+                      { key: "agile", label: "Agile" },
+                      { key: "scrum", label: "Scrum" },
+                      { key: "science", label: "Science" },
+                      { key: "math", label: "Mathematics" },
+                      { key: "lead", label: "Leadership" },
+                      {
+                        key: "public-broadcasting",
+                        label: "Public Broadcasting",
+                      },
+                      { key: "broadcast-media", label: "Broadcast Media" },
+                      { key: "teamwork", label: "Teamwork" },
+                      { key: "SofCons", label: "Software Construction" },
+                      { key: "VerCont", label: "Version Control" },
+                      { key: "SofArch", label: "Software Architecture" },
+                    ].filter((item) => skills.includes(item.key));
+
+                    if (skillTextLabels.length === 0) return null;
+
+                    return (
+                      <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
+                        {skillTextLabels.map((item, idx) => (
+                          <span key={item.key}>
+                            {item.label}
+                            {idx < skillTextLabels.length - 1 && ", "}
+                          </span>
+                        ))}
+                      </span>
+                    );
+                  })()}
                 </div>
               </div>
             )}
@@ -192,6 +293,7 @@ function ExperienceItem({
           </div>
         </div>
 
+        {/* Gambar */}
         {images.length > 0 && (
           <div className="flex flex-col items-center w-full mt-4 md:w-1/3 gap-2">
             {/* Gambar utama */}
@@ -201,9 +303,9 @@ function ExperienceItem({
               alt=""
               onClick={handleOpenModal}
             />
+            {/* Preview images & tombol hanya jika > 1 gambar */}
             {images.length > 1 && (
               <div className="flex flex-row flex-nowrap items-center gap-2 ">
-                {/* preview images */}
                 {images.slice(0, sliceCount).map((img: string, idx: number) => (
                   <img
                     key={idx}
@@ -213,8 +315,6 @@ function ExperienceItem({
                     onClick={() => setImgIdx(idx)}
                   />
                 ))}
-
-                {/* tombol lihat images selengkapnya */}
                 <button
                   className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 bg-blue-500 text-white rounded flex items-center justify-center text-base shadow-[0_3px_6px_rgba(8,74,131,0.5)] cursor-pointer hover:bg-blue-600 transition"
                   onClick={handleOpenModal}
@@ -223,79 +323,75 @@ function ExperienceItem({
                 >
                   <FaBars />
                 </button>
-
-                {/* Modal untuk semua gambar */}
-                {showModal && (
-                  <div
-                    className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
-                    onClick={handleCloseModal}
-                  >
-                    <div
-                      className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
-                      onClick={(e) => e.stopPropagation()}
+              </div>
+            )}
+            {/* Modal untuk semua gambar */}
+            {showModal && (
+              <div
+                className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
+                onClick={handleCloseModal}
+              >
+                <div
+                  className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Header */}
+                  <div className="flex justify-between items-center px-6 py-4 border-b">
+                    <span className="font-bold text-lg">Media</span>
+                    <button
+                      className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
+                      onClick={handleCloseModal}
+                      title="Tutup"
                     >
-                      {/* Header */}
-                      <div className="flex justify-between items-center px-6 py-4 border-b">
-                        <span className="font-bold text-lg">Media</span>
-                        <button
-                          className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
-                          onClick={handleCloseModal}
-                          title="Tutup"
-                        >
-                          <FaTimes />
-                        </button>
-                      </div>
-                      {/* Content */}
-                      <div className="flex flex-col  gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
-                        {/* Image preview */}
-                        <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
-                          <img
-                            src={imagess[images[imgIdx]]}
-                            alt=""
-                            className="w-full h-full object-contain rounded shadow bg-white"
-                          />
-                        </div>
-                        {/* Detail */}
-                        <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
-                          <span className="font-semibold text-base mb-2">
-                            {images[imgIdx]
-                              .replace(/[_-]/g, " ")
-                              .replace(/\.[^/.]+$/, "")}
-                          </span>
-                          {/* Tambahkan detail lain jika ada */}
-                        </div>
-                      </div>
-                      {/* Footer navigation */}
-                      <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
-                        <span className="text-sm text-gray-600">
-                          {imgIdx + 1} of {images.length}
-                        </span>
-                        <div className="flex gap-2">
-                          <button
-                            className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                            onClick={() =>
-                              setImgIdx((idx) => Math.max(0, idx - 1))
-                            }
-                            disabled={imgIdx === 0}
-                          >
-                            Previous
-                          </button>
-                          <button
-                            className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                            onClick={() =>
-                              setImgIdx((idx) =>
-                                Math.min(images.length - 1, idx + 1)
-                              )
-                            }
-                            disabled={imgIdx === images.length - 1}
-                          >
-                            Next
-                          </button>
-                        </div>
-                      </div>
+                      <FaTimes />
+                    </button>
+                  </div>
+                  {/* Content */}
+                  <div className="flex flex-col gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
+                    {/* Image preview */}
+                    <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
+                      <img
+                        src={imagess[images[imgIdx]]}
+                        alt=""
+                        className="w-full h-full object-contain rounded shadow bg-white"
+                      />
+                    </div>
+                    {/* Detail */}
+                    <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
+                      <span className="font-semibold text-base mb-2">
+                        {images[imgIdx]
+                          .replace(/[_-]/g, " ")
+                          .replace(/\.[^/.]+$/, "")}
+                      </span>
                     </div>
                   </div>
-                )}
+                  {/* Footer navigation */}
+                  <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
+                    <span className="text-sm text-gray-600">
+                      {imgIdx + 1} of {images.length}
+                    </span>
+                    <div className="flex gap-2">
+                      <button
+                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                        onClick={() => setImgIdx((idx) => Math.max(0, idx - 1))}
+                        disabled={imgIdx === 0}
+                      >
+                        Previous
+                      </button>
+                      <button
+                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                        onClick={() =>
+                          setImgIdx((idx) =>
+                            Math.min(images.length - 1, idx + 1)
+                          )
+                        }
+                        disabled={imgIdx === images.length - 1}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>

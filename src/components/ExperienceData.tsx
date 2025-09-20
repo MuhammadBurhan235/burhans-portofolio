@@ -129,7 +129,14 @@ const projectExperiences = [
     images: ["dummy"],
     location: "Klinik SA Medika, Tangerang",
     date: "Aug 2025 - Sekarang",
-    skills: [],
+    skills: [
+      "html",
+      "css",
+      "sass",
+      "javascript",
+      "php",
+      "frontend-development",
+    ],
     output: [
       {
         url: "https://samedika.com/",
@@ -138,6 +145,52 @@ const projectExperiences = [
       {
         url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/projects/1117927743/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1757763343344",
         label: "Evidence of Contribution",
+      },
+    ],
+  },
+  {
+    title: "Lembaga Dakwah Kampus Al Fath Website (Frontend Developer)",
+    description: [
+      "It was originally conceived by Tio Haidar Hanif and developed voluntarily in collaboration with him.",
+      "Contributed as the Frontend Developer (Hard Skills: React Js, CSS, Bootstrap, Laravel)",
+      "GitHub Repository: https://github.com/TioHaidarHanif/Al-Fath_App",
+      "*This project is not affiliated with the Al Fath organization.",
+    ],
+    images: ["dummy"],
+    date: "Jul 2025 - Sekarang",
+    skills: [
+      "react",
+      "javascript",
+      "css",
+      "bootstrap",
+      "laravel",
+      "frontend-development",
+    ],
+    output: [
+      {
+        url: "https://github.com/TioHaidarHanif/Al-Fath_App",
+        label: "GitHub Repository",
+      },
+    ],
+  },
+  {
+    title: "Portfolio Burhan v2 Website (Personal Project)",
+    description: [
+      "Hard Skills: React, TypeScript, Tailwind CSS",
+      "GitHub Repos: https://github.com/MuhammadBurhan235/burhans-portofolio",
+      "GitHub Pages / Portfolio Website: https://muhammadburhan235.github.io/burhans-portofolio/",
+    ],
+    images: ["dummy"],
+    date: "Jul 2025 - Sekarang",
+    skills: ["react", "typescript", "tailwindcss"],
+    output: [
+      {
+        url: "https://muhammadburhan235.github.io/burhans-portofolio/",
+        label: "GitHub Pages / Portfolio Website",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/burhans-portofolio",
+        label: "GitHub Repository",
       },
     ],
   },
