@@ -194,6 +194,22 @@ const projectExperiences = [
       },
     ],
   },
+  {
+    title: "Handai Coffee Application (Coffee Shop) (UI/UX Designer)",
+    description: [
+      "Client: Handai Coffee (https://www.instagram.com/handaicoffee)",
+      "Contributed as one of the UI/UX Designers for the mobile application.",
+    ],
+    images: ["dummy"],
+    date: "April 2025 - Aug 2025",
+    skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
+    output: [
+      {
+        url: "https://www.figma.com/file/YVArZyAU5tWavvnvh5WstY/UI-UX-Handai",
+        label: "UI/UX Design of System (Figma)",
+      },
+    ],
+  },
 ];
 
 const orgExperiences = [

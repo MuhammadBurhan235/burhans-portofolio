@@ -23,6 +23,7 @@ import {
   SiLaravel,
   SiBootstrap,
   SiTailwindcss,
+  SiFigma,
 } from "react-icons/si";
 import Navbar from "./Navbar";
 import { imagess } from "../Image";
@@ -36,6 +37,23 @@ import {
 interface OutputItem {
   url: string;
   label?: string;
+}
+function FigmaIconGradient() {
+  return (
+    <svg viewBox="0 0 14 14" className="w-6 h-6">
+      {/* Definisi gradasi */}
+      <defs>
+        <linearGradient id="figmaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#F24E1E" /> {/* Oranye */}
+          <stop offset="50%" stopColor="#A259FF" /> {/* Ungu */}
+          <stop offset="100%" stopColor="#0ACF83" />
+          {/* Biru */}
+        </linearGradient>
+      </defs>
+      {/* Path dari ikon Figma */}
+      <SiFigma style={{ fill: "url(#figmaGradient)" }} />
+    </svg>
+  );
 }
 
 function ExperienceItem({
@@ -205,6 +223,11 @@ function ExperienceItem({
                         ),
                         label: "Tailwind CSS",
                       },
+                      {
+                        key: "Figma",
+                        icon: <FigmaIconGradient />,
+                        label: "Figma",
+                      },
                     ].filter((item) => skills.includes(item.key));
 
                     if (skillIcons.length === 0) return null;
@@ -251,6 +274,8 @@ function ExperienceItem({
                       { key: "SofCons", label: "Software Construction" },
                       { key: "VerCont", label: "Version Control" },
                       { key: "SofArch", label: "Software Architecture" },
+                      { key: "UI/UX Design", label: "UI/UX Design" },
+                      { key: "Hi-Fi Prototype", label: "Hi-Fi Prototype" },
                     ].filter((item) => skills.includes(item.key));
 
                     if (skillTextLabels.length === 0) return null;
@@ -486,37 +511,53 @@ function DashboardUser() {
                       href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-colors "
-                      title="LinkedIn"
+                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-colors group"
                     >
                       <FaLinkedin className="text-2xl md:text-3xl" />
+                      <span className="relative group">
+                        <span className="absolute right-[-61px] top-[-55px] px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          Download CV
+                        </span>
+                      </span>
                     </a>
                     <a
                       href="https://github.com/MuhammadBurhan235/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-colors"
-                      title="GitHub"
+                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-colors group"
                     >
                       <FaGithub className="text-2xl md:text-3xl" />
+                      <span className="relative group">
+                        <span className="absolute right-[-43px] top-[-55px] px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          GitHub
+                        </span>
+                      </span>
                     </a>
                     <a
                       href="https://www.instagram.com/muhammadburhan_253/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-colors"
-                      title="Instagram"
+                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-colors group"
                     >
                       <FaInstagram className="text-2xl md:text-3xl" />
+                      <span className="relative group">
+                        <span className="absolute right-[-51px] top-[-55px] px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          Instagram
+                        </span>
+                      </span>
                     </a>
                     <a
                       href="https://drive.google.com/file/d/1NmYW_UoLKVmBdsHAI_TMM73Ck-QIJYDI/view?usp=sharing" // Ganti dengan link CV kamu
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-green-700 hover:bg-white  transition-colors "
-                      title="Download CV"
+                      className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-colors group "
                     >
-                      <FaFileAlt className="text-2xl md:text-3xl" />
+                      <FaFileAlt className="text-[20px] md:text-[24px]" />
+                      <span className="relative group">
+                        <span className="absolute right-[-35px] top-[-40px] px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          Download CV
+                        </span>
+                      </span>
                     </a>
                   </div>
                 </div>
