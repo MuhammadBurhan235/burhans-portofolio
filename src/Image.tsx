@@ -9,6 +9,7 @@ import Photo from "/photo.png";
 import Test from "./components/image.png";
 import HKI from "./components/Test.png";
 import dummy from "./components/Under3.png";
+import FigmaLogo from "./components/FigmaLogo.png";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -22,4 +23,5 @@ export const imagess: { [key: string]: string } = {
   Test: Test,
   HKI: HKI,
   dummy: dummy,
+  FigmaLogo: FigmaLogo,
 };

@@ -23,7 +23,6 @@ import {
   SiLaravel,
   SiBootstrap,
   SiTailwindcss,
-  SiFigma,
 } from "react-icons/si";
 import Navbar from "./Navbar";
 import { imagess } from "../Image";
@@ -37,23 +36,6 @@ import {
 interface OutputItem {
   url: string;
   label?: string;
-}
-function FigmaIconGradient() {
-  return (
-    <svg viewBox="0 0 14 14" className="w-6 h-6">
-      {/* Definisi gradasi */}
-      <defs>
-        <linearGradient id="figmaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F24E1E" /> {/* Oranye */}
-          <stop offset="50%" stopColor="#A259FF" /> {/* Ungu */}
-          <stop offset="100%" stopColor="#0ACF83" />
-          {/* Biru */}
-        </linearGradient>
-      </defs>
-      {/* Path dari ikon Figma */}
-      <SiFigma style={{ fill: "url(#figmaGradient)" }} />
-    </svg>
-  );
 }
 
 function ExperienceItem({
@@ -225,7 +207,12 @@ function ExperienceItem({
                       },
                       {
                         key: "Figma",
-                        icon: <FigmaIconGradient />,
+                        icon: (
+                          <img
+                            src={imagess["FigmaLogo"]}
+                            className="w-6 h-6 object-contain"
+                          />
+                        ),
                         label: "Figma",
                       },
                     ].filter((item) => skills.includes(item.key));
@@ -276,6 +263,7 @@ function ExperienceItem({
                       { key: "SofArch", label: "Software Architecture" },
                       { key: "UI/UX Design", label: "UI/UX Design" },
                       { key: "Hi-Fi Prototype", label: "Hi-Fi Prototype" },
+                      { key: "public workshop", label: "Public Workshop" },
                     ].filter((item) => skills.includes(item.key));
 
                     if (skillTextLabels.length === 0) return null;

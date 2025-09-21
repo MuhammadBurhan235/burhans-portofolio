@@ -210,9 +210,70 @@ const projectExperiences = [
       },
     ],
   },
+  {
+    title: "LAAK FIF Telkom University Helpdesk System (UI/UX Designer)",
+    description: [
+      "Client: LAAK FIF Telkom University",
+      "Contributed as the UI/UX Designer",
+    ],
+    images: ["dummy"],
+    date: "Jun 2025 - Aug 2025",
+    skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
+    output: [
+      {
+        url: "https://www.figma.com/file/iCkdxqtbMdimNbKhbU257Q/Capstone",
+        label: "UI/UX Design of System (Figma)",
+      },
+    ],
+  },
+  {
+    title: "Warung NeoJapan Digital Poster (Personal Project)",
+    description: [
+      "Inspired by the idea of creating a digital and interactive version of a poster: https://www.instagram.com/p/DKbYFtvyHqx/?hl=id&img_index=1",
+      "Hard Skills: React, TypeScript, Tailwind CSS",
+      "GitHub Pages: https://proyek-isengburhan.github.io/warungneojapan/",
+      "GitHub Repos: https://github.com/Proyek-IsengBurhan/warungneojapan ",
+    ],
+    images: ["dummy"],
+    date: "Jun 2025 - Jun 2025",
+    skills: ["react", "typescript", "tailwindcss"],
+    output: [
+      {
+        url: "https://proyek-isengburhan.github.io/warungneojapan/",
+        label: "GitHub Pages for Interactive Poster",
+      },
+      {
+        url: "https://github.com/Proyek-IsengBurhan/warungneojapan",
+        label: "GitHub Repos for Interactive Poster",
+      },
+    ],
+  },
 ];
 
 const orgExperiences = [
+  {
+    title: "Frontend Developer",
+    description:
+      "Frontend Developer of Learning Management System (Moodle) Al Lathif Islamic School Bandung",
+    images: [],
+    location: "Community Service Team - Al Lathif Islamic School Bandung",
+    date: "Nov 2024 - Jan 2025",
+    skills: ["lead", "teamwork", "public workshop", "frontend-development"],
+    output: [
+      {
+        url: "https://lms.allathif-islamicschool.id/",
+        label: "https://lms.allathif-islamicschool.id/",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/overlay/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1756189505012",
+        label: "HKI Certificate",
+      },
+      {
+        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/experience/2617095532/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1744482492759",
+        label: "Community Service Certificate",
+      },
+    ],
+  },
   {
     title: "Broadcaster",
     images: [],
@@ -260,6 +321,29 @@ const orgExperiences = [
         label: "Certificate of Contribution",
       },
     ],
+  },
+  {
+    title: "Head of Mosque Welfare Division",
+    images: [],
+    location: "Islamic Studies Organization of SMAN 2 Kota Tangerang (PISMAN)",
+    date: "2018 - 2021",
+    skills: ["lead", "teamwork"],
+  },
+  {
+    title: "Chief Organizer of the Eid al-Adha Event",
+    images: [],
+    location: "Islamic Studies Organization of SMAN 2 Kota Tangerang (PISMAN)",
+    date: "2018 - 2021",
+    skills: ["lead", "teamwork"],
+  },
+  {
+    title:
+      "Chief Organizer of the Malam Bina Iman dan Taqwa (Faith and Piety Development Night) Event",
+    images: [],
+    location:
+      "Islamic Spirituality Organization – SMPN 13 Kota Tangerang (ROSTA)",
+    date: "2015 - 2018",
+    skills: ["lead", "teamwork"],
   },
 ];
 
