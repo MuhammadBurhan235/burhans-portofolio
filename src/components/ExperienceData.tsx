@@ -169,6 +169,7 @@ const projectExperiences = [
       "*This project is not affiliated with the Al Fath organization.",
     ],
     images: ["Evidence_Al_Fath_Web", "Preview_Al_Fath_Web"],
+    location: "Fleksibel",
     date: "Jul 2025 - Sekarang",
     skills: [
       "react",
@@ -193,6 +194,7 @@ const projectExperiences = [
       "GitHub Pages / Portfolio Website: https://muhammadburhan235.github.io/burhans-portofolio/",
     ],
     images: ["Evidence_Project_Porto", "Preview_Porto_1", "Preview_Porto_2"],
+    location: "Fleksibel",
     date: "Jul 2025 - Sekarang",
     skills: ["react", "typescript", "tailwindcss"],
     output: [
@@ -213,6 +215,7 @@ const projectExperiences = [
       "Figma: https://www.figma.com/design/Z4NgEAWkwV0N50SeHKspyR/IVANET?node-id=0-1&t=475yQmJf7QDLoFn3-1",
     ],
     images: ["Figma_IVANET"],
+    location: "Fleksibel",
     date: "8 Sep 2025 - 23 Sep 2025",
     skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
     output: [
