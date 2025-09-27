@@ -16,7 +16,7 @@ import SKL from "./assets/SKL.png";
 import Practicum_Assistant_Certificate from "./assets/Practicum_Assistant_Certificate.png";
 import Module from "./assets/Module.png";
 import One_of_The_Schedules from "./assets/One_of_The_Schedules.png";
-import Community_Service_Certificate from "./assets/community_service_certificate.png";
+import Community_Service_Certificate from "./assets/Community_Service_Certificate.png";
 import hpanel_LMS_Al_Lathif_Islamic_School from "./assets/hpanel_LMS_Al_Lathif_Islamic_School.png";
 import Preview_LMS_Al_Lathif_Islamic_School from "./assets/Preview_LMS_Al_Lathif_Islamic_School.png";
 import hpanel_LMS_mynextskill from "./assets/hpanel_LMS_mynextskill.png";
