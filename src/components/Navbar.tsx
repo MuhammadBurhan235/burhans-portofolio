@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
   FaBars, // Tambahkan ikon burger
+  FaThList,
   FaTimes, // Tambahkan ikon close
 } from "react-icons/fa";
 import {
@@ -9,7 +10,21 @@ import {
   FaBriefcase,
   FaFolderOpen,
   FaUsers,
+  FaJs,
+  FaHtml5,
+  FaCss3,
+  FaReact,
+  FaSass,
+  FaGithub,
+  FaBootstrap,
 } from "react-icons/fa";
+import {
+  SiTypescript,
+  SiPhp,
+  SiMysql,
+  SiLaravel,
+  SiTailwindcss,
+} from "react-icons/si";
 import { Link } from "react-scroll";
 
 interface NavbarProps {
@@ -25,6 +40,69 @@ const portfolioSections = [
   { id: "org-experience", label: "Organization", icon: <FaUsers /> },
 ];
 
+const skillIcons = [
+  {
+    key: "JavaScript",
+    icon: <FaJs className="text-yellow-500 text-[32px]" />,
+    value: 8,
+  },
+  {
+    key: "HTML",
+    icon: <FaHtml5 className="text-red-500 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: "CSS",
+    icon: <FaCss3 className="text-blue-500 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: "React",
+    icon: <FaReact className="text-blue-400 text-[32px]" />,
+    value: 6,
+  },
+  {
+    key: "TypeScript",
+    icon: <SiTypescript className="text-blue-700 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: "Sass",
+    icon: <FaSass className="text-pink-500 text-[32px]" />,
+    value: 6,
+  },
+  {
+    key: "PHP",
+    icon: <SiPhp className="text-indigo-700 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: "MySQL",
+    icon: <SiMysql className="text-yellow-700 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: "Laravel",
+    icon: <SiLaravel className="text-red-700 text-[32px]" />,
+    value: 6,
+  },
+  {
+    key: "Bootstrap",
+    icon: <FaBootstrap className="text-purple-700 text-[32px]" />,
+    value: 6,
+  },
+  {
+    key: "Tailwind CSS",
+    icon: <SiTailwindcss className="text-cyan-500 text-[32px]" />,
+    value: 6,
+  },
+  {
+    key: "GitHub",
+    icon: <FaGithub className="text-black text-[32px]" />,
+    value: 7,
+  },
+];
+
 function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   // const [showNavbar, setShowNavbar] = useState(true);
   // const [isTop, setIsTop] = useState(true);
@@ -35,9 +113,15 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // Tambahkan state untuk burger menu skill
+  const [skillMenuOpen, setSkillMenuOpen] = useState(false);
+
   // Hitung berapa tombol yang muat berdasarkan lebar window
   const [visibleCount, setVisibleCount] = useState(portfolioSections.length);
 
+  const handleCloseSkillMenu = () => {
+    setSkillMenuOpen(false);
+  };
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -116,10 +200,91 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
           className={`fixed w-full h-[64px] bg-[#084a83]/30 flex justify-center transition-all duration-300 backdrop-blur-[5px] shadow-lg z-50`}
         >
           <div className="w-full min-w-[320px] max-w-[1140px] h-full px-4 bg-transparent flex flex-row justify-between items-center gap-4">
-            <a
-              href="#"
-              className="w-full min-w-[160px] max-w-[320px] h-[48px] bg-gray-900 rounded-[16px] cursor-pointer"
-            ></a>
+            {/* Media Infinite Icon Slide  */}
+            <div
+              className="w-full min-w-[160px] max-w-[400px] h-[48px] rounded-[16px] cursor-pointer overflow-hidden flex items-center relative"
+              style={{ position: "relative" }}
+            >
+              {/* Burger menu di kiri */}
+              <div className="relative z-10">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSkillMenuOpen(!skillMenuOpen);
+                  }}
+                  className="flex items-center justify-center w-10 h-12 bg-white rounded-[8px] hover:bg-blue-100 transition text-blue-600 shadow cursor-pointer"
+                  title="Show All Skills"
+                >
+                  <FaThList />
+                </button>
+              </div>
+              {/* Infinite Icon Slider */}
+              <div className="absolute left-0 top-0 w-full h-full flex items-center pl-12">
+                <div
+                  className="flex gap-5 animate-infinite-scroll"
+                  style={{
+                    animation: "infinite-scroll 22s linear infinite",
+                    minWidth: "max-content",
+                  }}
+                >
+                  {skillIcons.concat(skillIcons).map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="flex items-center bg-white/30 px-4 py-2 rounded-[8px] hover:bg-white transition-all duration-300 group"
+                    >
+                      {item.icon}
+                      <span className="relative group">
+                        <span className="absolute px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          {item.key} {item.value}/10
+                        </span>
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {/* Dropdown skill icons & label */}
+            {skillMenuOpen && (
+              <div
+                className="absolute max-w-[320px]  top-16 bg-white rounded shadow-lg p-4 z-50 min-w-[220px] flex flex-col gap-2"
+                style={{ overscrollBehavior: "contain" }}
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+              >
+                <div className="flex flex-row gap-1 justify-between items-center mb-2">
+                  <div className="font-semibold text-blue-700">All Skills</div>
+                  <button
+                    className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
+                    onClick={handleCloseSkillMenu}
+                    title="Tutup"
+                  >
+                    <FaTimes />
+                  </button>
+                </div>
+                <div
+                  className="grid grid-cols-3 gap-4 max-h-[320px] overflow-y-auto"
+                  style={{ overscrollBehavior: "contain" }}
+                  onWheel={(e) => e.stopPropagation()}
+                  onTouchMove={(e) => e.stopPropagation()}
+                >
+                  {skillIcons.map((item) => (
+                    <div
+                      key={item.key}
+                      className="flex flex-col items-center gap-1"
+                    >
+                      <span>{item.icon}</span>
+                      <span className="text-xs text-gray-700 font-medium capitalize text-center">
+                        {item.key}
+                      </span>
+                      <span className="text-[11px] text-gray-500 font-semibold">
+                        {item.value}/10
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Burger menu untuk mobile */}
             <div className="hidden max-[500px]:flex items-center gap-2">
               <button
@@ -273,6 +438,14 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
         </>
       )}
       {activeNavbar === 3 && <></>}
+      <style>
+        {`
+        @keyframes infinite-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        `}
+      </style>
     </>
   );
 }

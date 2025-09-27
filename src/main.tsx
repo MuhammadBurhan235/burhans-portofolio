@@ -6,7 +6,7 @@ import "./index.css";
 // const App = lazy(() => import("./App"));
 // const Layout = lazy(() => import("./Layout"));
 const Landing = lazy(() => import("./components/Landing"));
-const DashUser = lazy(() => import("./components/DashboardUser"));
+const DashUser = lazy(() => import("./Pages/PortfolioMP"));
 const Scroll = lazy(() => import("./components/Scroll"));
 
 // const Dashboard = lazy(() => import("./components/Dashboard"));

@@ -24,14 +24,14 @@ import {
   SiBootstrap,
   SiTailwindcss,
 } from "react-icons/si";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import { imagess } from "../Image";
 import {
   eduExperiences,
   workExperiences,
   projectExperiences,
   orgExperiences,
-} from "./ExperienceData";
+} from "../components/ExperienceData";
 
 interface OutputItem {
   url: string;

@@ -126,7 +126,7 @@ const projectExperiences = [
       "Contributed as one of the Frontend Developers (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
       "Live Website: https://samedika.com/",
     ],
-    images: ["dummy"],
+    images: ["SAM001"],
     location: "Klinik SA Medika, Tangerang",
     date: "Aug 2025 - Sekarang",
     skills: [
@@ -141,10 +141,6 @@ const projectExperiences = [
       {
         url: "https://samedika.com/",
         label: "https://samedika.com/",
-      },
-      {
-        url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/details/projects/1117927743/multiple-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo&treasuryMediaId=1757763343344",
-        label: "Evidence of Contribution",
       },
     ],
   },
@@ -180,7 +176,7 @@ const projectExperiences = [
       "GitHub Repos: https://github.com/MuhammadBurhan235/burhans-portofolio",
       "GitHub Pages / Portfolio Website: https://muhammadburhan235.github.io/burhans-portofolio/",
     ],
-    images: ["dummy"],
+    images: ["PMP001"],
     date: "Jul 2025 - Sekarang",
     skills: ["react", "typescript", "tailwindcss"],
     output: [

@@ -1,15 +1,17 @@
-import Warung from "/BismillahNeoJapan.png";
-import Baju1 from "/Baju1.png";
-import Mug from "/Gelas1.png";
-import Verif from "/check.png";
-import Neo1 from "/Neo1.png";
-import YTLogo from "/YTLogo.png";
-import BurhanLab from "/Burhan_Lab.png";
-import Photo from "/photo.png";
-import Test from "./components/image.png";
-import HKI from "./components/Test.png";
-import dummy from "./components/Under3.png";
-import FigmaLogo from "./components/FigmaLogo.png";
+import Warung from "./assets/BismillahNeoJapan.png";
+import Baju1 from "./assets/Baju1.png";
+import Mug from "./assets/Gelas1.png";
+import Verif from "./assets/check.png";
+import Neo1 from "./assets/Neo1.png";
+import YTLogo from "./assets/YTLogo.png";
+import BurhanLab from "./assets/Burhan_Lab.png";
+import Photo from "./assets/photo.png";
+import Test from "./assets/Test2.png";
+import HKI from "./assets/Test.png";
+import dummy from "./assets/Under3.png";
+import FigmaLogo from "./assets/FigmaLogo.png";
+import PMP001 from "./assets/PMP001.png";
+import SAM001 from "./assets/SAM001.png";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -24,4 +26,6 @@ export const imagess: { [key: string]: string } = {
   HKI: HKI,
   dummy: dummy,
   FigmaLogo: FigmaLogo,
+  PMP001: PMP001,
+  SAM001: SAM001,
 };
