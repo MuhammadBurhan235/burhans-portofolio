@@ -2,13 +2,13 @@ const eduExperiences = [
   {
     title: "Telkom University (Bandung)",
     description: [
-      "Bachelor of Computer Science (S.Si.Kom)",
+      "Bachelor of Computer Science (S.Si.Kom) (S-1)",
       "GPA: 3.79 (Cum Laude with HKI Certificate & proven DUDI implementation)",
-      "Activities and Societies: Teaching Assistant for Software Architecture and Design Course, Islamic Broadcaster at Al-Fath Campus Da'wah Organization, Community Service Volunteer at Al-Lathif Islamic School, Practicum Assistant for Software Construction Course",
+      "Activities and Societies: Teaching Assistant for Software Architecture and Design Course; Member of Al-Fath Campus Da'wah Organization (Broadcaster, Head of Public Relations Division, Secretary of Data Collection Division, Volunteer); Community Service Volunteer (Frontend Developer) at Al-Lathif Islamic School; Practicum Assistant for Software Construction Course; and Several Projects in Web/App Development and UI/UX Design.",
     ],
     location: "Jawa Barat, Indonesia",
     date: "Sep 2021 - Aug 2025",
-    images: ["dummy"],
+    images: ["HKI_Certificate_1", "HKI_Certificate_2", "SKL"],
     skills: [],
     output: [
       {
@@ -19,6 +19,10 @@ const eduExperiences = [
   },
   {
     title: "SMA Negeri 2 Kota Tangerang",
+    description: [
+      "Science Major",
+      "Activities and Societies: Head of Mosque Welfare Division; Chief Organizer of the Eid al-Adha Event; Chief Organizer of the Malam Bina Iman dan Taqwa (Faith and Piety Development Night) Event.",
+    ],
     location: "Banten, Indonesia",
     date: "Jul 2018 - Jan 2021",
     images: [],
@@ -36,7 +40,11 @@ const workExperiences = [
     ],
     location: "Informatics Laboratory, Telkom University",
     date: "Feb 2025 - Jun 2025",
-    images: ["dummy"],
+    images: [
+      "Practicum_Assistant_Certificate",
+      "Module",
+      "One_of_The_Schedules",
+    ],
     skills: ["SofCons", "VerCont"],
     output: [
       {
@@ -54,7 +62,13 @@ const workExperiences = [
       "Collaborated with the academic team to deliver workshops and technical support to target users.",
       "Contributed to the socialization and technical implementation of Moodle in the school environment.",
     ],
-    images: ["dummy", "Mug", "Baju1", "Mug", "Baju1", "Photo"],
+    images: [
+      "HKI_Certificate_1",
+      "HKI_Certificate_2",
+      "hpanel_LMS_Al_Lathif_Islamic_School",
+      "community_service_certificate",
+      "Preview_LMS_Al_Lathif_Islamic_School",
+    ],
     location: "Telkom University - Al Lathif Islamic School",
     date: "Nov 2024 - Jan 2025",
     skills: [
@@ -86,7 +100,7 @@ const workExperiences = [
       "Using the Lean UX Method, the development process was conducted without prototypes or initial designs in Figma. Feedback from lecturers was directly applied by modifying the code on the Moodle platform, which was already hosted on Hostinger.",
       "LMS interface customization, including color adjustments, layout modifications, and other visual design elements to meet institutional branding and accessibility needs.",
     ],
-    images: ["dummy", "Mug", "Baju1", "Mug", "Baju1"],
+    images: ["hpanel_LMS_mynextskill", "Preview_LMS_mynextskill"],
     location: "Telkom University",
     date: "Jun 2024 - Aug 2024",
     skills: [
@@ -113,7 +127,7 @@ const workExperiences = [
     ],
     location: "Fakultas Informatika, Telkom University",
     date: "Oct 2023 - Jan 2024",
-    images: ["dummy"],
+    images: [],
     skills: ["SofArch"],
   },
 ];
@@ -126,7 +140,7 @@ const projectExperiences = [
       "Contributed as one of the Frontend Developers (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
       "Live Website: https://samedika.com/",
     ],
-    images: ["SAM001"],
+    images: ["Preview_Web_Klinik"],
     location: "Klinik SA Medika, Tangerang",
     date: "Aug 2025 - Sekarang",
     skills: [
@@ -152,7 +166,7 @@ const projectExperiences = [
       "GitHub Repository: https://github.com/TioHaidarHanif/Al-Fath_App",
       "*This project is not affiliated with the Al Fath organization.",
     ],
-    images: ["dummy"],
+    images: ["Evidence_Al_Fath_Web", "Preview_Al_Fath_Web"],
     date: "Jul 2025 - Sekarang",
     skills: [
       "react",
@@ -176,7 +190,7 @@ const projectExperiences = [
       "GitHub Repos: https://github.com/MuhammadBurhan235/burhans-portofolio",
       "GitHub Pages / Portfolio Website: https://muhammadburhan235.github.io/burhans-portofolio/",
     ],
-    images: ["PMP001"],
+    images: ["Evidence_Project_Porto", "Preview_Porto_1", "Preview_Porto_2"],
     date: "Jul 2025 - Sekarang",
     skills: ["react", "typescript", "tailwindcss"],
     output: [
@@ -187,6 +201,22 @@ const projectExperiences = [
       {
         url: "https://github.com/MuhammadBurhan235/burhans-portofolio",
         label: "GitHub Repository",
+      },
+    ],
+  },
+  {
+    title: "Website IVANET (UI/UX Designer)",
+    description: [
+      "Type: Cervical Cancer Health Data Management Dashboard (Since it shares the same type as the previous project, the previous UI Design System was re-engineered by adjusting it to the new UX and environment).",
+      "Figma: https://www.figma.com/design/Z4NgEAWkwV0N50SeHKspyR/IVANET?node-id=0-1&t=475yQmJf7QDLoFn3-1",
+    ],
+    images: ["Figma_IVANET"],
+    date: "8 Sep 2025 - 23 Sep 2025",
+    skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
+    output: [
+      {
+        url: "https://www.figma.com/design/Z4NgEAWkwV0N50SeHKspyR/IVANET?node-id=0-1&t=475yQmJf7QDLoFn3-1",
+        label: "UI/UX Design of System (Figma)",
       },
     ],
   },

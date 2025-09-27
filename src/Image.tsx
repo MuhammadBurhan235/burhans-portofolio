@@ -6,12 +6,26 @@ import Neo1 from "./assets/Neo1.png";
 import YTLogo from "./assets/YTLogo.png";
 import BurhanLab from "./assets/Burhan_Lab.png";
 import Photo from "./assets/photo.png";
-import Test from "./assets/Test2.png";
-import HKI from "./assets/Test.png";
+import HKI_Certificate_1 from "./assets/HKI_Certificate_1.png";
+import HKI_Certificate_2 from "./assets/HKI_Certificate_2.png";
 import dummy from "./assets/Under3.png";
 import FigmaLogo from "./assets/FigmaLogo.png";
-import PMP001 from "./assets/PMP001.png";
-import SAM001 from "./assets/SAM001.png";
+import Evidence_Project_Porto from "./assets/Evidence_Project_Porto.png";
+import Preview_Web_Klinik from "./assets/Preview_Web_Klinik.png";
+import SKL from "./assets/SKL.png";
+import Practicum_Assistant_Certificate from "./assets/Practicum_Assistant_Certificate.png";
+import Module from "./assets/Module.png";
+import One_of_The_Schedules from "./assets/One_of_The_Schedules.png";
+import Community_Service_Certificate from "./assets/community_service_certificate.png";
+import hpanel_LMS_Al_Lathif_Islamic_School from "./assets/hpanel_LMS_Al_Lathif_Islamic_School.png";
+import Preview_LMS_Al_Lathif_Islamic_School from "./assets/Preview_LMS_Al_Lathif_Islamic_School.png";
+import hpanel_LMS_mynextskill from "./assets/hpanel_LMS_mynextskill.png";
+import Preview_LMS_mynextskill from "./assets/Preview_LMS_mynextskill.png";
+import Figma_IVANET from "./assets/Figma_IVANET.png";
+import Preview_Porto_1 from "./assets/Preview_Porto_1.png";
+import Preview_Porto_2 from "./assets/Preview_Porto_2.png";
+import Evidence_Al_Fath_Web from "./assets/Evidence_Al_Fath_Web.png";
+import Preview_Al_Fath_Web from "./assets/Preview_Al_Fath_Web.png";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -22,10 +36,24 @@ export const imagess: { [key: string]: string } = {
   YTLogo: YTLogo,
   Profile: BurhanLab,
   Photo: Photo,
-  Test: Test,
-  HKI: HKI,
+  HKI_Certificate_1: HKI_Certificate_1,
+  HKI_Certificate_2: HKI_Certificate_2,
   dummy: dummy,
   FigmaLogo: FigmaLogo,
-  PMP001: PMP001,
-  SAM001: SAM001,
+  Evidence_Project_Porto: Evidence_Project_Porto,
+  Preview_Web_Klinik: Preview_Web_Klinik,
+  SKL: SKL,
+  Practicum_Assistant_Certificate: Practicum_Assistant_Certificate,
+  Module: Module,
+  One_of_The_Schedules: One_of_The_Schedules,
+  community_service_certificate: Community_Service_Certificate,
+  hpanel_LMS_Al_Lathif_Islamic_School: hpanel_LMS_Al_Lathif_Islamic_School,
+  Preview_LMS_Al_Lathif_Islamic_School: Preview_LMS_Al_Lathif_Islamic_School,
+  hpanel_LMS_mynextskill: hpanel_LMS_mynextskill,
+  Preview_LMS_mynextskill: Preview_LMS_mynextskill,
+  Figma_IVANET: Figma_IVANET,
+  Preview_Porto_1: Preview_Porto_1,
+  Preview_Porto_2: Preview_Porto_2,
+  Evidence_Al_Fath_Web: Evidence_Al_Fath_Web,
+  Preview_Al_Fath_Web: Preview_Al_Fath_Web,
 };

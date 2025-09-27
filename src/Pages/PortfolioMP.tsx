@@ -81,6 +81,9 @@ function ExperienceItem({
     };
   }, [showModal]);
 
+  {
+    /* Experience Item */
+  }
   return (
     <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
       <h3
@@ -478,7 +481,7 @@ function DashboardUser() {
                       </a>
                       {/* CV - bawah kanan */}
                       <a
-                        href="https://drive.google.com/file/d/1NmYW_UoLKVmBdsHAI_TMM73Ck-QIJYDI/view?usp=sharing"
+                        href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="absolute right-[-26.5px] bottom-[-17px] bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-green-50 transition"
@@ -535,7 +538,7 @@ function DashboardUser() {
                       </span>
                     </a>
                     <a
-                      href="https://drive.google.com/file/d/1NmYW_UoLKVmBdsHAI_TMM73Ck-QIJYDI/view?usp=sharing" // Ganti dengan link CV kamu
+                      href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing" // Ganti dengan link CV kamu
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-colors group "

@@ -237,6 +237,10 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   {skillIcons.concat(skillIcons).map((item, idx) => (
                     <span
                       key={idx}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSkillMenuOpen(!skillMenuOpen);
+                      }}
                       className="flex items-center bg-white/30 px-4 py-2 rounded-[8px] hover:bg-white transition-all duration-300 group"
                     >
                       {item.icon}
