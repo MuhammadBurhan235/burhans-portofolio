@@ -185,6 +185,26 @@ function ExperienceItem({
                         label: "PHP",
                       },
                       {
+                        key: "C#",
+                        icon: (
+                          <img
+                            src={imagess["Csharp"]}
+                            className="w-6 h-6 object-contain"
+                          />
+                        ),
+                        label: "C#",
+                      },
+                      {
+                        key: ".Net Core",
+                        icon: (
+                          <img
+                            src={imagess["NET_Core_Logo"]}
+                            className="w-6 h-6 object-contain"
+                          />
+                        ),
+                        label: ".Net Core",
+                      },
+                      {
                         key: "mysql",
                         icon: <SiMysql className="text-yellow-700 text-2xl" />,
                         label: "MySQL",

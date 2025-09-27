@@ -25,6 +25,7 @@ import {
   SiMysql,
   SiLaravel,
   SiTailwindcss,
+  SiNodedotjs,
 } from "react-icons/si";
 import { Link } from "react-scroll";
 
@@ -68,10 +69,11 @@ const skillIcons = [
     value: 7,
   },
   {
-    key: "Sass",
-    icon: <FaSass className="text-pink-500 text-[32px]" />,
-    value: 8,
+    key: "C#",
+    icon: <img src={imagess["Csharp"]} className="w-8 h-8 object-contain" />,
+    value: 7,
   },
+
   {
     key: "PHP",
     icon: <SiPhp className="text-indigo-700 text-[32px]" />,
@@ -101,6 +103,24 @@ const skillIcons = [
     key: "Figma",
     icon: <img src={imagess["FigmaLogo"]} className="w-8 h-8 object-contain" />,
     label: "Figma",
+    value: 8,
+  },
+  {
+    key: "Node.js",
+    icon: <SiNodedotjs className="text-green-500 text-[32px]" />,
+    value: 7,
+  },
+  {
+    key: ".Net Core",
+    icon: (
+      <img src={imagess["NET_Core_Logo"]} className="w-8 h-8 object-contain" />
+    ),
+    label: ".Net Core",
+    value: 6,
+  },
+  {
+    key: "Sass",
+    icon: <FaSass className="text-pink-500 text-[32px]" />,
     value: 8,
   },
   {

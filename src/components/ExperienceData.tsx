@@ -45,7 +45,7 @@ const workExperiences = [
       "Module",
       "One_of_The_Schedules",
     ],
-    skills: ["SofCons", "VerCont"],
+    skills: ["C#", ".Net Core", "mysql", "SofCons", "VerCont"],
     output: [
       {
         url: "https://www.linkedin.com/in/muhammad-burhan-5835841b0/overlay/1752825839585/single-media-viewer/?profileId=ACoAADE04jMBmvs0Puvg4otlnQL3sC4rkjFgxVo",
@@ -73,6 +73,7 @@ const workExperiences = [
     date: "Nov 2024 - Jan 2025",
     skills: [
       "sass",
+      "javascript",
       "php",
       "mysql",
       "frontend-development",
@@ -106,6 +107,7 @@ const workExperiences = [
     skills: [
       "sass",
       "php",
+      "javascript",
       "mysql",
       "frontend-development",
       "lean-ux",
@@ -140,7 +142,7 @@ const projectExperiences = [
       "Contributed as one of the Frontend Developers (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
       "Live Website: https://samedika.com/",
     ],
-    images: ["Preview_Web_Klinik"],
+    images: ["Preview_Web_Klinik", "Evidence_Web_Klinik"],
     location: "Klinik SA Medika, Tangerang",
     date: "Aug 2025 - Sekarang",
     skills: [
@@ -281,7 +283,7 @@ const orgExperiences = [
     title: "Frontend Developer",
     description:
       "Frontend Developer of Learning Management System (Moodle) Al Lathif Islamic School Bandung",
-    images: [],
+    images: ["HKI_Certificate_1", "HKI_Certificate_2"],
     location: "Community Service Team - Al Lathif Islamic School Bandung",
     date: "Nov 2024 - Jan 2025",
     skills: ["lead", "teamwork", "public workshop", "frontend-development"],

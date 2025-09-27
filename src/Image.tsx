@@ -26,6 +26,9 @@ import Preview_Porto_1 from "./assets/Preview_Porto_1.png";
 import Preview_Porto_2 from "./assets/Preview_Porto_2.png";
 import Evidence_Al_Fath_Web from "./assets/Evidence_Al_Fath_Web.png";
 import Preview_Al_Fath_Web from "./assets/Preview_Al_Fath_Web.png";
+import Evidence_Web_Klinik from "./assets/Evidence_Web_Klinik.png";
+import Csharp from "./assets/Csharp_Logo.png";
+import NET_Core_Logo from "./assets/NET_Core_Logo.svg";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -56,4 +59,7 @@ export const imagess: { [key: string]: string } = {
   Preview_Porto_2: Preview_Porto_2,
   Evidence_Al_Fath_Web: Evidence_Al_Fath_Web,
   Preview_Al_Fath_Web: Preview_Al_Fath_Web,
+  Evidence_Web_Klinik: Evidence_Web_Klinik,
+  Csharp: Csharp,
+  NET_Core_Logo: NET_Core_Logo,
 };
