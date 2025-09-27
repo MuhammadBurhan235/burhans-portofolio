@@ -579,7 +579,7 @@ function DashboardUser() {
         >
           <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
             <FaGraduationCap className="text-blue-700" />
-            Education
+            Education ({eduExperiences.length})
           </h2>
           {eduExperiences.map((exp, idx) => (
             <ExperienceItem key={idx} {...exp} />
@@ -593,7 +593,7 @@ function DashboardUser() {
         >
           <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
             <FaBriefcase className="text-blue-700" />
-            Work Experience
+            Work Experience ({workExperiences.length})
           </h2>
           {workExperiences.map((exp, idx) => (
             <ExperienceItem key={idx} {...exp} />
@@ -607,7 +607,7 @@ function DashboardUser() {
         >
           <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
             <FaFolderOpen className="text-blue-700" />
-            Project Experience
+            Project Experience ({projectExperiences.length})
           </h2>
           {projectExperiences.map((exp, idx) => (
             <ExperienceItem key={idx} {...exp} />
@@ -621,7 +621,7 @@ function DashboardUser() {
         >
           <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
             <FaUsers className="text-blue-700" />
-            Organization Experience
+            Organization Experience ({orgExperiences.length})
           </h2>
           {orgExperiences.map((exp, idx) => (
             <ExperienceItem key={idx} {...exp} />

@@ -4,6 +4,7 @@ import {
   FaThList,
   FaTimes, // Tambahkan ikon close
 } from "react-icons/fa";
+import { imagess } from "../Image";
 import {
   FaUser,
   FaGraduationCap,
@@ -49,17 +50,17 @@ const skillIcons = [
   {
     key: "HTML",
     icon: <FaHtml5 className="text-red-500 text-[32px]" />,
-    value: 7,
+    value: 8,
   },
   {
     key: "CSS",
     icon: <FaCss3 className="text-blue-500 text-[32px]" />,
-    value: 7,
+    value: 8,
   },
   {
     key: "React",
     icon: <FaReact className="text-blue-400 text-[32px]" />,
-    value: 6,
+    value: 7,
   },
   {
     key: "TypeScript",
@@ -69,7 +70,7 @@ const skillIcons = [
   {
     key: "Sass",
     icon: <FaSass className="text-pink-500 text-[32px]" />,
-    value: 6,
+    value: 8,
   },
   {
     key: "PHP",
@@ -87,19 +88,25 @@ const skillIcons = [
     value: 6,
   },
   {
-    key: "Bootstrap",
-    icon: <FaBootstrap className="text-purple-700 text-[32px]" />,
-    value: 6,
-  },
-  {
     key: "Tailwind CSS",
     icon: <SiTailwindcss className="text-cyan-500 text-[32px]" />,
-    value: 6,
+    value: 8,
   },
   {
     key: "GitHub",
     icon: <FaGithub className="text-black text-[32px]" />,
-    value: 7,
+    value: 8,
+  },
+  {
+    key: "Figma",
+    icon: <img src={imagess["FigmaLogo"]} className="w-8 h-8 object-contain" />,
+    label: "Figma",
+    value: 8,
+  },
+  {
+    key: "Bootstrap",
+    icon: <FaBootstrap className="text-purple-700 text-[32px]" />,
+    value: 6,
   },
 ];
 
@@ -252,7 +259,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 onTouchMove={(e) => e.stopPropagation()}
               >
                 <div className="flex flex-row gap-1 justify-between items-center mb-2">
-                  <div className="font-semibold text-blue-700">All Skills</div>
+                  <div className="font-semibold ">All Skills</div>
                   <button
                     className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
                     onClick={handleCloseSkillMenu}
