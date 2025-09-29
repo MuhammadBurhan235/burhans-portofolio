@@ -228,10 +228,10 @@ const projectExperiences = [
   {
     title: "Handai Coffee Application (Coffee Shop) (UI/UX Designer)",
     description: [
-      "Client: Handai Coffee (https://www.instagram.com/handaicoffee)",
+      "Client: Handai Coffee - https://www.instagram.com/handaicoffee",
       "Contributed as one of the UI/UX Designers for the mobile application.",
     ],
-    images: ["dummy"],
+    images: ["Figma_Handai_1", "Figma_Handai_2", "Handai_Poster"],
     date: "April 2025 - Aug 2025",
     skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
     output: [
@@ -247,7 +247,7 @@ const projectExperiences = [
       "Client: LAAK FIF Telkom University",
       "Contributed as the UI/UX Designer",
     ],
-    images: ["dummy"],
+    images: ["Figma_LAAK_1", "Figma_LAAK_2", "LAAK_Logo"],
     date: "Jun 2025 - Aug 2025",
     skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
     output: [
@@ -265,7 +265,7 @@ const projectExperiences = [
       "GitHub Pages: https://proyek-isengburhan.github.io/warungneojapan/",
       "GitHub Repos: https://github.com/Proyek-IsengBurhan/warungneojapan ",
     ],
-    images: ["dummy"],
+    images: ["Evidence_Digital_Poster", "Preview_Digital_Poster"],
     date: "Jun 2025 - Jun 2025",
     skills: ["react", "typescript", "tailwindcss"],
     output: [

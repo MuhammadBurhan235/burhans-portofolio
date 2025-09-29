@@ -29,6 +29,14 @@ import Preview_Al_Fath_Web from "./assets/Preview_Al_Fath_Web.png";
 import Evidence_Web_Klinik from "./assets/Evidence_Web_Klinik.png";
 import Csharp from "./assets/Csharp_Logo.png";
 import NET_Core_Logo from "./assets/NET_Core_Logo.svg";
+import Figma_Handai_1 from "./assets/Figma_Handai_1.png";
+import Figma_Handai_2 from "./assets/Figma_Handai_2.png";
+import Handai_Poster from "./assets/Handai_Poster.png";
+import Figma_LAAK_1 from "./assets/Figma_LAAK_1.webp";
+import Figma_LAAK_2 from "./assets/Figma_LAAK_2.webp";
+import LAAK_Logo from "./assets/LAAK_Logo.webp";
+import Evidence_Digital_Poster from "./assets/Evidence_Digital_Poster.webp";
+import Preview_Digital_Poster from "./assets/Preview_Digital_Poster.webp";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -62,4 +70,12 @@ export const imagess: { [key: string]: string } = {
   Evidence_Web_Klinik: Evidence_Web_Klinik,
   Csharp: Csharp,
   NET_Core_Logo: NET_Core_Logo,
+  Figma_Handai_1: Figma_Handai_1,
+  Figma_Handai_2: Figma_Handai_2,
+  Handai_Poster: Handai_Poster,
+  Figma_LAAK_1: Figma_LAAK_1,
+  Figma_LAAK_2: Figma_LAAK_2,
+  LAAK_Logo: LAAK_Logo,
+  Evidence_Digital_Poster: Evidence_Digital_Poster,
+  Preview_Digital_Poster: Preview_Digital_Poster,
 };
