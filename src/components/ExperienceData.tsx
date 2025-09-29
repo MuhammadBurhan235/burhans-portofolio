@@ -2,7 +2,8 @@ const eduExperiences = [
   {
     title: "Telkom University (Bandung)",
     description: [
-      "Bachelor of Computer Science (S.Si.Kom) (S-1)",
+      "S-1 Rekayasa Perangkat Lunak (Software Engineering)",
+      "Bachelor of Computer Science (S.Si.Kom)",
       "GPA: 3.79 (Cum Laude with HKI Certificate & proven DUDI implementation)",
       "Activities and Societies: Teaching Assistant for Software Architecture and Design Course; Member of Al-Fath Campus Da'wah Organization (Broadcaster, Head of Public Relations Division, Secretary of Data Collection Division, Volunteer); Community Service Volunteer (Frontend Developer) at Al-Lathif Islamic School; Practicum Assistant for Software Construction Course; and Several Projects in Web/App Development and UI/UX Design.",
     ],
@@ -102,7 +103,7 @@ const workExperiences = [
       "LMS interface customization, including color adjustments, layout modifications, and other visual design elements to meet institutional branding and accessibility needs.",
     ],
     images: ["hpanel_LMS_mynextskill", "Preview_LMS_mynextskill"],
-    location: "Telkom University",
+    location: "Software Engineering and Algorithm (SEAL), Telkom University",
     date: "Jun 2024 - Aug 2024",
     skills: [
       "sass",
