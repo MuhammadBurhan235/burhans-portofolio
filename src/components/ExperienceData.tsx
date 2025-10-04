@@ -280,6 +280,61 @@ const projectExperiences = [
       },
     ],
   },
+  {
+    title:
+      "Al Lathif Islamic School Bandung Learning Management System (Frontend Developer | UI/UX Designer)",
+    description: [
+      "Client: Al Lathif Islamic School Bandung",
+      "Contributed as the Frontend Developer | UI/UX Designer (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
+      "Live Website: https://lms.allathif-islamicschool.id/",
+    ],
+    images: [
+      "Preview_LMS_Al_Lathif_Islamic_School",
+      "Evidence_LMS_Al_Lathif_Islamic_School",
+    ],
+    date: "Nov 2024 - Jan 2025",
+    skills: [
+      "Frontend Development",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "Javascript",
+      "PHP",
+      "UI/UX Design",
+    ],
+    output: [
+      {
+        url: "https://lms.allathif-islamicschool.id/",
+        label: "https://lms.allathif-islamicschool.id/",
+      },
+    ],
+  },
+  {
+    title:
+      "My Next Skill Learning Management System (Frontend Developer | UI/UX Designer)",
+    description: [
+      "Client: Software Engineering and Algorithm (SEAL), Telkom University",
+      "Contributed as the Frontend Developer | UI/UX Designer (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
+      "Live Website: https://lms.mynextskill.com/",
+    ],
+    images: ["Preview_LMS_mynextskill", "Evidence_LMS_mynextskill"],
+    date: "Jun 2024 - Aug 2024",
+    skills: [
+      "Frontend Development",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "Javascript",
+      "PHP",
+      "UI/UX Design",
+    ],
+    output: [
+      {
+        url: "https://lms.mynextskill.com/",
+        label: "https://lms.mynextskill.com/",
+      },
+    ],
+  },
 ];
 
 const orgExperiences = [
