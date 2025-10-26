@@ -576,18 +576,18 @@ function DashboardUser() {
                 <div className="bg-white p-4 md:p-6 rounded-lg shadow-[0_3px_6px_rgba(8,74,131,0.5)] mt-2 md:ml-[-70px] md:pl-18">
                   <p className="text-xs sm:text-sm md:text-base text-center">
                     I am a Bachelor’s graduate in Software Engineering from
-                    Telkom University (2025) with a strong passion for Frontend
-                    Development and UI/UX Design with Agile/Lean UX Method. I
-                    have experience designing and building responsive,
-                    user-focused web interfaces through internships,
-                    professional work, and various projects with several
-                    clients. My approach emphasizes rapid iteration, validating
-                    designs through user feedback, and cross-functional
-                    collaboration to deliver digital solutions that are both
-                    functional and provide an optimal user experience. I am
-                    enthusiastic about tackling new challenges in digital
-                    product development and committed to continuously learning
-                    and adapting to user needs and industry trends.
+                    Telkom University (2025) with a strong passion for Software
+                    Developer with Agile/Lean UX Method. I have experience
+                    designing and building responsive, user-focused web
+                    interfaces through internships, professional work, and
+                    various projects with several clients. My approach
+                    emphasizes rapid iteration, validating designs through user
+                    feedback, and cross-functional collaboration to deliver
+                    digital solutions that are both functional and provide an
+                    optimal user experience. I am enthusiastic about tackling
+                    new challenges in digital product development and committed
+                    to continuously learning and adapting to user needs and
+                    industry trends.
                   </p>
                 </div>
               </div>
