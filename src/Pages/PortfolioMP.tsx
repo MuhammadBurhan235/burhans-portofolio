@@ -34,6 +34,15 @@ import {
   orgExperiences,
 } from "../components/ExperienceData";
 
+function canonicalizeSkill(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/c\s*#/g, "csharp")
+    .replace(/\.\s*net/g, "dotnet")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
 const SKILL_ICON_ITEMS = [
   {
     key: "javascript",
@@ -254,12 +263,18 @@ const ExperienceItem = memo(function ExperienceItem({
 
   const skillIcons = useMemo(() => {
     if (!skills?.length) return [];
-    return SKILL_ICON_ITEMS.filter((item) => skills.includes(item.key));
+    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
+    return SKILL_ICON_ITEMS.filter((item) =>
+      canonicalSkills.has(canonicalizeSkill(item.key)),
+    );
   }, [skills]);
 
   const skillTextLabels = useMemo(() => {
     if (!skills?.length) return [];
-    return SKILL_TEXT_ITEMS.filter((item) => skills.includes(item.key));
+    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
+    return SKILL_TEXT_ITEMS.filter((item) =>
+      canonicalSkills.has(canonicalizeSkill(item.key)),
+    );
   }, [skills]);
 
   const handleOpenModal = () => setShowModal(true);
