@@ -7,6 +7,7 @@ import "./index.css";
 // const Layout = lazy(() => import("./Layout"));
 const Landing = lazy(() => import("./components/Landing"));
 const DashUser = lazy(() => import("./Pages/PortfolioMP"));
+const DashCheck = lazy(() => import("./Pages/PortfolioMP copy"));
 const Scroll = lazy(() => import("./components/Scroll"));
 
 // const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/burhans-portofolio/",
     element: <DashUser />,
+  },
+  {
+    path: "/burhans-portofolio/dashcheck",
+    element: <DashCheck />,
   },
   {
     path: "/burhans-portofolio/dashuser",
@@ -45,5 +50,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     >
       <RouterProvider router={router} />
     </Suspense>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
