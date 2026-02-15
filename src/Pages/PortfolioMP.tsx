@@ -414,7 +414,7 @@ const ExperienceItem = memo(function ExperienceItem({
 
   return (
     <div className="w-full group">
-      <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-shadow duration-200 motion-reduce:transition-none will-change-transform group-hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] group-hover:animate-bounce group-hover:[animation-duration:1.4s] motion-reduce:group-hover:animate-none">
+      <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-shadow duration-200 motion-reduce:transition-none will-change-transform group-hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] group-hover:animate-float motion-reduce:group-hover:animate-none">
         <h3
           className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
              bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
