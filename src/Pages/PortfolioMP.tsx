@@ -480,6 +480,7 @@ const ExperienceItem = memo(function ExperienceItem({
               className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300 cursor-pointer shadow-[0_0_6px_rgba(8,74,131,0.5)]"
               alt={`${title} - preview`}
               loading="lazy"
+              decoding="async"
               onClick={handleOpenModal}
             />
             {/* Preview images & tombol hanya jika > 1 gambar */}
@@ -492,6 +493,7 @@ const ExperienceItem = memo(function ExperienceItem({
                     className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300 shadow-[0_3px_6px_rgba(8,74,131,0.5)]"
                     alt={`${title} - thumbnail ${idx + 1}`}
                     loading="lazy"
+                    decoding="async"
                     onClick={() => setImgIdx(idx)}
                   />
                 ))}
@@ -546,6 +548,8 @@ const ExperienceItem = memo(function ExperienceItem({
                         src={imagess[images[imgIdx]]}
                         alt={`${title} - media ${imgIdx + 1}`}
                         className="w-full h-full object-contain rounded shadow bg-white"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     {/* Detail */}
@@ -596,11 +600,46 @@ const ExperienceItem = memo(function ExperienceItem({
 function DashboardUser() {
   const [activeNavbar, setActiveNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    let rafId = 0;
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        setShowBackToTop(window.scrollY > 400);
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const scrollToId = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
       {/*Navbar*/}
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
+
+      {showBackToTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-6 z-[998] px-4 py-2 rounded-4xl bg-blue-500 text-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-600 transition font-semibold text-sm"
+          aria-label="Back to top"
+          title="Back to top"
+        >
+          Back to top
+        </button>
+      )}
 
       {/*Content Area*/}
       <div className="w-full min-w-[320px] px-8 py-16 bg-transparent flex flex-col items-center gap-4 ">
@@ -747,6 +786,36 @@ function DashboardUser() {
                     industry trends.
                   </p>
                 </div>
+
+                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start md:ml-[-70px]">
+                  <button
+                    type="button"
+                    onClick={() => scrollToId("project-experience")}
+                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+                    aria-label="Jump to Projects"
+                    title="Jump to Projects"
+                  >
+                    Jump to Projects
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollToId("work-experience")}
+                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+                    aria-label="Jump to Experience"
+                    title="Jump to Experience"
+                  >
+                    Jump to Experience
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollToId("contact")}
+                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+                    aria-label="Jump to Contact"
+                    title="Jump to Contact"
+                  >
+                    Jump to Contact
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -783,6 +852,52 @@ function DashboardUser() {
           items={orgExperiences}
           sliceCount={sliceCount}
         />
+
+        <div
+          id="contact"
+          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-4 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
+        >
+          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
+            <span className="text-blue-700">
+              <FaFileAlt />
+            </span>
+            Contact
+          </h2>
+          <div className="w-full px-4 flex flex-wrap gap-3 justify-center md:justify-start">
+            <a
+              href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/MuhammadBurhan235/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.instagram.com/muhammadburhan_253/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
