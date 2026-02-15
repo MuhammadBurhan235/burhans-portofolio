@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import {
   FaBars,
   FaReact,
@@ -33,33 +34,144 @@ import {
   orgExperiences,
 } from "../components/ExperienceData";
 
-interface OutputItem {
-  url: string;
-  label?: string;
+function canonicalizeSkill(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/c\s*#/g, "csharp")
+    .replace(/\.\s*net/g, "dotnet")
+    .replace(/[^a-z0-9]+/g, "");
 }
 
-function ExperienceItem({
-  title,
-  description,
-  images,
-  location,
-  date,
-  output: output = [] as OutputItem[],
-  skills = [],
-}: any) {
-  const [imgIdx, setImgIdx] = useState(0);
-  const [sliceCount, setSliceCount] = useState(3);
-  const [showModal, setShowModal] = useState(false);
+const SKILL_ICON_ITEMS = [
+  {
+    key: "javascript",
+    icon: <FaJs className="text-yellow-500 text-2xl" />,
+    label: "JavaScript",
+  },
+  {
+    key: "html",
+    icon: <FaHtml5 className="text-red-500 text-2xl" />,
+    label: "HTML",
+  },
+  {
+    key: "react",
+    icon: <FaReact className="text-blue-500 text-2xl" />,
+    label: "React.js",
+  },
+  {
+    key: "typescript",
+    icon: <SiTypescript className="text-blue-700 text-2xl" />,
+    label: "TypeScript",
+  },
+  {
+    key: "css",
+    icon: <FaCss3 className="text-blue-500 text-2xl" />,
+    label: "CSS",
+  },
+  {
+    key: "sass",
+    icon: <FaSass className="text-pink-500 text-2xl" />,
+    label: "Sass",
+  },
+  {
+    key: "php",
+    icon: <SiPhp className="text-indigo-700 text-2xl" />,
+    label: "PHP",
+  },
+  {
+    key: "C#",
+    icon: (
+      <img
+        src={imagess["Csharp"]}
+        alt="C#"
+        loading="lazy"
+        className="w-6 h-6 object-contain"
+      />
+    ),
+    label: "C#",
+  },
+  {
+    key: ".Net Core",
+    icon: (
+      <img
+        src={imagess["NET_Core_Logo"]}
+        alt=".Net Core"
+        loading="lazy"
+        className="w-6 h-6 object-contain"
+      />
+    ),
+    label: ".Net Core",
+  },
+  {
+    key: "mysql",
+    icon: <SiMysql className="text-yellow-700 text-2xl" />,
+    label: "MySQL",
+  },
+  {
+    key: "laravel",
+    icon: <SiLaravel className="text-red-700 text-2xl" />,
+    label: "Laravel",
+  },
+  {
+    key: "bootstrap",
+    icon: <SiBootstrap className="text-purple-700 text-2xl" />,
+    label: "Bootstrap",
+  },
+  {
+    key: "tailwindcss",
+    icon: <SiTailwindcss className="text-cyan-500 text-2xl" />,
+    label: "Tailwind CSS",
+  },
+  {
+    key: "Figma",
+    icon: (
+      <img
+        src={imagess["FigmaLogo"]}
+        alt="Figma"
+        loading="lazy"
+        className="w-6 h-6 object-contain"
+      />
+    ),
+    label: "Figma",
+  },
+] as const;
+
+const SKILL_TEXT_ITEMS = [
+  { key: "frontend-development", label: "Frontend Development" },
+  { key: "lean-ux", label: "Lean UX" },
+  { key: "ui-design", label: "UI Design" },
+  { key: "agile", label: "Agile" },
+  { key: "scrum", label: "Scrum" },
+  { key: "science", label: "Science" },
+  { key: "math", label: "Mathematics" },
+  { key: "lead", label: "Leadership" },
+  { key: "public-broadcasting", label: "Public Broadcasting" },
+  { key: "broadcast-media", label: "Broadcast Media" },
+  { key: "teamwork", label: "Teamwork" },
+  { key: "SofCons", label: "Software Construction" },
+  { key: "VerCont", label: "Version Control" },
+  { key: "SofArch", label: "Software Architecture" },
+  { key: "UI/UX Design", label: "UI/UX Design" },
+  { key: "Hi-Fi Prototype", label: "Hi-Fi Prototype" },
+  { key: "public workshop", label: "Public Workshop" },
+] as const;
+
+function getSliceCountFromWidth(width: number) {
+  if (width <= 768) return 3; // md: max 3
+  if (width <= 1024) return 4; // lg: max 4
+  return 5;
+}
+
+function useResponsiveSliceCount() {
+  const [sliceCount, setSliceCount] = useState(() => {
+    if (typeof window === "undefined") return 3;
+    return getSliceCountFromWidth(window.innerWidth);
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setSliceCount(3); // md: max 3
-      } else if (window.innerWidth <= 1024) {
-        setSliceCount(4); // lg: max 4
-      } else {
-        setSliceCount(5);
-      }
+      setSliceCount(getSliceCountFromWidth(window.innerWidth));
     };
 
     handleResize();
@@ -67,8 +179,169 @@ function ExperienceItem({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  return sliceCount;
+}
+
+interface OutputItem {
+  url: string;
+  label?: string;
+}
+
+type ExperienceDescription = string | string[];
+
+interface ExperienceItemProps {
+  title: string;
+  description?: ExperienceDescription;
+  images?: string[];
+  location?: string;
+  date?: string;
+  output?: OutputItem[];
+  skills?: string[];
+  sliceCount: number;
+}
+
+type ExperienceDataItem = Omit<ExperienceItemProps, "sliceCount">;
+
+interface ExperienceSectionProps {
+  id: string;
+  title: string;
+  icon: ReactNode;
+  items: ExperienceDataItem[];
+  sliceCount: number;
+}
+
+const ExperienceSection = memo(function ExperienceSection({
+  id,
+  title,
+  icon,
+  items,
+  sliceCount,
+}: ExperienceSectionProps) {
+  return (
+    <div
+      id={id}
+      className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
+    >
+      <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
+        <span className="text-blue-700">{icon}</span>
+        {title} ({items.length})
+      </h2>
+      {items.map((exp, idx) => (
+        <ExperienceItem key={`${id}-${idx}`} {...exp} sliceCount={sliceCount} />
+      ))}
+    </div>
+  );
+});
+
+const ExperienceItem = memo(function ExperienceItem({
+  title,
+  description = "",
+  images = [],
+  location,
+  date,
+  output = [],
+  skills = [],
+  sliceCount,
+}: ExperienceItemProps) {
+  const [imgIdx, setImgIdx] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const modalId = useId();
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lastActiveElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (images.length === 0) {
+      if (imgIdx !== 0) setImgIdx(0);
+      return;
+    }
+
+    if (imgIdx > images.length - 1) {
+      setImgIdx(0);
+    }
+  }, [images.length, imgIdx]);
+
+  const skillIcons = useMemo(() => {
+    if (!skills?.length) return [];
+    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
+    return SKILL_ICON_ITEMS.filter((item) =>
+      canonicalSkills.has(canonicalizeSkill(item.key)),
+    );
+  }, [skills]);
+
+  const skillTextLabels = useMemo(() => {
+    if (!skills?.length) return [];
+    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
+    return SKILL_TEXT_ITEMS.filter((item) =>
+      canonicalSkills.has(canonicalizeSkill(item.key)),
+    );
+  }, [skills]);
+
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    lastActiveElementRef.current = document.activeElement as HTMLElement | null;
+    const focusTimer = window.setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+    };
+  }, [showModal]);
+
+  useEffect(() => {
+    if (!showModal) {
+      lastActiveElementRef.current?.focus?.();
+      return;
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        handleCloseModal();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+      const root = modalRef.current;
+      if (!root) return;
+
+      const focusable = Array.from(
+        root.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled") && el.tabIndex !== -1);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        root.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey) {
+        if (active === first || !root.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [showModal]);
 
   useEffect(() => {
     if (showModal) {
@@ -81,9 +354,6 @@ function ExperienceItem({
     };
   }, [showModal]);
 
-  {
-    /* Experience Item */
-  }
   return (
     <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
       <h3
@@ -94,7 +364,7 @@ function ExperienceItem({
       >
         {title}
       </h3>
-      <div className="flex flex-col md:flex-row gap-4w-full bg-amber-0">
+      <div className="flex flex-col md:flex-row gap-4 w-full bg-amber-0">
         <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
           {/* Lokasi dan Tanggal */}
           <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
@@ -108,7 +378,7 @@ function ExperienceItem({
           {/* Deskripsi */}
           {Array.isArray(description) ? (
             <ul className="pl-0 md:pl-2 w-full break-words whitespace-pre-line">
-              {description.map((line, idx) => (
+              {description.map((line: string, idx: number) => (
                 <li
                   key={idx}
                   className="flex items-start gap-2 mb-1 list-none w-full break-words"
@@ -145,163 +415,35 @@ function ExperienceItem({
                 </span>
                 <div className="flex flex-wrap gap-2 items-center">
                   {/* Skill Icons and Labels */}
-                  {(() => {
-                    const skillIcons = [
-                      {
-                        key: "javascript",
-                        icon: <FaJs className="text-yellow-500 text-2xl" />,
-                        label: "JavaScript",
-                      },
-                      {
-                        key: "html",
-                        icon: <FaHtml5 className="text-red-500 text-2xl" />,
-                        label: "HTML",
-                      },
-                      {
-                        key: "react",
-                        icon: <FaReact className="text-blue-500 text-2xl" />,
-                        label: "React.js",
-                      },
-                      {
-                        key: "typescript",
-                        icon: (
-                          <SiTypescript className="text-blue-700 text-2xl" />
-                        ),
-                        label: "TypeScript",
-                      },
-                      {
-                        key: "css",
-                        icon: <FaCss3 className="text-blue-500 text-2xl" />,
-                        label: "CSS",
-                      },
-                      {
-                        key: "sass",
-                        icon: <FaSass className="text-pink-500 text-2xl" />,
-                        label: "Sass",
-                      },
-                      {
-                        key: "php",
-                        icon: <SiPhp className="text-indigo-700 text-2xl" />,
-                        label: "PHP",
-                      },
-                      {
-                        key: "C#",
-                        icon: (
-                          <img
-                            src={imagess["Csharp"]}
-                            className="w-6 h-6 object-contain"
-                          />
-                        ),
-                        label: "C#",
-                      },
-                      {
-                        key: ".Net Core",
-                        icon: (
-                          <img
-                            src={imagess["NET_Core_Logo"]}
-                            className="w-6 h-6 object-contain"
-                          />
-                        ),
-                        label: ".Net Core",
-                      },
-                      {
-                        key: "mysql",
-                        icon: <SiMysql className="text-yellow-700 text-2xl" />,
-                        label: "MySQL",
-                      },
-                      {
-                        key: "laravel",
-                        icon: <SiLaravel className="text-red-700 text-2xl" />,
-                        label: "Laravel",
-                      },
-                      {
-                        key: "bootstrap",
-                        icon: (
-                          <SiBootstrap className="text-purple-700 text-2xl" />
-                        ),
-                        label: "Bootstrap",
-                      },
-                      {
-                        key: "tailwindcss",
-                        icon: (
-                          <SiTailwindcss className="text-cyan-500 text-2xl" />
-                        ),
-                        label: "Tailwind CSS",
-                      },
-                      {
-                        key: "Figma",
-                        icon: (
-                          <img
-                            src={imagess["FigmaLogo"]}
-                            className="w-6 h-6 object-contain"
-                          />
-                        ),
-                        label: "Figma",
-                      },
-                    ].filter((item) => skills.includes(item.key));
-
-                    if (skillIcons.length === 0) return null;
-
-                    return (
-                      <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
-                        {skillIcons.map((item, idx) => (
-                          <span className="relative group" key={item.key}>
-                            {item.icon}
-                            <span
-                              className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
-                                idx % 2 === 0
-                                  ? "bottom-full mb-1"
-                                  : "top-full mt-1"
-                              }`}
-                            >
-                              {item.label}
-                            </span>
-                          </span>
-                        ))}
-                      </span>
-                    );
-                  })()}
-                  {/* Skill Text Labels for non-icon skills */}
-                  {(() => {
-                    const skillTextLabels = [
-                      {
-                        key: "frontend-development",
-                        label: "Frontend Development",
-                      },
-                      { key: "lean-ux", label: "Lean UX" },
-                      { key: "ui-design", label: "UI Design" },
-                      { key: "agile", label: "Agile" },
-                      { key: "scrum", label: "Scrum" },
-                      { key: "science", label: "Science" },
-                      { key: "math", label: "Mathematics" },
-                      { key: "lead", label: "Leadership" },
-                      {
-                        key: "public-broadcasting",
-                        label: "Public Broadcasting",
-                      },
-                      { key: "broadcast-media", label: "Broadcast Media" },
-                      { key: "teamwork", label: "Teamwork" },
-                      { key: "SofCons", label: "Software Construction" },
-                      { key: "VerCont", label: "Version Control" },
-                      { key: "SofArch", label: "Software Architecture" },
-                      { key: "UI/UX Design", label: "UI/UX Design" },
-                      { key: "Hi-Fi Prototype", label: "Hi-Fi Prototype" },
-                      { key: "public workshop", label: "Public Workshop" },
-                    ].filter((item) => skills.includes(item.key));
-
-                    if (skillTextLabels.length === 0) return null;
-
-                    return (
-                      <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
-                        {skillTextLabels.map((item, idx) => (
-                          <span key={item.key}>
+                  {skillIcons.length > 0 && (
+                    <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
+                      {skillIcons.map((item, idx) => (
+                        <span className="relative group" key={item.key}>
+                          {item.icon}
+                          <span
+                            className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
+                              idx % 2 === 0
+                                ? "bottom-full mb-1"
+                                : "top-full mt-1"
+                            }`}
+                          >
                             {item.label}
-                            {idx < skillTextLabels.length - 1 && ", "}
                           </span>
-                        ))}
-                      </span>
-                    );
-                  })()}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                  {/* Skill Text Labels for non-icon skills */}
+                  {skillTextLabels.length > 0 && (
+                    <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
+                      {skillTextLabels.map((item, idx) => (
+                        <span key={item.key}>
+                          {item.label}
+                          {idx < skillTextLabels.length - 1 && ", "}
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
@@ -312,9 +454,9 @@ function ExperienceItem({
                   Output - Just Click It!
                 </span>
                 <div className="flex flex-wrap gap-3 text-center md:gap-2">
-                  {output.map((item: OutputItem, idx: string) => (
+                  {output.map((item: OutputItem, idx: number) => (
                     <a
-                      key={idx}
+                      key={`${item.url}-${idx}`}
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -336,7 +478,8 @@ function ExperienceItem({
             <img
               src={imagess[images[imgIdx]]}
               className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300 cursor-pointer shadow-[0_0_6px_rgba(8,74,131,0.5)]"
-              alt=""
+              alt={`${title} - preview`}
+              loading="lazy"
               onClick={handleOpenModal}
             />
             {/* Preview images & tombol hanya jika > 1 gambar */}
@@ -344,10 +487,11 @@ function ExperienceItem({
               <div className="flex flex-row flex-nowrap items-center gap-2 ">
                 {images.slice(0, sliceCount).map((img: string, idx: number) => (
                   <img
-                    key={idx}
+                    key={img}
                     src={imagess[img]}
                     className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300 shadow-[0_3px_6px_rgba(8,74,131,0.5)]"
-                    alt=""
+                    alt={`${title} - thumbnail ${idx + 1}`}
+                    loading="lazy"
                     onClick={() => setImgIdx(idx)}
                   />
                 ))}
@@ -370,14 +514,26 @@ function ExperienceItem({
                 <div
                   className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
                   onClick={(e) => e.stopPropagation()}
+                  ref={modalRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby={`media-title-${modalId}`}
+                  tabIndex={-1}
                 >
                   {/* Header */}
                   <div className="flex justify-between items-center px-6 py-4 border-b">
-                    <span className="font-bold text-lg">Media</span>
+                    <span
+                      id={`media-title-${modalId}`}
+                      className="font-bold text-lg"
+                    >
+                      Media
+                    </span>
                     <button
                       className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
                       onClick={handleCloseModal}
                       title="Tutup"
+                      aria-label="Tutup modal"
+                      ref={closeButtonRef}
                     >
                       <FaTimes />
                     </button>
@@ -388,7 +544,7 @@ function ExperienceItem({
                     <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
                       <img
                         src={imagess[images[imgIdx]]}
-                        alt=""
+                        alt={`${title} - media ${imgIdx + 1}`}
                         className="w-full h-full object-contain rounded shadow bg-white"
                       />
                     </div>
@@ -435,10 +591,11 @@ function ExperienceItem({
       </div>
     </div>
   );
-}
+});
 
 function DashboardUser() {
   const [activeNavbar, setActiveNavbar] = useState(1);
+  const sliceCount = useResponsiveSliceCount();
 
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
@@ -527,7 +684,7 @@ function DashboardUser() {
                       <FaLinkedin className="text-2xl md:text-3xl" />
                       <span className="relative group">
                         <span className="absolute right-[-61px] top-[-55px] px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                          Download CV
+                          LinkedIn
                         </span>
                       </span>
                     </a>
@@ -595,61 +752,37 @@ function DashboardUser() {
           </div>
         </div>
 
-        {/* section education*/}
-        <div
+        <ExperienceSection
           id="edu-experience"
-          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
-            <FaGraduationCap className="text-blue-700" />
-            Education ({eduExperiences.length})
-          </h2>
-          {eduExperiences.map((exp, idx) => (
-            <ExperienceItem key={idx} {...exp} />
-          ))}
-        </div>
+          title="Education"
+          icon={<FaGraduationCap />}
+          items={eduExperiences}
+          sliceCount={sliceCount}
+        />
 
-        {/* section work experience */}
-        <div
+        <ExperienceSection
           id="work-experience"
-          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
-            <FaBriefcase className="text-blue-700" />
-            Work Experience ({workExperiences.length})
-          </h2>
-          {workExperiences.map((exp, idx) => (
-            <ExperienceItem key={idx} {...exp} />
-          ))}
-        </div>
+          title="Work Experience"
+          icon={<FaBriefcase />}
+          items={workExperiences}
+          sliceCount={sliceCount}
+        />
 
-        {/* section project experience */}
-        <div
+        <ExperienceSection
           id="project-experience"
-          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
-            <FaFolderOpen className="text-blue-700" />
-            Project Experience ({projectExperiences.length})
-          </h2>
-          {projectExperiences.map((exp, idx) => (
-            <ExperienceItem key={idx} {...exp} />
-          ))}
-        </div>
+          title="Project Experience"
+          icon={<FaFolderOpen />}
+          items={projectExperiences}
+          sliceCount={sliceCount}
+        />
 
-        {/* section organization and volunteer experience */}
-        <div
+        <ExperienceSection
           id="org-experience"
-          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
-            <FaUsers className="text-blue-700" />
-            Organization Experience ({orgExperiences.length})
-          </h2>
-          {orgExperiences.map((exp, idx) => (
-            <ExperienceItem key={idx} {...exp} />
-          ))}
-        </div>
+          title="Organization Experience"
+          icon={<FaUsers />}
+          items={orgExperiences}
+          sliceCount={sliceCount}
+        />
       </div>
     </div>
   );
