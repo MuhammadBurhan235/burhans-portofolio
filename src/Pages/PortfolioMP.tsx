@@ -34,6 +34,43 @@ import {
   orgExperiences,
 } from "../components/ExperienceData";
 
+function useInView<T extends Element>(
+  options: IntersectionObserverInit = { threshold: 0.15, rootMargin: "0px" },
+) {
+  const [node, setNode] = useState<T | null>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    if (!node) return;
+    if (typeof window === "undefined") {
+      setIsInView(true);
+      return;
+    }
+
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )?.matches;
+    if (reduceMotion) {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      if (entry.isIntersecting) {
+        setIsInView(true);
+        observer.disconnect();
+      }
+    }, options);
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [node, options]);
+
+  return [setNode, isInView] as const;
+}
+
 function canonicalizeSkill(value: string) {
   return value
     .trim()
@@ -86,6 +123,7 @@ const SKILL_ICON_ITEMS = [
         src={imagess["Csharp"]}
         alt="C#"
         loading="lazy"
+        decoding="async"
         className="w-6 h-6 object-contain"
       />
     ),
@@ -98,6 +136,7 @@ const SKILL_ICON_ITEMS = [
         src={imagess["NET_Core_Logo"]}
         alt=".Net Core"
         loading="lazy"
+        decoding="async"
         className="w-6 h-6 object-contain"
       />
     ),
@@ -130,6 +169,7 @@ const SKILL_ICON_ITEMS = [
         src={imagess["FigmaLogo"]}
         alt="Figma"
         loading="lazy"
+        decoding="async"
         className="w-6 h-6 object-contain"
       />
     ),
@@ -217,10 +257,20 @@ const ExperienceSection = memo(function ExperienceSection({
   items,
   sliceCount,
 }: ExperienceSectionProps) {
+  const [setSectionRef, sectionInView] = useInView<HTMLDivElement>({
+    threshold: 0.12,
+    rootMargin: "0px 0px -10% 0px",
+  });
+
   return (
     <div
       id={id}
-      className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
+      ref={setSectionRef}
+      className={`w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-8 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]
+      transition-all duration-700 ease-out motion-reduce:transition-none
+      ${
+        sectionInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
     >
       <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
         <span className="text-blue-700">{icon}</span>
@@ -355,7 +405,7 @@ const ExperienceItem = memo(function ExperienceItem({
   }, [showModal]);
 
   return (
-    <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)]">
+    <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:-translate-y-0.5">
       <h3
         className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
              bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
@@ -548,8 +598,6 @@ const ExperienceItem = memo(function ExperienceItem({
                         src={imagess[images[imgIdx]]}
                         alt={`${title} - media ${imgIdx + 1}`}
                         className="w-full h-full object-contain rounded shadow bg-white"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
                     {/* Detail */}
@@ -600,53 +648,25 @@ const ExperienceItem = memo(function ExperienceItem({
 function DashboardUser() {
   const [activeNavbar, setActiveNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  useEffect(() => {
-    let rafId = 0;
-    const onScroll = () => {
-      if (rafId) return;
-      rafId = window.requestAnimationFrame(() => {
-        rafId = 0;
-        setShowBackToTop(window.scrollY > 400);
-      });
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (rafId) window.cancelAnimationFrame(rafId);
-    };
-  }, []);
-
-  const scrollToId = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [setAboutRef, aboutInView] = useInView<HTMLDivElement>({
+    threshold: 0.18,
+    rootMargin: "0px 0px -10% 0px",
+  });
 
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
       {/*Navbar*/}
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 
-      {showBackToTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 z-[998] px-4 py-2 rounded-4xl bg-blue-500 text-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-600 transition font-semibold text-sm"
-          aria-label="Back to top"
-          title="Back to top"
-        >
-          Back to top
-        </button>
-      )}
-
       {/*Content Area*/}
       <div className="w-full min-w-[320px] px-8 py-16 bg-transparent flex flex-col items-center gap-4 ">
         {/* section about burhan */}
         <div
           id="about-burhan"
-          className="w-full scroll-mt-24 min-w-[288px] max-w-[1148px] px-2 md:px-4 py-8 md:py-16 rounded-b-4xl flex flex-col gap-8 items-center"
+          ref={setAboutRef}
+          className={`w-full scroll-mt-24 min-w-[288px] max-w-[1148px] px-2 md:px-4 py-8 md:py-16 rounded-b-4xl flex flex-col gap-8 items-center
+          transition-all duration-700 ease-out motion-reduce:transition-none
+          ${aboutInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
         >
           <div className="w-full flex flex-col gap-4 items-center">
             <div className="flex flex-col mt-4 md:flex-row gap-4 px-2 md:px-4 max-w-[1000px] items-center">
@@ -718,7 +738,7 @@ function DashboardUser() {
                       href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-colors group"
+                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaLinkedin className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -731,7 +751,7 @@ function DashboardUser() {
                       href="https://github.com/MuhammadBurhan235/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-colors group"
+                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaGithub className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -744,7 +764,7 @@ function DashboardUser() {
                       href="https://www.instagram.com/muhammadburhan_253/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-colors group"
+                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaInstagram className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -757,7 +777,7 @@ function DashboardUser() {
                       href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing" // Ganti dengan link CV kamu
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-colors group "
+                      className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaFileAlt className="text-[20px] md:text-[24px]" />
                       <span className="relative group">
@@ -785,36 +805,6 @@ function DashboardUser() {
                     to continuously learning and adapting to user needs and
                     industry trends.
                   </p>
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start md:ml-[-70px]">
-                  <button
-                    type="button"
-                    onClick={() => scrollToId("project-experience")}
-                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-                    aria-label="Jump to Projects"
-                    title="Jump to Projects"
-                  >
-                    Jump to Projects
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollToId("work-experience")}
-                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-                    aria-label="Jump to Experience"
-                    title="Jump to Experience"
-                  >
-                    Jump to Experience
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollToId("contact")}
-                    className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-                    aria-label="Jump to Contact"
-                    title="Jump to Contact"
-                  >
-                    Jump to Contact
-                  </button>
                 </div>
               </div>
             </div>
@@ -852,52 +842,6 @@ function DashboardUser() {
           items={orgExperiences}
           sliceCount={sliceCount}
         />
-
-        <div
-          id="contact"
-          className="w-full scroll-mt-24 mb-8 min-w-[288px] max-w-[1148px] px-4 py-8 pr-0 rounded-4xl flex flex-col gap-4 items-center shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)]"
-        >
-          <h2 className="w-full font-bold text-lg md:text-xl lg:text-2xl mb-2 px-4 flex items-center gap-3">
-            <span className="text-blue-700">
-              <FaFileAlt />
-            </span>
-            Contact
-          </h2>
-          <div className="w-full px-4 flex flex-wrap gap-3 justify-center md:justify-start">
-            <a
-              href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/MuhammadBurhan235/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://www.instagram.com/muhammadburhan_253/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-fit font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.35)] hover:bg-blue-200 transition"
-            >
-              Download CV
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );
