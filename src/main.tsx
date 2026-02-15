@@ -42,7 +42,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Suspense fallback={<LoadingScreen />}>
+    {/* <Suspense fallback={<LoadingScreen />}> */}
+    <Suspense>
       <RouterProvider router={router} />
     </Suspense>
   </React.StrictMode>,
