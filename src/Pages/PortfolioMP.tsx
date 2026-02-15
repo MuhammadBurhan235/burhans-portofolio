@@ -413,241 +413,247 @@ const ExperienceItem = memo(function ExperienceItem({
   }, [showModal]);
 
   return (
-    <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:-translate-y-0.5">
-      <h3
-        className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
+    <div className="w-full group">
+      <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none will-change-transform group-hover:-translate-y-0.5 group-hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+        <h3
+          className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
              bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
              before:content-[''] before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 
              before:w-4 before:h-4 before:rounded-full before:bg-blue-500"
-      >
-        {title}
-      </h3>
-      <div className="flex flex-col md:flex-row gap-4 w-full bg-amber-0">
-        <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
-          {/* Lokasi dan Tanggal */}
-          <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
-            {location && date && (
-              <span className="text-xs md:text-sm font-bold">
-                {location} | {date}
-              </span>
-            )}
-          </div>
+        >
+          {title}
+        </h3>
+        <div className="flex flex-col md:flex-row gap-4 w-full bg-amber-0">
+          <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
+            {/* Lokasi dan Tanggal */}
+            <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
+              {location && date && (
+                <span className="text-xs md:text-sm font-bold">
+                  {location} | {date}
+                </span>
+              )}
+            </div>
 
-          {/* Deskripsi */}
-          {Array.isArray(description) ? (
-            <ul className="pl-0 md:pl-2 w-full break-words whitespace-pre-line">
-              {description.map((line: string, idx: number) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-2 mb-1 list-none w-full break-words"
-                >
-                  <span className="mt-1 w-2 h-2 rounded-full bg-blue-500 inline-block flex-shrink-0"></span>
-                  <span className="text-left break-words whitespace-pre-line w-full">
-                    {/* Deteksi link dan render sebagai <a> */}
-                    {line.match(/https?:\/\/[^\s]+/) ? (
+            {/* Deskripsi */}
+            {Array.isArray(description) ? (
+              <ul className="pl-0 md:pl-2 w-full break-words whitespace-pre-line">
+                {description.map((line: string, idx: number) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2 mb-1 list-none w-full break-words"
+                  >
+                    <span className="mt-1 w-2 h-2 rounded-full bg-blue-500 inline-block flex-shrink-0"></span>
+                    <span className="text-left break-words whitespace-pre-line w-full">
+                      {/* Deteksi link dan render sebagai <a> */}
+                      {line.match(/https?:\/\/[^\s]+/) ? (
+                        <a
+                          href={line.match(/https?:\/\/[^\s]+/)?.[0]}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-700 underline break-all"
+                        >
+                          {line}
+                        </a>
+                      ) : (
+                        line
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-left break-words whitespace-pre-line">
+                {description}
+              </p>
+            )}
+            <div className="mt-4">
+              {skills?.length > 0 && (
+                <div className="flex flex-col gap-2 ">
+                  <span className="text-xs md:text-sm font-bold">
+                    Skills Focus
+                  </span>
+                  <div className="flex flex-wrap gap-2 items-center">
+                    {/* Skill Icons and Labels */}
+                    {skillIcons.length > 0 && (
+                      <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
+                        {skillIcons.map((item, idx) => (
+                          <span className="relative group" key={item.key}>
+                            {item.icon}
+                            <span
+                              className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
+                                idx % 2 === 0
+                                  ? "bottom-full mb-1"
+                                  : "top-full mt-1"
+                              }`}
+                            >
+                              {item.label}
+                            </span>
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                    {/* Skill Text Labels for non-icon skills */}
+                    {skillTextLabels.length > 0 && (
+                      <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
+                        {skillTextLabels.map((item, idx) => (
+                          <span key={item.key}>
+                            {item.label}
+                            {idx < skillTextLabels.length - 1 && ", "}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {output.length > 0 && (
+                <div className="flex flex-col gap-2 mt-4">
+                  <span className="text-xs md:text-sm font-bold">
+                    Output - Just Click It!
+                  </span>
+                  <div className="flex flex-wrap gap-3 text-center md:gap-2">
+                    {output.map((item: OutputItem, idx: number) => (
                       <a
-                        href={line.match(/https?:\/\/[^\s]+/)?.[0]}
+                        key={`${item.url}-${idx}`}
+                        href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-700 underline break-all"
+                        className="w-fit max-[485px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
                       >
-                        {line}
+                        {item.label ?? item.url}
                       </a>
-                    ) : (
-                      line
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-left break-words whitespace-pre-line">
-              {description}
-            </p>
-          )}
-          <div className="mt-4">
-            {skills?.length > 0 && (
-              <div className="flex flex-col gap-2 ">
-                <span className="text-xs md:text-sm font-bold">
-                  Skills Focus
-                </span>
-                <div className="flex flex-wrap gap-2 items-center">
-                  {/* Skill Icons and Labels */}
-                  {skillIcons.length > 0 && (
-                    <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
-                      {skillIcons.map((item, idx) => (
-                        <span className="relative group" key={item.key}>
-                          {item.icon}
-                          <span
-                            className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
-                              idx % 2 === 0
-                                ? "bottom-full mb-1"
-                                : "top-full mt-1"
-                            }`}
-                          >
-                            {item.label}
-                          </span>
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                  {/* Skill Text Labels for non-icon skills */}
-                  {skillTextLabels.length > 0 && (
-                    <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
-                      {skillTextLabels.map((item, idx) => (
-                        <span key={item.key}>
-                          {item.label}
-                          {idx < skillTextLabels.length - 1 && ", "}
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {output.length > 0 && (
-              <div className="flex flex-col gap-2 mt-4">
-                <span className="text-xs md:text-sm font-bold">
-                  Output - Just Click It!
-                </span>
-                <div className="flex flex-wrap gap-3 text-center md:gap-2">
-                  {output.map((item: OutputItem, idx: number) => (
-                    <a
-                      key={`${item.url}-${idx}`}
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-fit max-[485px]:w-full font-medium text-xs md:text-sm px-4 py-1 bg-blue-100 rounded-4xl shadow-[0_3px_6px_rgba(8,74,131,0.5)] hover:bg-blue-200 transition"
-                    >
-                      {item.label ?? item.url}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Gambar */}
-        {images.length > 0 && (
-          <div className="flex flex-col items-center w-full mt-4 md:w-1/3 gap-2">
-            {/* Gambar utama */}
-            <img
-              src={imagess[images[imgIdx]]}
-              className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300 cursor-pointer shadow-[0_0_6px_rgba(8,74,131,0.5)]"
-              alt={`${title} - preview`}
-              loading="lazy"
-              decoding="async"
-              onClick={handleOpenModal}
-            />
-            {/* Preview images & tombol hanya jika > 1 gambar */}
-            {images.length > 1 && (
-              <div className="flex flex-row flex-nowrap items-center gap-2 ">
-                {images.slice(0, sliceCount).map((img: string, idx: number) => (
-                  <img
-                    key={img}
-                    src={imagess[img]}
-                    className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300 shadow-[0_3px_6px_rgba(8,74,131,0.5)]"
-                    alt={`${title} - thumbnail ${idx + 1}`}
-                    loading="lazy"
-                    decoding="async"
-                    onClick={() => setImgIdx(idx)}
-                  />
-                ))}
-                <button
-                  className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 bg-blue-500 text-white rounded flex items-center justify-center text-base shadow-[0_3px_6px_rgba(8,74,131,0.5)] cursor-pointer hover:bg-blue-600 transition"
-                  onClick={handleOpenModal}
-                  style={{ minWidth: "28px", minHeight: "28px" }}
-                  title="Lihat semua gambar"
-                >
-                  <FaBars />
-                </button>
-              </div>
-            )}
-            {/* Modal untuk semua gambar */}
-            {showModal && (
-              <div
-                className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
-                onClick={handleCloseModal}
-              >
-                <div
-                  className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
-                  onClick={(e) => e.stopPropagation()}
-                  ref={modalRef}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby={`media-title-${modalId}`}
-                  tabIndex={-1}
-                >
-                  {/* Header */}
-                  <div className="flex justify-between items-center px-6 py-4 border-b">
-                    <span
-                      id={`media-title-${modalId}`}
-                      className="font-bold text-lg"
-                    >
-                      Media
-                    </span>
-                    <button
-                      className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
-                      onClick={handleCloseModal}
-                      title="Tutup"
-                      aria-label="Tutup modal"
-                      ref={closeButtonRef}
-                    >
-                      <FaTimes />
-                    </button>
+                    ))}
                   </div>
-                  {/* Content */}
-                  <div className="flex flex-col gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
-                    {/* Image preview */}
-                    <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Gambar */}
+          {images.length > 0 && (
+            <div className="flex flex-col items-center w-full mt-4 md:w-1/3 gap-2">
+              {/* Gambar utama */}
+              <img
+                src={imagess[images[imgIdx]]}
+                className="w-full max-w-xs h-40 md:h-48 lg:h-56 object-cover rounded transition-all duration-300 cursor-pointer shadow-[0_0_6px_rgba(8,74,131,0.5)]"
+                alt={`${title} - preview`}
+                loading="lazy"
+                decoding="async"
+                onClick={handleOpenModal}
+              />
+              {/* Preview images & tombol hanya jika > 1 gambar */}
+              {images.length > 1 && (
+                <div className="flex flex-row flex-nowrap items-center gap-2 ">
+                  {images
+                    .slice(0, sliceCount)
+                    .map((img: string, idx: number) => (
                       <img
-                        src={imagess[images[imgIdx]]}
-                        alt={`${title} - media ${imgIdx + 1}`}
-                        className="w-full h-full object-contain rounded shadow bg-white"
+                        key={img}
+                        src={imagess[img]}
+                        className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 object-cover rounded border border-gray-200 cursor-pointer transition-all duration-300 shadow-[0_3px_6px_rgba(8,74,131,0.5)]"
+                        alt={`${title} - thumbnail ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        onClick={() => setImgIdx(idx)}
                       />
-                    </div>
-                    {/* Detail */}
-                    <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
-                      <span className="font-semibold text-base mb-2">
-                        {images[imgIdx]
-                          .replace(/[_-]/g, " ")
-                          .replace(/\.[^/.]+$/, "")}
+                    ))}
+                  <button
+                    className="w-10 h-7 sm:w-12 sm:h-8 md:w-10 md:h-7 lg:w-12 lg:h-8 bg-blue-500 text-white rounded flex items-center justify-center text-base shadow-[0_3px_6px_rgba(8,74,131,0.5)] cursor-pointer hover:bg-blue-600 transition"
+                    onClick={handleOpenModal}
+                    style={{ minWidth: "28px", minHeight: "28px" }}
+                    title="Lihat semua gambar"
+                  >
+                    <FaBars />
+                  </button>
+                </div>
+              )}
+              {/* Modal untuk semua gambar */}
+              {showModal && (
+                <div
+                  className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
+                  onClick={handleCloseModal}
+                >
+                  <div
+                    className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
+                    onClick={(e) => e.stopPropagation()}
+                    ref={modalRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby={`media-title-${modalId}`}
+                    tabIndex={-1}
+                  >
+                    {/* Header */}
+                    <div className="flex justify-between items-center px-6 py-4 border-b">
+                      <span
+                        id={`media-title-${modalId}`}
+                        className="font-bold text-lg"
+                      >
+                        Media
                       </span>
+                      <button
+                        className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
+                        onClick={handleCloseModal}
+                        title="Tutup"
+                        aria-label="Tutup modal"
+                        ref={closeButtonRef}
+                      >
+                        <FaTimes />
+                      </button>
                     </div>
-                  </div>
-                  {/* Footer navigation */}
-                  <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
-                    <span className="text-sm text-gray-600">
-                      {imgIdx + 1} of {images.length}
-                    </span>
-                    <div className="flex gap-2">
-                      <button
-                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                        onClick={() => setImgIdx((idx) => Math.max(0, idx - 1))}
-                        disabled={imgIdx === 0}
-                      >
-                        Previous
-                      </button>
-                      <button
-                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                        onClick={() =>
-                          setImgIdx((idx) =>
-                            Math.min(images.length - 1, idx + 1),
-                          )
-                        }
-                        disabled={imgIdx === images.length - 1}
-                      >
-                        Next
-                      </button>
+                    {/* Content */}
+                    <div className="flex flex-col gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
+                      {/* Image preview */}
+                      <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
+                        <img
+                          src={imagess[images[imgIdx]]}
+                          alt={`${title} - media ${imgIdx + 1}`}
+                          className="w-full h-full object-contain rounded shadow bg-white"
+                        />
+                      </div>
+                      {/* Detail */}
+                      <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
+                        <span className="font-semibold text-base mb-2">
+                          {images[imgIdx]
+                            .replace(/[_-]/g, " ")
+                            .replace(/\.[^/.]+$/, "")}
+                        </span>
+                      </div>
+                    </div>
+                    {/* Footer navigation */}
+                    <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
+                      <span className="text-sm text-gray-600">
+                        {imgIdx + 1} of {images.length}
+                      </span>
+                      <div className="flex gap-2">
+                        <button
+                          className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                          onClick={() =>
+                            setImgIdx((idx) => Math.max(0, idx - 1))
+                          }
+                          disabled={imgIdx === 0}
+                        >
+                          Previous
+                        </button>
+                        <button
+                          className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                          onClick={() =>
+                            setImgIdx((idx) =>
+                              Math.min(images.length - 1, idx + 1),
+                            )
+                          }
+                          disabled={imgIdx === images.length - 1}
+                        >
+                          Next
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
