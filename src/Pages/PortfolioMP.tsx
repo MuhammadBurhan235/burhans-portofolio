@@ -474,7 +474,7 @@ const ExperienceItem = memo(function ExperienceItem({
                 <div className="flex flex-wrap gap-2 items-center">
                   {/* Skill Icons and Labels */}
                   {skillIcons.length > 0 && (
-                    <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl group">
+                    <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl">
                       {skillIcons.map((item, idx) => (
                         <span className="relative group" key={item.key}>
                           {item.icon}

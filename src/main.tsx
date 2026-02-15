@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import LoadingScreen from "./components/LoadingScreen";
 
 // const App = lazy(() => import("./App"));
 // const Layout = lazy(() => import("./Layout"));
@@ -41,13 +42,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Suspense
-      fallback={
-        <div className="h-screen flex items-center justify-center text-lg font-bold">
-          Loading...
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingScreen />}>
       <RouterProvider router={router} />
     </Suspense>
   </React.StrictMode>,
