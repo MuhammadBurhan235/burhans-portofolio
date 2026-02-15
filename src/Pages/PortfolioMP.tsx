@@ -35,7 +35,7 @@ import {
 } from "../components/ExperienceData";
 
 function useInView<T extends Element>(
-  options: IntersectionObserverInit = { threshold: 0.15, rootMargin: "0px" },
+  options: IntersectionObserverInit = { threshold: 0.01, rootMargin: "0px" },
 ) {
   const [node, setNode] = useState<T | null>(null);
   const [isInView, setIsInView] = useState(false);
@@ -266,7 +266,7 @@ const ExperienceSection = memo(function ExperienceSection({
   sliceCount,
 }: ExperienceSectionProps) {
   const [setSectionRef, sectionInView] = useInView<HTMLDivElement>({
-    threshold: 0.12,
+    threshold: 0.01,
     rootMargin: "0px 0px -10% 0px",
   });
 
@@ -657,7 +657,7 @@ function DashboardUser() {
   const [activeNavbar, setActiveNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
   const [setAboutRef, aboutInView] = useInView<HTMLDivElement>({
-    threshold: 0.18,
+    threshold: 0.01,
     rootMargin: "0px 0px -10% 0px",
   });
 
