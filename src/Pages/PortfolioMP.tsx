@@ -64,6 +64,14 @@ function useInView<T extends Element>(
       }
     }, options);
 
+    const rect = node.getBoundingClientRect();
+    const isAlreadyInView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (isAlreadyInView) {
+      setIsInView(true);
+      observer.disconnect();
+      return;
+    }
+
     observer.observe(node);
     return () => observer.disconnect();
   }, [node, options]);
