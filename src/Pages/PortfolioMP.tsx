@@ -277,7 +277,7 @@ const ExperienceItem = memo(function ExperienceItem({
   }, [showModal]);
 
   return (
-    <div className="bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
+    <div className="float-hover bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
       <h3
         className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
              bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
@@ -503,6 +503,20 @@ function DashboardUser() {
 
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+
+        .float-hover:hover {
+          animation: float 1.5s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .float-hover:hover { animation: none !important; }
+        }
+      `}</style>
       {/*Navbar*/}
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 

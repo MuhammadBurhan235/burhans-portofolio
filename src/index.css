@@ -104,8 +104,7 @@
   .animate-marquee,
   .animate-marquee-solo,
   .animate-marquee-vertical,
-  .animate-bar,
-  .animate-float {
+  .animate-bar {
     animation: none !important;
   }
 }
