@@ -591,7 +591,7 @@ function DashboardUser() {
                   </div>
                 </div>
               </div>
-              <div className="w-full max-[920px]:w-[430px]">
+              <div className="w-full">
                 {/* Responsive Name */}
                 <div className="relative w-full font-bold text-lg sm:text-2xl md:text-2xl lg:text-4xl ml-0 md:ml-[-64px] flex flex-row justify-between max-[425px]:justify-center items-center">
                   Muhammad Burhan {/* Social Media Icons */}
