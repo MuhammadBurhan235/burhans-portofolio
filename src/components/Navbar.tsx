@@ -31,7 +31,7 @@ import { Link } from "react-scroll";
 
 interface NavbarProps {
   activeNavbar: number;
-  setActiveNavbar: (nav: number) => void;
+  setActiveNavbar?: (nav: number) => void;
 }
 
 const portfolioSections = [
@@ -449,19 +449,19 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
           <div className="w-fit h-full flex gap-4 items-center">
             <button
               className="w-fit h-full flex items-center bg-yellow-500 px-4 py-2"
-              onClick={() => setActiveNavbar(1)}
+              onClick={() => setActiveNavbar?.(1)}
             >
               Nav1
             </button>
             <button
               className="w-fit h-full flex items-center bg-green-500 px-4 py-2"
-              onClick={() => setActiveNavbar(2)}
+              onClick={() => setActiveNavbar?.(2)}
             >
               Nav2
             </button>
             <button
               className="w-fit h-full flex items-center bg-blue-500 px-4 py-2"
-              onClick={() => setActiveNavbar(3)}
+              onClick={() => setActiveNavbar?.(3)}
             >
               Nav3
             </button>
