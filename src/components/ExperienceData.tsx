@@ -33,7 +33,29 @@ const eduExperiences = [
 
 const workExperiences = [
   {
+    title:
+      "Penata Kelola Sistem dan Teknologi Informasi - Internship (Maganghub)",
+    status: "on going" as const,
+    description: [
+      "Merancang, mengembangkan, dan memelihara sistem informasi internal.",
+      "Menganalisis kebutuhan pengguna dan menerjemahkannya menjadi solusi sistem yang efektif.",
+      "Menyusun dan mengelola database operasional kampus untuk mendukung proses bisnis.",
+      "Mengoptimalkan layanan digital untuk kebutuhan akademik, kepegawaian, dan keuangan.",
+      "Membantu evaluasi keamanan jaringan serta otomatisasi proses layanan publik berbasis teknologi.",
+    ],
+    location: "Politeknik Penerbangan Indonesia Curug (Tangerang) - Maganghub",
+    date: "Nov 2025 - May 2026",
+    images: [],
+    skills: [
+      "information-systems",
+      "database",
+      "automation",
+      "network-security",
+    ],
+  },
+  {
     title: "Practicum Assistant - Software Construction",
+    status: "done" as const,
     description: [
       "Supported students in practicing fundamental and secure construction concepts.",
       "Guided lab exercises related to automation tools, version control systems, and standardized software construction practices.",
@@ -55,7 +77,8 @@ const workExperiences = [
     ],
   },
   {
-    title: "Frontend Developer",
+    title: "Frontend Developer - Contract",
+    status: "done" as const,
     description: [
       "Developed and customized front-end components of Moodle LMS to enhance user experience and engagement.",
       "Assisted in planning, coordination, and deployment of a Learning Management System (LMS) based on Moodle.",
@@ -97,7 +120,8 @@ const workExperiences = [
     ],
   },
   {
-    title: "Frontend Developer",
+    title: "Frontend Developer - Internship",
+    status: "done" as const,
     description: [
       "Using the Lean UX Method, the development process was conducted without prototypes or initial designs in Figma. Feedback from lecturers was directly applied by modifying the code on the Moodle platform, which was already hosted on Hostinger.",
       "LMS interface customization, including color adjustments, layout modifications, and other visual design elements to meet institutional branding and accessibility needs.",
@@ -123,6 +147,7 @@ const workExperiences = [
   },
   {
     title: "Teaching Assistant - Software Architecture and Design",
+    status: "done" as const,
     description: [
       "Facilitated student understanding of architectural modeling, design principles, and evaluation of software architecture.",
       "Supported analysis of software quality attributes (performance, reliability, usability, etc.) and their implications on system design.",
@@ -297,7 +322,7 @@ const projectExperiences = [
       "Frontend Development",
       "HTML",
       "CSS",
-      "SCSS",
+      "Sass",
       "Javascript",
       "PHP",
       "UI/UX Design",
@@ -323,7 +348,7 @@ const projectExperiences = [
       "Frontend Development",
       "HTML",
       "CSS",
-      "SCSS",
+      "Sass",
       "Javascript",
       "PHP",
       "UI/UX Design",

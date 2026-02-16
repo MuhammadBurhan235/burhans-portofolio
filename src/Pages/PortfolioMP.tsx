@@ -1,9 +1,8 @@
-import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 import {
   FaBars,
-  FaReact,
-  FaSass,
   FaInstagram,
   FaLinkedin,
   FaGithub,
@@ -13,20 +12,11 @@ import {
   FaUsers,
   FaTimes,
   FaFileAlt,
-  FaJs,
-  FaHtml5,
-  FaCss3,
 } from "react-icons/fa";
-import {
-  SiTypescript,
-  SiPhp,
-  SiMysql,
-  SiLaravel,
-  SiBootstrap,
-  SiTailwindcss,
-} from "react-icons/si";
 import Navbar from "../components/Navbar";
 import { imagess } from "../Image";
+import SkillsFocus from "../components/SkillsFocus";
+import OnGoingWorkMarquee from "../components/OnGoingWorkMarquee";
 import {
   eduExperiences,
   workExperiences,
@@ -79,132 +69,6 @@ function useInView<T extends Element>(
   return [setNode, isInView] as const;
 }
 
-function canonicalizeSkill(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/c\s*#/g, "csharp")
-    .replace(/\.\s*net/g, "dotnet")
-    .replace(/[^a-z0-9]+/g, "");
-}
-
-const SKILL_ICON_ITEMS = [
-  {
-    key: "javascript",
-    icon: <FaJs className="text-yellow-500 text-2xl" />,
-    label: "JavaScript",
-  },
-  {
-    key: "html",
-    icon: <FaHtml5 className="text-red-500 text-2xl" />,
-    label: "HTML",
-  },
-  {
-    key: "react",
-    icon: <FaReact className="text-blue-500 text-2xl" />,
-    label: "React.js",
-  },
-  {
-    key: "typescript",
-    icon: <SiTypescript className="text-blue-700 text-2xl" />,
-    label: "TypeScript",
-  },
-  {
-    key: "css",
-    icon: <FaCss3 className="text-blue-500 text-2xl" />,
-    label: "CSS",
-  },
-  {
-    key: "sass",
-    icon: <FaSass className="text-pink-500 text-2xl" />,
-    label: "Sass",
-  },
-  {
-    key: "php",
-    icon: <SiPhp className="text-indigo-700 text-2xl" />,
-    label: "PHP",
-  },
-  {
-    key: "C#",
-    icon: (
-      <img
-        src={imagess["Csharp"]}
-        alt="C#"
-        loading="lazy"
-        decoding="async"
-        className="w-6 h-6 object-contain"
-      />
-    ),
-    label: "C#",
-  },
-  {
-    key: ".Net Core",
-    icon: (
-      <img
-        src={imagess["NET_Core_Logo"]}
-        alt=".Net Core"
-        loading="lazy"
-        decoding="async"
-        className="w-6 h-6 object-contain"
-      />
-    ),
-    label: ".Net Core",
-  },
-  {
-    key: "mysql",
-    icon: <SiMysql className="text-yellow-700 text-2xl" />,
-    label: "MySQL",
-  },
-  {
-    key: "laravel",
-    icon: <SiLaravel className="text-red-700 text-2xl" />,
-    label: "Laravel",
-  },
-  {
-    key: "bootstrap",
-    icon: <SiBootstrap className="text-purple-700 text-2xl" />,
-    label: "Bootstrap",
-  },
-  {
-    key: "tailwindcss",
-    icon: <SiTailwindcss className="text-cyan-500 text-2xl" />,
-    label: "Tailwind CSS",
-  },
-  {
-    key: "Figma",
-    icon: (
-      <img
-        src={imagess["FigmaLogo"]}
-        alt="Figma"
-        loading="lazy"
-        decoding="async"
-        className="w-6 h-6 object-contain"
-      />
-    ),
-    label: "Figma",
-  },
-] as const;
-
-const SKILL_TEXT_ITEMS = [
-  { key: "frontend-development", label: "Frontend Development" },
-  { key: "lean-ux", label: "Lean UX" },
-  { key: "ui-design", label: "UI Design" },
-  { key: "agile", label: "Agile" },
-  { key: "scrum", label: "Scrum" },
-  { key: "science", label: "Science" },
-  { key: "math", label: "Mathematics" },
-  { key: "lead", label: "Leadership" },
-  { key: "public-broadcasting", label: "Public Broadcasting" },
-  { key: "broadcast-media", label: "Broadcast Media" },
-  { key: "teamwork", label: "Teamwork" },
-  { key: "SofCons", label: "Software Construction" },
-  { key: "VerCont", label: "Version Control" },
-  { key: "SofArch", label: "Software Architecture" },
-  { key: "UI/UX Design", label: "UI/UX Design" },
-  { key: "Hi-Fi Prototype", label: "Hi-Fi Prototype" },
-  { key: "public workshop", label: "Public Workshop" },
-] as const;
-
 function getSliceCountFromWidth(width: number) {
   if (width <= 768) return 3; // md: max 3
   if (width <= 1024) return 4; // lg: max 4
@@ -237,12 +101,25 @@ interface OutputItem {
 
 type ExperienceDescription = string | string[];
 
+type ExperienceStatus = "on going" | "done";
+
+function formatExperienceStatus(status: ExperienceStatus) {
+  return status === "on going" ? "On Going" : "Done";
+}
+
+function getExperienceStatusClassName(status: ExperienceStatus) {
+  return status === "on going"
+    ? "bg-blue-100 text-blue-700"
+    : "bg-gray-200 text-gray-700";
+}
+
 interface ExperienceItemProps {
   title: string;
   description?: ExperienceDescription;
   images?: string[];
   location?: string;
   date?: string;
+  status?: ExperienceStatus;
   output?: OutputItem[];
   skills?: string[];
   sliceCount: number;
@@ -297,6 +174,7 @@ const ExperienceItem = memo(function ExperienceItem({
   images = [],
   location,
   date,
+  status,
   output = [],
   skills = [],
   sliceCount,
@@ -319,21 +197,7 @@ const ExperienceItem = memo(function ExperienceItem({
     }
   }, [images.length, imgIdx]);
 
-  const skillIcons = useMemo(() => {
-    if (!skills?.length) return [];
-    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
-    return SKILL_ICON_ITEMS.filter((item) =>
-      canonicalSkills.has(canonicalizeSkill(item.key)),
-    );
-  }, [skills]);
-
-  const skillTextLabels = useMemo(() => {
-    if (!skills?.length) return [];
-    const canonicalSkills = new Set(skills.map(canonicalizeSkill));
-    return SKILL_TEXT_ITEMS.filter((item) =>
-      canonicalSkills.has(canonicalizeSkill(item.key)),
-    );
-  }, [skills]);
+  // Skills rendering is componentized in <SkillsFocus /> for reuse & maintainability.
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -426,9 +290,18 @@ const ExperienceItem = memo(function ExperienceItem({
         <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
           {/* Lokasi dan Tanggal */}
           <div className="flex gap-2 items-center mb-2 flex-wrap text-gray-700">
-            {location && date && (
-              <span className="text-xs md:text-sm font-bold">
-                {location} | {date}
+            {(location || date || status) && (
+              <span className="text-xs md:text-sm font-bold inline-flex items-center gap-2 flex-wrap">
+                <span>{[location, date].filter(Boolean).join(" | ")}</span>
+                {status && (
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-[11px] md:text-xs font-semibold ${getExperienceStatusClassName(
+                      status,
+                    )}`}
+                  >
+                    {formatExperienceStatus(status)}
+                  </span>
+                )}
               </span>
             )}
           </div>
@@ -466,45 +339,7 @@ const ExperienceItem = memo(function ExperienceItem({
             </p>
           )}
           <div className="mt-4">
-            {skills?.length > 0 && (
-              <div className="flex flex-col gap-2 ">
-                <span className="text-xs md:text-sm font-bold">
-                  Skills Focus
-                </span>
-                <div className="flex flex-wrap gap-2 items-center">
-                  {/* Skill Icons and Labels */}
-                  {skillIcons.length > 0 && (
-                    <span className="relative w-fit max-[485px]:w-full font-medium text-xs flex flex-wrap justify-center gap-3 items-center md:text-sm px-4 py-2 bg-blue-100 rounded-4xl">
-                      {skillIcons.map((item, idx) => (
-                        <span className="relative group" key={item.key}>
-                          {item.icon}
-                          <span
-                            className={`absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
-                              idx % 2 === 0
-                                ? "bottom-full mb-1"
-                                : "top-full mt-1"
-                            }`}
-                          >
-                            {item.label}
-                          </span>
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                  {/* Skill Text Labels for non-icon skills */}
-                  {skillTextLabels.length > 0 && (
-                    <span className="w-fit max-[485px]:w-full font-medium text-xs text-center md:text-sm px-4 py-1 bg-blue-100 rounded-4xl whitespace-normal">
-                      {skillTextLabels.map((item, idx) => (
-                        <span key={item.key}>
-                          {item.label}
-                          {idx < skillTextLabels.length - 1 && ", "}
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
+            <SkillsFocus skills={skills} />
 
             {output.length > 0 && (
               <div className="flex flex-col gap-2 mt-4">
@@ -566,86 +401,91 @@ const ExperienceItem = memo(function ExperienceItem({
               </div>
             )}
             {/* Modal untuk semua gambar */}
-            {showModal && (
-              <div
-                className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
-                onClick={handleCloseModal}
-              >
+            {showModal &&
+              typeof document !== "undefined" &&
+              createPortal(
                 <div
-                  className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
-                  onClick={(e) => e.stopPropagation()}
-                  ref={modalRef}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby={`media-title-${modalId}`}
-                  tabIndex={-1}
+                  className="fixed inset-0 bg-black/40 z-[999] flex items-center justify-center"
+                  onClick={handleCloseModal}
                 >
-                  {/* Header */}
-                  <div className="flex justify-between items-center px-6 py-4 border-b">
-                    <span
-                      id={`media-title-${modalId}`}
-                      className="font-bold text-lg"
-                    >
-                      Media
-                    </span>
-                    <button
-                      className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
-                      onClick={handleCloseModal}
-                      title="Tutup"
-                      aria-label="Tutup modal"
-                      ref={closeButtonRef}
-                    >
-                      <FaTimes />
-                    </button>
-                  </div>
-                  {/* Content */}
-                  <div className="flex flex-col gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
-                    {/* Image preview */}
-                    <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
-                      <img
-                        src={imagess[images[imgIdx]]}
-                        alt={`${title} - media ${imgIdx + 1}`}
-                        className="w-full h-full object-contain rounded shadow bg-white"
-                      />
-                    </div>
-                    {/* Detail */}
-                    <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
-                      <span className="font-semibold text-base mb-2">
-                        {images[imgIdx]
-                          .replace(/[_-]/g, " ")
-                          .replace(/\.[^/.]+$/, "")}
+                  <div
+                    className="w-[756px] h-[776px] max-w-full max-h-full bg-white rounded-lg p-0 shadow-lg relative flex flex-col"
+                    onClick={(e) => e.stopPropagation()}
+                    ref={modalRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby={`media-title-${modalId}`}
+                    tabIndex={-1}
+                  >
+                    {/* Header */}
+                    <div className="flex justify-between items-center px-6 py-4 border-b">
+                      <span
+                        id={`media-title-${modalId}`}
+                        className="font-bold text-lg"
+                      >
+                        Media
                       </span>
-                    </div>
-                  </div>
-                  {/* Footer navigation */}
-                  <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
-                    <span className="text-sm text-gray-600">
-                      {imgIdx + 1} of {images.length}
-                    </span>
-                    <div className="flex gap-2">
                       <button
-                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                        onClick={() => setImgIdx((idx) => Math.max(0, idx - 1))}
-                        disabled={imgIdx === 0}
+                        className="text-gray-600 hover:text-blue-600 text-2xl cursor-pointer"
+                        onClick={handleCloseModal}
+                        title="Tutup"
+                        aria-label="Tutup modal"
+                        ref={closeButtonRef}
                       >
-                        Previous
-                      </button>
-                      <button
-                        className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
-                        onClick={() =>
-                          setImgIdx((idx) =>
-                            Math.min(images.length - 1, idx + 1),
-                          )
-                        }
-                        disabled={imgIdx === images.length - 1}
-                      >
-                        Next
+                        <FaTimes />
                       </button>
                     </div>
+                    {/* Content */}
+                    <div className="flex flex-col gap-0 md:gap-4 px-6 py-4 flex-1 overflow-auto">
+                      {/* Image preview */}
+                      <div className="flex-1 flex items-center justify-center h-full max-h-[525px]">
+                        <img
+                          src={imagess[images[imgIdx]]}
+                          alt={`${title} - media ${imgIdx + 1}`}
+                          className="w-full h-full object-contain rounded shadow bg-white"
+                        />
+                      </div>
+                      {/* Detail */}
+                      <div className="flex-1 flex flex-col justify-start min-w-[220px] px-0 md:px-4 mt-4 md:mt-0">
+                        <span className="font-semibold text-base mb-2">
+                          {images[imgIdx]
+                            .replace(/[_-]/g, " ")
+                            .replace(/\.[^/.]+$/, "")}
+                        </span>
+                      </div>
+                    </div>
+                    {/* Footer navigation */}
+                    <div className="flex items-center justify-between px-6 py-3 border-t bg-gray-50 rounded-b-lg">
+                      <span className="text-sm text-gray-600">
+                        {imgIdx + 1} of {images.length}
+                      </span>
+                      <div className="flex gap-2">
+                        <button
+                          className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                          onClick={() =>
+                            setImgIdx((idx) => Math.max(0, idx - 1))
+                          }
+                          disabled={imgIdx === 0}
+                        >
+                          Previous
+                        </button>
+                        <button
+                          className="px-4 py-2 rounded bg-white border text-blue-700 hover:bg-blue-100 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+                          onClick={() =>
+                            setImgIdx((idx) =>
+                              Math.min(images.length - 1, idx + 1),
+                            )
+                          }
+                          disabled={imgIdx === images.length - 1}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
+                </div>,
+                document.body,
+              )}
           </div>
         )}
       </div>
@@ -654,7 +494,7 @@ const ExperienceItem = memo(function ExperienceItem({
 });
 
 function DashboardUser() {
-  const [activeNavbar, setActiveNavbar] = useState(1);
+  const [activeNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
   const [setAboutRef, aboutInView] = useInView<HTMLDivElement>({
     threshold: 0.01,
@@ -664,7 +504,7 @@ function DashboardUser() {
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
       {/*Navbar*/}
-      <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
+      <Navbar activeNavbar={activeNavbar} />
 
       {/*Content Area*/}
       <div className="w-full min-w-[320px] px-8 py-16 bg-transparent flex flex-col items-center gap-4 ">
@@ -677,7 +517,7 @@ function DashboardUser() {
           ${aboutInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
         >
           <div className="w-full flex flex-col gap-4 items-center">
-            <div className="flex flex-col mt-4 md:flex-row gap-4 px-2 md:px-4 max-w-[1000px] items-center">
+            <div className="w-full flex flex-col mt-4 md:flex-row gap-4 px-2 md:px-4 max-w-[1000px] items-center">
               {/* Responsive Profile Image & Social Media Icons */}
               <div className="relative mx-auto flex items-center justify-center mb-2">
                 <div className="border-4 border-white rounded-full bg-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] overflow-visible flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
@@ -746,7 +586,7 @@ function DashboardUser() {
                       href="https://www.linkedin.com/in/muhammad-burhan-5835841b0/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
+                      className="text-gray-800 hover:text-blue-700 hover:bg-white rounded transition-all duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaLinkedin className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -759,7 +599,7 @@ function DashboardUser() {
                       href="https://github.com/MuhammadBurhan235/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
+                      className="text-gray-800 hover:text-black hover:bg-white rounded-[16px] transition-all duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaGithub className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -772,7 +612,7 @@ function DashboardUser() {
                       href="https://www.instagram.com/muhammadburhan_253/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
+                      className="text-gray-800 hover:text-pink-600 hover:bg-white rounded-[8px] transition-all duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaInstagram className="text-2xl md:text-3xl" />
                       <span className="relative group">
@@ -785,7 +625,7 @@ function DashboardUser() {
                       href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing" // Ganti dengan link CV kamu
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-colors group transition-transform duration-150 motion-reduce:transition-none hover:scale-110"
+                      className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-all duration-150 motion-reduce:transition-none hover:scale-110"
                     >
                       <FaFileAlt className="text-[20px] md:text-[24px]" />
                       <span className="relative group">
@@ -813,6 +653,8 @@ function DashboardUser() {
                     to continuously learning and adapting to user needs and
                     industry trends.
                   </p>
+
+                  <OnGoingWorkMarquee items={workExperiences} />
                 </div>
               </div>
             </div>

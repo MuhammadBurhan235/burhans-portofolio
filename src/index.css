@@ -44,10 +44,26 @@
   }
 }
 
+@keyframes marquee-solo {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .animate-marquee {
   display: flex;
   white-space: nowrap;
   animation: marquee 20s linear infinite;
+}
+
+.animate-marquee-solo {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-solo 12s linear infinite;
 }
 
 @keyframes marquee-vertical {
@@ -80,8 +96,13 @@
   animation-play-state: paused;
 }
 
+.animate-marquee-solo:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
+  .animate-marquee-solo,
   .animate-marquee-vertical,
   .animate-bar,
   .animate-float {

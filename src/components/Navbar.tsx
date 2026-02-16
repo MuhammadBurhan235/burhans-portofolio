@@ -273,6 +273,16 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   ))}
                 </div>
               </div>
+
+              {/* Fog edges */}
+              {/* <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-12 w-6 sm:w-8 bg-gradient-to-r from-white to-transparent"
+              /> */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 right-0 w-6 sm:w-8 bg-gradient-to-l from-white/30 to-transparent"
+              />
             </div>
             {/* Dropdown skill icons & label */}
             {skillMenuOpen && (

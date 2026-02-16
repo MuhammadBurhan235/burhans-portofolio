@@ -8,7 +8,7 @@ import "./index.css";
 // const Layout = lazy(() => import("./Layout"));
 const Landing = lazy(() => import("./components/Landing"));
 const DashUser = lazy(() => import("./Pages/PortfolioMP"));
-const DashCheck = lazy(() => import("./Pages/PortfolioMP copy"));
+const DashCheck = lazy(() => import("./Pages/AncientPortfolioMP"));
 const Scroll = lazy(() => import("./components/Scroll"));
 
 // const Dashboard = lazy(() => import("./components/Dashboard"));
