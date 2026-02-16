@@ -41,7 +41,7 @@ const OnGoingWorkMarquee = memo(function OnGoingWorkMarquee({ items }: Props) {
   };
 
   return (
-    <div className="mt-4 w-full max-w-140 rounded-lg bg-blue-100 shadow-[0_3px_6px_rgba(8,74,131,0.5)] p-3 overflow-hidden">
+    <div className="mt-4 w-full max-w-160 rounded-lg bg-blue-100 shadow-[0_3px_6px_rgba(8,74,131,0.5)] p-3 overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
         <div className="w-full sm:w-auto shrink-0 flex items-center justify-between sm:justify-start gap-2">
           <div className="text-xs font-bold text-blue-700">On Going Work</div>

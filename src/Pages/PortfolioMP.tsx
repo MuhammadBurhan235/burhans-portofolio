@@ -494,7 +494,7 @@ const ExperienceItem = memo(function ExperienceItem({
 });
 
 function DashboardUser() {
-  const [activeNavbar] = useState(1);
+  const [activeNavbar, setActiveNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
   const [setAboutRef, aboutInView] = useInView<HTMLDivElement>({
     threshold: 0.01,
@@ -504,7 +504,7 @@ function DashboardUser() {
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">
       {/*Navbar*/}
-      <Navbar activeNavbar={activeNavbar} />
+      <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 
       {/*Content Area*/}
       <div className="w-full min-w-[320px] px-8 py-16 bg-transparent flex flex-col items-center gap-4 ">
@@ -577,7 +577,7 @@ function DashboardUser() {
                   </div>
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full max-[920px]:w-[430px]">
                 {/* Responsive Name */}
                 <div className="relative w-full font-bold text-lg sm:text-2xl md:text-2xl lg:text-4xl ml-0 md:ml-[-64px] flex flex-row justify-between max-[425px]:justify-center items-center">
                   Muhammad Burhan {/* Social Media Icons */}
@@ -653,8 +653,9 @@ function DashboardUser() {
                     to continuously learning and adapting to user needs and
                     industry trends.
                   </p>
-
-                  <OnGoingWorkMarquee items={workExperiences} />
+                  <div className="w-full items-center justify-center flex">
+                    <OnGoingWorkMarquee items={workExperiences} />
+                  </div>
                 </div>
               </div>
             </div>
