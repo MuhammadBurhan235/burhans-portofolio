@@ -1,10 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/burhans-portofolio/assets/B1-D4QgA0-b.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>M. Burhan's Portfolio</title>
+
+    <!-- GitHub Pages SPA routing fix (pairs with public/404.html) -->
+    <script type="text/javascript">
+      (function (l) {
+        // Convert /?/<route> back into /<route> so React Router can match.
+        if (l.search && l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+
+          var basePath = l.pathname.replace(/\/$/, "");
+          var newUrl = basePath + decoded + l.hash;
+          window.history.replaceState(null, null, newUrl);
+        }
+      })(window.location);
+    </script>
     <script type="module" crossorigin src="/burhans-portofolio/assets/index-Hd-gTtMQ.js"></script>
     <link rel="stylesheet" crossorigin href="/burhans-portofolio/assets/index-DGxQ7IXe.css">
   </head>
