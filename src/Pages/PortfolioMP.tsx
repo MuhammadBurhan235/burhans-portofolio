@@ -1,6 +1,7 @@
 import { memo, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   FaBars,
   FaInstagram,
@@ -75,6 +76,16 @@ function getSliceCountFromWidth(width: number) {
   return 5;
 }
 
+function slugifyTitle(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
+
 function useResponsiveSliceCount() {
   const [sliceCount, setSliceCount] = useState(() => {
     if (typeof window === "undefined") return 3;
@@ -123,6 +134,8 @@ interface ExperienceItemProps {
   output?: OutputItem[];
   skills?: string[];
   sliceCount: number;
+  containerId?: string;
+  onTitleClick?: () => void;
 }
 
 type ExperienceDataItem = Omit<ExperienceItemProps, "sliceCount">;
@@ -142,6 +155,7 @@ const ExperienceSection = memo(function ExperienceSection({
   items,
   sliceCount,
 }: ExperienceSectionProps) {
+  const navigate = useNavigate();
   const [setSectionRef, sectionInView] = useInView<HTMLDivElement>({
     threshold: 0.01,
     rootMargin: "0px 0px -10% 0px",
@@ -162,7 +176,26 @@ const ExperienceSection = memo(function ExperienceSection({
         {title} ({items.length})
       </h2>
       {items.map((exp, idx) => (
-        <ExperienceItem key={`${id}-${idx}`} {...exp} sliceCount={sliceCount} />
+        <ExperienceItem
+          key={`${id}-${idx}`}
+          {...exp}
+          sliceCount={sliceCount}
+          containerId={
+            id === "work-experience"
+              ? `work-experience-${slugifyTitle(exp.title)}`
+              : undefined
+          }
+          onTitleClick={
+            id === "work-experience"
+              ? () =>
+                  navigate(
+                    `/burhans-portofolio/work-experience/${slugifyTitle(
+                      exp.title,
+                    )}`,
+                  )
+              : undefined
+          }
+        />
       ))}
     </div>
   );
@@ -178,6 +211,8 @@ const ExperienceItem = memo(function ExperienceItem({
   output = [],
   skills = [],
   sliceCount,
+  containerId,
+  onTitleClick,
 }: ExperienceItemProps) {
   const [imgIdx, setImgIdx] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -277,15 +312,33 @@ const ExperienceItem = memo(function ExperienceItem({
   }, [showModal]);
 
   return (
-    <div className="float-hover bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]">
-      <h3
-        className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
+    <div
+      id={containerId}
+      className={`float-hover bg-gray-50 rounded-xl p-4 pb-8 w-full flex flex-col gap-3 shadow-[0_-3px_4px_rgba(8,74,131,0.08),0_3px_6px_rgba(8,74,131,0.12)] transition-transform duration-200 motion-reduce:transition-none hover:shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)] ${
+        containerId ? "scroll-mt-24" : ""
+      }`}
+    >
+      {onTitleClick ? (
+        <button
+          type="button"
+          onClick={onTitleClick}
+          className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 text-left cursor-pointer
              bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
              before:content-[''] before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 
              before:w-4 before:h-4 before:rounded-full before:bg-blue-500"
-      >
-        {title}
-      </h3>
+        >
+          {title}
+        </button>
+      ) : (
+        <h3
+          className="relative w-fit font-bold text-sm md:text-base lg:text-lg ml-[-56px] px-[24px] py-[12px] pl-14 
+             bg-blue-100 rounded-4xl shadow-[0_-3px_4px_rgba(8,74,131,0.5),0_3px_6px_rgba(8,74,131,0.5)]
+             before:content-[''] before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 
+             before:w-4 before:h-4 before:rounded-full before:bg-blue-500"
+        >
+          {title}
+        </h3>
+      )}
       <div className="flex flex-col md:flex-row gap-4 w-full bg-amber-0">
         <div className="text-[12px] p-4 pt-0 md:text-sm lg:text-base flex flex-col gap-1 w-full md:w-2/3 ">
           {/* Lokasi dan Tanggal */}
@@ -494,12 +547,32 @@ const ExperienceItem = memo(function ExperienceItem({
 });
 
 function DashboardUser() {
+  const { title: workTitleSlug } = useParams();
   const [activeNavbar, setActiveNavbar] = useState(1);
   const sliceCount = useResponsiveSliceCount();
   const [setAboutRef, aboutInView] = useInView<HTMLDivElement>({
     threshold: 0.01,
     rootMargin: "0px 0px -10% 0px",
   });
+
+  useEffect(() => {
+    if (!workTitleSlug) return;
+    if (typeof document === "undefined") return;
+
+    const timer = window.setTimeout(() => {
+      const el = document.getElementById(`work-experience-${workTitleSlug}`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      document
+        .getElementById("work-experience")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [workTitleSlug]);
 
   return (
     <div className="w-full h-fit bg-[linear-gradient(to_bottom,#084a83_0%,#ECF0F5_16%)] flex flex-col items-center">

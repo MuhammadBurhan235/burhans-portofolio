@@ -19,6 +19,10 @@ const router = createBrowserRouter([
     element: <DashUser />,
   },
   {
+    path: "/burhans-portofolio/work-experience/:title",
+    element: <DashUser />,
+  },
+  {
     path: "/burhans-portofolio/dashcheck",
     element: <DashCheck />,
   },
