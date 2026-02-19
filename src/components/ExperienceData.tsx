@@ -44,7 +44,7 @@ const workExperiences = [
       "Implemented and configured the training application on Hostinger web hosting.",
       "Planned application name: ATLAS (Aviation Training & Learning Application System).",
     ],
-    location: "Politeknik Penerbangan Indonesia Curug (Tangerang) - Maganghub",
+    location: "Indonesian Civil Aviation Polytechnic (Tangerang) - Maganghub",
     date: "Nov 2025 - May 2026",
     images: [],
     skills: [
