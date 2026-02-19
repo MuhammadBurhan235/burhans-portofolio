@@ -27,7 +27,7 @@ import {
   SiTailwindcss,
   SiNodedotjs,
 } from "react-icons/si";
-import { Link } from "react-scroll";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   activeNavbar: number;
@@ -131,6 +131,8 @@ const skillIcons = [
 ];
 
 function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
   // const [showNavbar, setShowNavbar] = useState(true);
   // const [isTop, setIsTop] = useState(true);
   const lastScrollY = useRef(0);
@@ -219,6 +221,56 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
   const isActiveInDropdown = portfolioSections
     .slice(visibleCount)
     .some((sec) => sec.id === active);
+
+  const basePath = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
+  const performScroll = (sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+
+    const offset = 80; // navbar 64px + padding
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    // Always land on the base portfolio route so URLs don't become
+    // /work-experience/:title#section
+    if (location.pathname !== basePath) {
+      navigate(
+        {
+          pathname: basePath,
+          hash: `${sectionId}`,
+        },
+        { replace: true },
+      );
+
+      window.setTimeout(() => performScroll(sectionId), 0);
+      return;
+    }
+
+    navigate(
+      {
+        pathname: location.pathname,
+        search: location.search,
+        hash: `${sectionId}`,
+      },
+      { replace: true },
+    );
+
+    performScroll(sectionId);
+  };
+
+  useEffect(() => {
+    const hash = location.hash?.slice(1);
+    if (!hash) return;
+
+    const timer = window.setTimeout(() => {
+      performScroll(hash);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [location.hash]);
 
   return (
     <>
@@ -345,13 +397,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               {menuOpen && (
                 <div className="absolute top-[64px] right-4 bg-white rounded shadow-lg flex flex-col gap-2 p-2 z-50 min-w-[180px]">
                   {portfolioSections.map((sec) => (
-                    <Link
+                    <button
                       key={sec.id}
-                      to={sec.id}
-                      spy={true}
-                      smooth={true}
-                      offset={-64} // sesuaikan dengan tinggi navbar
-                      duration={500}
+                      type="button"
                       className={`p-3 rounded-md nav-link transition-colors duration-200 text-sm cursor-pointer whitespace-nowrap flex items-center gap-2 ${
                         active === sec.id
                           ? "bg-blue-600 text-white"
@@ -360,12 +408,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                       onClick={() => {
                         setActive(sec.id);
                         setMenuOpen(false);
-                        // HAPUS: scrollIntoView
+                        scrollToSection(sec.id);
                       }}
                     >
                       <span className="text-base">{sec.icon}</span>
                       {sec.label}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
@@ -374,13 +422,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
             {/* Tombol scroll section untuk desktop */}
             <div className="flex max-[500px]:hidden flex-row items-center gap-2 w-auto max-w-full relative">
               {portfolioSections.slice(0, visibleCount).map((sec) => (
-                <Link
+                <button
                   key={sec.id}
-                  to={sec.id}
-                  spy={true}
-                  smooth={true}
-                  offset={-64}
-                  duration={500}
+                  type="button"
                   className={`px-3 py-2 rounded-md nav-link transition-colors duration-200 text-sm md:text-base cursor-pointer whitespace-nowrap flex items-center gap-2
                   ${
                     active === sec.id
@@ -390,11 +434,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   onClick={() => {
                     setActive(sec.id);
                     setMenuOpen(false);
+                    scrollToSection(sec.id);
                   }}
                 >
                   <span className="text-base">{sec.icon}</span>
                   {sec.label}
-                </Link>
+                </button>
               ))}
               {visibleCount < portfolioSections.length && (
                 <div className="relative">
@@ -414,13 +459,9 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   {dropdownOpen && (
                     <div className="absolute top-[52px] right-0 bg-white rounded shadow-lg flex flex-col gap-2 p-2 z-50 min-w-[180px]">
                       {portfolioSections.slice(visibleCount).map((sec) => (
-                        <Link
+                        <button
                           key={sec.id}
-                          to={sec.id}
-                          spy={true}
-                          smooth={true}
-                          offset={-64}
-                          duration={500}
+                          type="button"
                           className={`p-3 rounded-md nav-link transition-colors duration-200 text-sm cursor-pointer whitespace-nowrap flex items-center gap-2
                           ${
                             active === sec.id
@@ -430,11 +471,12 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                           onClick={() => {
                             setActive(sec.id);
                             setDropdownOpen(false);
+                            scrollToSection(sec.id);
                           }}
                         >
                           <span className="text-base">{sec.icon}</span>
                           {sec.label}
-                        </Link>
+                        </button>
                       ))}
                     </div>
                   )}
