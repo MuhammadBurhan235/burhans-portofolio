@@ -267,7 +267,7 @@ export default function SholatCountdownMini({
             </motion.div>
 
             {/* Text column */}
-            <div className="flex flex-col leading-tight flex-1 min-w-0 gap-0.5">
+            <div className="flex flex-col leading-tight flex-1 min-w-0 gap-1">
 
               {/* City row — same style both states */}
               <motion.div layoutId="sholat-city" transition={spring} className={`items-center gap-1 ${expanded ? "flex" : "hidden min-[528px]:flex"}`}>
