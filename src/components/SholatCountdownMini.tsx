@@ -260,7 +260,7 @@ export default function SholatCountdownMini({
               className={[
                 T.iconBg, T.iconText, T.iconShadow, 
                 "flex items-center justify-center",
-                expanded ? "w-10 h-10" : "w-5 h-5",
+                expanded ? "w-10 h-10" : "w-8 h-8 max-[536px]:w-5 max-[536px]:h-5",
               ].join(" ")}
             >
               <FaMosque className={expanded ? "text-base" : "text-sm"} />
