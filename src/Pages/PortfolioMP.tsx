@@ -946,9 +946,9 @@ function DashboardUser() {
           ${aboutInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
         >
           <div className="w-full flex flex-col gap-4 items-center">
-            <div className="w-full flex flex-col mt-4 md:flex-row gap-4 px-2 md:px-4 max-w-[1000px] items-center">
+            <div className="w-full flex flex-col mt-4 md:flex-row md:justify-center gap-4 px-2 md:px-4 max-w-[1000px] items-center">
               {/* Responsive Profile Image & Social Media Icons */}
-              <div className="relative mx-auto flex items-center justify-center mb-2">
+              <div className="relative mx-auto md:mx-0 flex items-center justify-center mb-2 md:mb-0 flex-shrink-0 z-20">
                 <div className="border-4 border-white rounded-full bg-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] overflow-visible flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
                   <img
                     src={
@@ -1006,7 +1006,7 @@ function DashboardUser() {
                   </div>
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full max-[1000px]:w-[470px] max-[768px]:w-full relative z-10">
                 {/* Responsive Name */}
                 <div className="relative w-full font-bold text-lg sm:text-2xl md:text-2xl lg:text-4xl ml-0 md:ml-[-64px] flex flex-row justify-between max-[425px]:justify-center items-center">
                   Muhammad Burhan {/* Social Media Icons */}
