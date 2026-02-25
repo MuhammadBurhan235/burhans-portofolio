@@ -13,6 +13,8 @@ import {
   FaUsers,
   FaTimes,
   FaFileAlt,
+  FaClock,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import { imagess } from "../Image";
@@ -146,6 +148,346 @@ interface ExperienceSectionProps {
   icon: ReactNode;
   items: ExperienceDataItem[];
   sliceCount: number;
+}
+
+const SHOLAT_API_BASE = "https://api.myquran.com/v2/sholat" as const;
+
+type PrayerSchedule = {
+  [key: string]: string;
+};
+
+interface CityOption {
+  id: string;
+  name: string;
+}
+
+const PRAYER_KEYS: { key: string; label: string }[] = [
+  { key: "subuh", label: "Subuh" },
+  { key: "dzuhur", label: "Dzuhur" },
+  { key: "ashar", label: "Ashar" },
+  { key: "maghrib", label: "Maghrib" },
+  { key: "isya", label: "Isya" },
+];
+
+function getNextPrayer(schedule: PrayerSchedule | null) {
+  if (!schedule) return null;
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const day = now.getDate();
+
+  const upcoming = PRAYER_KEYS.map((p) => {
+    const timeStr = schedule[p.key];
+    if (!timeStr) return null;
+
+    const [hStr, mStr] = timeStr.split(":");
+    const hours = Number(hStr ?? 0);
+    const minutes = Number(mStr ?? 0);
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) return null;
+
+    const prayerTime = new Date(year, month, day, hours, minutes, 0, 0);
+    if (prayerTime.getTime() <= now.getTime()) return null;
+
+    return {
+      name: p.label,
+      key: p.key,
+      time: timeStr,
+      date: prayerTime,
+    };
+  }).filter(Boolean) as {
+    name: string;
+    key: string;
+    time: string;
+    date: Date;
+  }[];
+
+  if (upcoming.length === 0) return null;
+
+  upcoming.sort((a, b) => a.date.getTime() - b.date.getTime());
+  const next = upcoming[0];
+
+  const diffMs = next.date.getTime() - now.getTime();
+  const diffMinutesTotal = Math.max(0, Math.floor(diffMs / 60000));
+  const diffHours = Math.floor(diffMinutesTotal / 60);
+  const diffMinutes = diffMinutesTotal % 60;
+
+  const inText =
+    diffHours > 0
+      ? `${diffHours} jam ${diffMinutes} menit`
+      : `${diffMinutes} menit`;
+
+  return {
+    name: next.name,
+    key: next.key,
+    time: next.time,
+    inText,
+  };
+}
+
+const DEFAULT_CITIES = [
+  { query: "Kota Tangerang", label: "Kota Tangerang" },
+  { query: "Kota Bandung", label: "Kota Bandung" },
+];
+
+function SholatScheduleCard() {
+  const [setSectionRef, inView] = useInView<HTMLDivElement>({
+    threshold: 0.01,
+    rootMargin: "0px 0px -10% 0px",
+  });
+
+  const [cities, setCities] = useState<CityOption[]>([]);
+  const [selectedCityId, setSelectedCityId] = useState<string | null>(null);
+  const [selectedCityName, setSelectedCityName] = useState<string>("");
+  const [schedule, setSchedule] = useState<PrayerSchedule | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchCities = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const results = await Promise.all(
+          DEFAULT_CITIES.map(async (c) => {
+            const res = await fetch(
+              `${SHOLAT_API_BASE}/kota/cari/${encodeURIComponent(c.query)}`,
+            );
+
+            if (!res.ok) return null;
+            const json = await res.json();
+            const data = Array.isArray(json?.data) ? json.data : [];
+            if (data.length === 0) return null;
+
+            const match = data.find((city: any) =>
+              typeof city?.lokasi === "string"
+                ? city.lokasi.toLowerCase().includes(c.label.toLowerCase())
+                : false,
+            );
+
+            const chosen = match ?? data[0];
+            if (!chosen?.id) return null;
+
+            return {
+              id: String(chosen.id),
+              name:
+                typeof chosen.lokasi === "string" && chosen.lokasi.trim()
+                  ? chosen.lokasi
+                  : c.label,
+            } satisfies CityOption;
+          }),
+        );
+
+        if (cancelled) return;
+
+        const validCities = results.filter((c): c is CityOption => !!c);
+        setCities(validCities);
+
+        if (validCities.length > 0 && !selectedCityId) {
+          const defaultCity =
+            validCities.find((c) =>
+              c.name.toUpperCase().includes("KOTA TANGERANG"),
+            ) ?? validCities[0];
+
+          setSelectedCityId(defaultCity.id);
+          setSelectedCityName(defaultCity.name);
+        }
+      } catch (e) {
+        if (cancelled) return;
+        setError("Gagal memuat data kota.");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchCities();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCityId]);
+
+  useEffect(() => {
+    if (!selectedCityId) return;
+    let cancelled = false;
+
+    const fetchSchedule = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
+        const res = await fetch(
+          `${SHOLAT_API_BASE}/jadwal/${selectedCityId}/${year}/${month}/${day}`,
+        );
+
+        if (!res.ok) {
+          throw new Error("Gagal memuat jadwal sholat.");
+        }
+
+        const json = await res.json();
+        const jadwal = json?.data?.jadwal;
+
+        if (!cancelled) {
+          setSchedule(jadwal ?? null);
+        }
+      } catch (e) {
+        if (cancelled) return;
+        setError("Gagal memuat jadwal sholat.");
+        setSchedule(null);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchSchedule();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCityId]);
+
+  const nextPrayer = getNextPrayer(schedule);
+
+  return (
+    <div
+      ref={setSectionRef}
+      className={`w-full scroll-mt-24 min-w-[288px] max-w-[1148px] px-4 py-6 md:py-8 rounded-4xl flex flex-col gap-4 items-start bg-white/90 shadow-[-4px_-3px_6px_rgba(8,74,131,0.12),-4px_3px_6px_rgba(8,74,131,0.12)] transition-all duration-700 ease-out motion-reduce:transition-none ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
+      <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 shadow-[0_3px_6px_rgba(8,74,131,0.5)]">
+            <FaClock className="text-lg md:text-xl" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm md:text-base lg:text-lg">
+              Jadwal Sholat Terdekat
+            </span>
+            <span className="text-[11px] md:text-xs text-gray-600">
+              Data real-time dari MyQuran untuk hari ini
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-[11px] md:text-xs text-gray-600 flex items-center gap-1">
+            <FaMapMarkerAlt className="text-blue-600" />
+            Kota:
+          </span>
+          <div className="inline-flex rounded-full bg-blue-50 p-1 shadow-[0_2px_4px_rgba(8,74,131,0.2)]">
+            {cities.length === 0 && (
+              <span className="px-3 py-1 text-[11px] md:text-xs text-gray-600">
+                Memuat kota...
+              </span>
+            )}
+            {cities.map((city) => {
+              const isActive = city.id === selectedCityId;
+              return (
+                <button
+                  key={city.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedCityId(city.id);
+                    setSelectedCityName(city.name);
+                  }}
+                  className={`px-3 md:px-4 py-1 rounded-full text-[11px] md:text-xs font-semibold cursor-pointer transition-colors duration-150 motion-reduce:transition-none ${
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "bg-transparent text-blue-700 hover:bg-blue-100"
+                  }`}
+                >
+                  {city.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full mt-2 md:mt-4 flex flex-col gap-3 md:flex-row md:items-stretch">
+        <div className="flex-1 bg-blue-50 rounded-2xl p-4 flex flex-col justify-between shadow-[0_3px_6px_rgba(8,74,131,0.2)]">
+          {loading && (
+            <p className="text-[12px] md:text-sm text-gray-700">
+              Memuat jadwal sholat hari ini...
+            </p>
+          )}
+          {!loading && error && (
+            <p className="text-[12px] md:text-sm text-red-600">
+              {error} Silakan muat ulang halaman.
+            </p>
+          )}
+          {!loading && !error && (!schedule || !nextPrayer) && (
+            <p className="text-[12px] md:text-sm text-gray-700">
+              Jadwal sholat untuk hari ini tidak tersedia.
+            </p>
+          )}
+
+          {!loading && !error && schedule && nextPrayer && (
+            <>
+              <div className="flex flex-col gap-1 mb-2">
+                <span className="text-[11px] md:text-xs text-gray-600 uppercase tracking-wide">
+                  Sholat terdekat
+                </span>
+                <span className="text-lg md:text-xl font-bold text-blue-800">
+                  {nextPrayer.name} - {nextPrayer.time}
+                </span>
+                <span className="text-[11px] md:text-xs text-gray-700">
+                  Sekitar {nextPrayer.inText} lagi
+                </span>
+              </div>
+              {schedule.tanggal && (
+                <span className="text-[11px] md:text-xs text-gray-600 mt-1">
+                  Tanggal: {schedule.tanggal}
+                </span>
+              )}
+              {selectedCityName && (
+                <span className="text-[11px] md:text-xs text-gray-600 mt-1">
+                  Lokasi: {selectedCityName}
+                </span>
+              )}
+            </>
+          )}
+        </div>
+
+        <div className="flex-[1.4] mt-3 md:mt-0 md:ml-4 bg-white rounded-2xl p-3 md:p-4 shadow-[0_3px_6px_rgba(8,74,131,0.2)] flex flex-col gap-2">
+          <span className="text-[11px] md:text-xs font-semibold text-gray-700 mb-1">
+            Jadwal sholat hari ini
+          </span>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-1">
+            {PRAYER_KEYS.map((p) => {
+              const timeStr = schedule?.[p.key] ?? "-";
+              const isActive = nextPrayer?.key === p.key;
+
+              return (
+                <div
+                  key={p.key}
+                  className={`flex flex-col items-center justify-center rounded-xl border text-[11px] md:text-xs px-2 py-2 shadow-[0_1px_3px_rgba(8,74,131,0.2)] ${
+                    isActive
+                      ? "bg-blue-600 border-blue-700 text-white"
+                      : "bg-white border-blue-100 text-gray-800"
+                  }`}
+                >
+                  <span className="font-semibold mb-0.5">{p.label}</span>
+                  <span className="font-mono text-[11px] md:text-xs">
+                    {timeStr}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const ExperienceSection = memo(function ExperienceSection({
@@ -748,6 +1090,8 @@ function DashboardUser() {
             </div>
           </div>
         </div>
+
+        <SholatScheduleCard />
 
         <ExperienceSection
           id="edu-experience"
