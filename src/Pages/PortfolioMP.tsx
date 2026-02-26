@@ -600,7 +600,7 @@ function DashboardUser() {
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 
       {/*Content Area*/}
-      <div className="w-full min-w-[320px] px-8 py-16 sm:pt-32 bg-transparent flex flex-col items-center gap-4 ">
+      <div className="w-full min-w-[320px] px-8 py-32 sm:pt-16 bg-transparent flex flex-col items-center gap-4 ">
         {/* section about burhan */}
         <div
           id="about-burhan"
