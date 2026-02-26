@@ -600,7 +600,7 @@ function DashboardUser() {
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 
       {/*Content Area*/}
-      <div className="w-full min-w-[320px] px-8 py-16 bg-transparent flex flex-col items-center gap-4 ">
+      <div className="w-full min-w-[320px] px-8 py-16 sm:pt-32 bg-transparent flex flex-col items-center gap-4 ">
         {/* section about burhan */}
         <div
           id="about-burhan"
@@ -610,7 +610,7 @@ function DashboardUser() {
           ${aboutInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
         >
           <div className="w-full flex flex-col gap-4 items-center">
-            <div className="w-full flex flex-col mt-8 sm:mt-4 md:flex-row md:justify-center gap-4 px-2 md:px-4 max-w-[1000px] items-center">
+            <div className="w-full flex flex-col mt-4 md:flex-row md:justify-center gap-4 px-2 md:px-4 max-w-[1000px] items-center">
               {/* Responsive Profile Image & Social Media Icons */}
               <div className="relative mx-auto md:mx-0 flex items-center justify-center mb-2 md:mb-0 flex-shrink-0 z-20">
                 <div className="border-4 border-white rounded-full bg-white shadow-[0_3px_6px_rgba(8,74,131,0.5)] overflow-visible flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
