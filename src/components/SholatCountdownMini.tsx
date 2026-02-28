@@ -6,7 +6,7 @@ import { FaChevronDown, FaMapMarkerAlt, FaMosque, FaTimes } from "react-icons/fa
 // All colours & sizes live here so mini ↔ expanded stay in sync.
 const T = {
   // Card surface
-  cardBg:       "bg-white/90 backdrop-blur",
+  cardBg:       "bg-white/50 backdrop-blur",
   cardBorder:   "border border-blue-100/80",
   cardShadow:   "shadow-[0_4px_20px_rgba(8,74,131,0.18)]",
 
