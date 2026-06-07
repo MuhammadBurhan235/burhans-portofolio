@@ -44,7 +44,7 @@ const workExperiences = [
       "Politeknik Penerbangan Indonesia Curug, Tangerang (PIP/PPI Curug)",
     date: "Jun 2026 - Currently",
     images: [],
-    skills: ["php", "mysql", "javascript", "sass", "hosting", "vps management"],
+    skills: ["php", "mysql", "javascript", "sass", "Hosting", "VPS Management"],
     output: [
       {
         url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd",
