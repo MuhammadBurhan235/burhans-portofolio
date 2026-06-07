@@ -1,0 +1,506 @@
+{{! 
+    REVISI BARISTA WALKING (DIRECT FOLLOW)
+    Fitur: Barista berjalan mengikuti posisi X kursor mouse dari kiri ke kanan.
+}}
+
+<div id="tuku-wrapper" 
+     onmousemove="jalanIkutiKursor(event)" 
+     style="width: 100%; overflow-x: auto; background-color: #f3f4f6; position: relative;">
+
+    <style>
+        /* Animasi Ojol Tetap Ada */
+        @keyframes ojol-masuk {
+            0% { transform: translateX(400px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Animasi Barista 'Bobbing' (Naik turun saat jalan) */
+        @keyframes jalan-menul {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Helper Class */
+        .tuku-hotspot { position: absolute; z-index: 60; cursor: pointer; } /* Z-index paling tinggi agar bisa diklik */
+        
+        .tuku-popup { 
+            opacity: 0; 
+            transition: all 0.2s ease-out; 
+            pointer-events: none; 
+            transform: scale(0.8);
+            z-index: 70;
+        }
+        
+        .tuku-hotspot:hover .tuku-popup { 
+            opacity: 1; 
+            transform: scale(1);
+        }
+
+        /* Area Ojol */
+        .area-ojol:hover .img-ojol {
+            transform: translateX(0) !important; 
+        }
+    </style>
+
+    <div id="canvas-tuku" style="position: relative; width: 1152px; height: 814px; margin: 0 auto; background-color: white; overflow: hidden;">
+
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+            <img src="https://tuku.coffee/_next/static/media/background_desktop.24186be3.webp" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        <div id="si-barista" style="position: absolute; left: 450px; bottom: 220px; width: 224px; height: 288px; z-index: 20; transition: left 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94); pointer-events: none;">
+            <img src="https://tuku.coffee/_next/static/media/01_barista_pose_front.5aa6b1d4.webp" style="width: 100%; height: 100%; object-fit: contain; animation: jalan-menul 0.8s infinite ease-in-out;">
+        </div>
+
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 30; pointer-events: none;">
+            <img src="https://tuku.coffee/_next/static/media/table_desktop.4ae3c07c.webp" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        <div class="tuku-hotspot" style="left: 70px; top: 7px; width: 128px; height: 272px;">
+            <a href="{{{block06buttonlink}}}" style="display:block; width:100%; height:100%;">
+                <img class="tuku-popup" src="https://tuku.coffee/_next/static/media/01_pesan_di_sini_outline.7d3aceec.webp" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top:0; left:0;">
+            </a>
+            <div class="tuku-popup" style="position: absolute; left: 90px; top: 180px; width: 175px;">
+                <img src="https://tuku.coffee/_next/static/media/02_text_box_image.69c74767.webp" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="tuku-hotspot" style="left: 306px; top: 168px; width: 368px; height: 120px;">
+            <a href="#lini-produk" style="display:block; width:100%; height:100%;">
+                <img class="tuku-popup" src="https://tuku.coffee/_next/static/media/06_menu_outline.cea0a188.webp" style="width: 100%; height: 100%; object-fit: contain;">
+            </a>
+            <div class="tuku-popup" style="position: absolute; left: 360px; top: 0px; width: 180px;">
+                <img src="https://tuku.coffee/_next/static/media/menu_tetangga_tuku_type_03.c1a90bf0.webp" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="tuku-hotspot" style="left: 498px; top: 320px; width: 388px; height: 207px;">
+            <a target="_blank" href="https://beragam.co.id/en/" style="display:block; width:100%; height:100%;">
+                <img class="tuku-popup" src="https://tuku.coffee/_next/static/media/05_bergam_roastery_outline.f25ecc01.webp" style="width: 100%; height: 100%; object-fit: contain;">
+            </a>
+            <div class="tuku-popup" style="position: absolute; left: 80px; top: -60px; width: 200px;">
+                <img src="https://tuku.coffee/_next/static/media/beragam_coffee_roastery_type_04.435e4c9a.webp" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="tuku-hotspot" style="left: 186px; top: 385px; width: 280px; height: 130px;">
+            <a href="#lini-produk" style="display:block; width:100%; height:100%;">
+                <img class="tuku-popup" src="https://tuku.coffee/_next/static/media/04_tukudapan_outline.8f41d789.webp" style="width: 100%; height: 100%; object-fit: contain;">
+            </a>
+            <div class="tuku-popup" style="position: absolute; left: -60px; top: -60px; width: 160px;">
+                <img src="https://tuku.coffee/_next/static/media/tukudapan_type_01.0799cc55.webp" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="tuku-hotspot" style="bottom: 102px; left: 46px; width: 395px; height: 190px;">
+            <a href="#lini-produk" style="display:block; width:100%; height:100%;">
+                <img class="tuku-popup" src="https://tuku.coffee/_next/static/media/03_selain_kopi_outline.db9b6e5b.webp" style="width: 100%; height: 100%; object-fit: contain;">
+            </a>
+            <div class="tuku-popup" style="position: absolute; left: 370px; top: -70px; width: 160px;">
+                <img src="https://tuku.coffee/_next/static/media/selain_kopi_type_02.f637f5b2.webp" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="tuku-hotspot area-ojol" style="right: 0; top: 0; width: 200px; height: 814px;">
+             <div class="tuku-popup" style="position: absolute; top: 20px; right: 80px; width: 93px;">
+                 <img src="https://tuku.coffee/_next/static/media/07_ambil_di_sini_outline.bef1bd67.webp" style="width: 100%;">
+             </div>
+             <div class="img-ojol" style="position: absolute; bottom: 0; right: 0; width: 290px; transform: translateX(400px); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); pointer-events: none; z-index: 50;">
+                <img src="https://tuku.coffee/_next/static/media/08_ojol_image_new.f48ea72d.webp" style="width: 100%;">
+             </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="block06-roadmap" style="width: 100%; background: #f8fafc; overflow: hidden;">
+    <style>
+        /* --- MODERN STYLES --- */
+        #block06-roadmap .roadmap-ghost-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 40px 0;
+            font-family: 'Inter', 'Segoe UI', sans-serif; /* Font modern */
+            background: transparent;
+        }
+
+        /* HEADER */
+        .roadmap-header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 20;
+        }
+        .roadmap-header h2 {
+            margin: 0;
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 2rem;
+            letter-spacing: -1px;
+        }
+        .roadmap-header p {
+            margin: 8px 0 0 0;
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* LAYER JALAN */
+        #block06-roadmap .road-layer {
+            width: 100%;
+            height: 400px; /* Tinggi area jalan */
+            position: relative;
+        }
+
+        /* SVG JALAN */
+        #block06-roadmap svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Jalan Belakang (Abu-abu) */
+        #block06-roadmap .road-bg {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 60px;
+            stroke-linecap: round;
+        }
+
+        /* Garis Putus-putus Tengah */
+        #block06-roadmap .road-dash {
+            fill: none;
+            stroke: #cbd5e1;
+            stroke-width: 2px;
+            stroke-dasharray: 15, 25;
+        }
+
+        /* Jalan Progress (Biru yang mengisi) */
+        #block06-roadmap .road-progress {
+            fill: none;
+            stroke: #3b82f6; /* Warna Progress */
+            stroke-width: 60px;
+            stroke-linecap: round;
+            /* Awalnya kosong, diatur JS */
+            stroke-dasharray: 0, 10000; 
+            transition: stroke-dasharray 0.1s linear;
+            opacity: 0.2; /* Sedikit transparan agar texture jalan terlihat */
+        }
+
+        /* PESAWAT */
+        #block06-roadmap .road-plane {
+            position: absolute;
+            width: 120px; /* Ukuran pesawat besar */
+            z-index: 50;
+            pointer-events: none;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)); /* Shadow realistis */
+            transform-origin: center center;
+            transition: transform 0.1s linear;
+        }
+
+        /* PIN WRAPPER (Posisi Absolute) */
+        #block06-roadmap .pin-wrapper {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            opacity: 0.4; /* Default redup */
+            transform: scale(0.8); /* Default kecil */
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek membal (bounce) */
+            filter: grayscale(100%);
+        }
+
+        /* STATE AKTIF (Saat pesawat lewat) */
+        #block06-roadmap .pin-wrapper.active {
+            opacity: 1;
+            transform: scale(1.1); /* Membesar */
+            filter: grayscale(0%);
+            z-index: 60;
+        }
+
+        /* LINGKARAN NOMOR */
+        #block06-roadmap .pin-circle {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #3b82f6;
+            border: 4px solid #3b82f6;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        /* Efek Pulse pada titik aktif */
+        #block06-roadmap .pin-wrapper.active .pin-circle::after {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* KARTU KACA (GLASSMORPHISM) */
+        #block06-roadmap .pin-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 160px;
+            transition: transform 0.3s;
+        }
+
+        #block06-roadmap .pin-card h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #1e293b;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        #block06-roadmap .pin-card p {
+            margin: 5px 0 0 0;
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* Posisi Pin Manual (Sesuaikan % agar pas di kurva) */
+        /* Kita pakai data-trigger-t di HTML untuk logika JS, tapi CSS untuk posisi visual */
+        #block06-roadmap .pos-1 { bottom: 60px; left: 5%; }
+        #block06-roadmap .pos-2 { bottom: 90px; left: 25%; }
+        #block06-roadmap .pos-3 { top: 180px; left: 45%; } 
+        /* Khusus pos 3 text di kanan */
+        #block06-roadmap .pos-3 .pin-card { margin-top: 10px; }
+        
+        #block06-roadmap .pos-4 { top: 40px; right: 28%; }
+        #block06-roadmap .pos-5 { top: 40px; right: 5%; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            #block06-roadmap .road-layer { display: none; }
+            #block06-roadmap .pin-wrapper {
+                position: relative; inset: auto !important;
+                opacity: 1; transform: none; filter: none;
+                flex-direction: row; gap: 15px; margin-bottom: 20px;
+                width: 100%;
+            }
+            #block06-roadmap .pin-circle { margin-bottom: 0; min-width: 48px;}
+            #block06-roadmap .pin-card { text-align: left; width: 100%; }
+        }
+    </style>
+
+    <div class="roadmap-ghost-wrapper">
+        <div class="roadmap-header">
+            <h2>Flight Map Recruitment</h2>
+            <p>Gerakkan kursor/sentuh layar untuk menerbangkan pesawat.</p>
+        </div>
+
+        <div class="road-layer">
+            <svg id="block06-road-svg" viewBox="0 0 1200 400" preserveAspectRatio="none">
+                <defs>
+                    <path id="block06-road-def" d="M -100 350 L 350 350 C 550 350, 600 120, 800 120 L 1300 120" />
+                </defs>
+                
+                <use href="#block06-road-def" class="road-bg" />
+                
+                <path id="block06-road-prog" d="M -100 350 L 350 350 C 550 350, 600 120, 800 120 L 1300 120" class="road-progress" />
+                
+                <use href="#block06-road-def" class="road-dash" />
+            </svg>
+
+            <img 
+                id="block06-road-plane" 
+                class="road-plane"
+                src="https://upload.wikimedia.org/wikipedia/commons/8/86/Airliner_silhouette.svg"
+                style="filter: drop-shadow(0 10px 5px rgba(0,0,0,0.2));"
+                alt="Plane"
+            >
+
+            <div class="pin-wrapper pos-1" data-trigger="0.08">
+                <div class="pin-circle">01</div>
+                <div class="pin-card">
+                    <h4>Registrasi</h4>
+                    <p>Isi form data diri.</p>
+                </div>
+            </div>
+
+            <div class="pin-wrapper pos-2" data-trigger="0.28">
+                <div class="pin-circle">02</div>
+                <div class="pin-card">
+                    <h4>Medex Check</h4>
+                    <p>Tes kesehatan fisik.</p>
+                </div>
+            </div>
+
+            <div class="pin-wrapper pos-3" data-trigger="0.48">
+                <div class="pin-circle">03</div>
+                <div class="pin-card">
+                    <h4>Akademik</h4>
+                    <p>Ujian TPA & Inggris.</p>
+                </div>
+            </div>
+
+            <div class="pin-wrapper pos-4" data-trigger="0.68">
+                <div class="pin-circle">04</div>
+                <div class="pin-card">
+                    <h4>Interview</h4>
+                    <p>Wawancara User.</p>
+                </div>
+            </div>
+
+            <div class="pin-wrapper pos-5" data-trigger="0.88">
+                <div class="pin-circle">05</div>
+                <div class="pin-card">
+                    <h4>Onboard</h4>
+                    <p>Siap Pendidikan.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const container = document.getElementById('block06-roadmap');
+            if (!container) return;
+            
+            const svg = container.querySelector('#block06-road-svg');
+            const pathDef = container.querySelector('#block06-road-def'); // Path referensi
+            const pathProg = container.querySelector('#block06-road-prog'); // Path biru
+            const plane = container.querySelector('#block06-road-plane');
+            const pins = container.querySelectorAll('.pin-wrapper');
+
+            // Cek elemen penting
+            if (!pathDef || !pathProg || !plane) return;
+
+            const pathLen = pathDef.getTotalLength();
+            
+            // Set up stroke-dash untuk progress bar
+            // Kita set dasharray agar bagian "kosong" menutupi seluruh jalan awalnya
+            pathProg.style.strokeDasharray = `${pathLen} ${pathLen}`;
+            pathProg.style.strokeDashoffset = pathLen; // Offset penuh = kosong
+
+            function setPlanePosition(t) {
+                // Batasi t antara 0 dan 1
+                const safeT = Math.max(0, Math.min(1, t));
+                
+                // 1. Hitung panjang saat ini
+                const currentLen = safeT * pathLen;
+                
+                // 2. Update Progress Bar Jalan (Biru)
+                // Offset berkurang = garis biru bertambah
+                pathProg.style.strokeDashoffset = pathLen - currentLen;
+
+                // 3. Update Posisi Pesawat
+                const p = pathDef.getPointAtLength(currentLen);
+                // Ambil titik sedikit di depan untuk hitung rotasi
+                const pNext = pathDef.getPointAtLength(Math.min(currentLen + 10, pathLen)); 
+                
+                const angle = Math.atan2(pNext.y - p.y, pNext.x - p.x) * (180 / Math.PI);
+
+                // Konversi koordinat SVG ke Pixel relatif container
+                const rect = svg.getBoundingClientRect();
+                const vb = svg.viewBox.baseVal;
+                
+                const scaleX = rect.width / vb.width;
+                const scaleY = rect.height / vb.height;
+                
+                // Koordinat visual
+                const visX = (p.x - vb.x) * scaleX;
+                const visY = (p.y - vb.y) * scaleY;
+
+                plane.style.left = `${visX}px`;
+                plane.style.top = `${visY}px`;
+                // Rotasi pesawat (tambah 90deg jika gambar pesawat aslinya menghadap atas)
+                // Asumsi: Gambar menghadap kanan -> rotasi normal
+                plane.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+                // 4. Logika Aktivasi Poin (Auto Trigger)
+                pins.forEach(pin => {
+                    const triggerPoint = parseFloat(pin.dataset.trigger);
+                    // Toleransi jarak (range) dimana pin aktif
+                    // Misal: aktif jika pesawat berada di +/- 8% dari titik trigger
+                    const range = 0.08; 
+
+                    if (safeT >= (triggerPoint - range) && safeT <= (triggerPoint + range)) {
+                        pin.classList.add('active');
+                    } else {
+                        pin.classList.remove('active');
+                    }
+                });
+            }
+
+            // Event Listener Mouse Move
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                // Hitung persentase lebar container (0.0 - 1.0)
+                const t = x / rect.width;
+                
+                requestAnimationFrame(() => {
+                    setPlanePosition(t);
+                });
+            });
+
+            // Touch support untuk HP
+            container.addEventListener('touchmove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left;
+                const t = x / rect.width;
+                 requestAnimationFrame(() => {
+                    setPlanePosition(t);
+                });
+            }, {passive: true});
+
+            // Init posisi awal
+            setPlanePosition(0);
+        })();
+    </script>
+</div>
+
+<script>
+    function jalanIkutiKursor(e) {
+        var wrapper = document.getElementById('tuku-wrapper');
+        var canvas = document.getElementById('canvas-tuku');
+        var barista = document.getElementById('si-barista');
+
+        if (canvas && barista) {
+            // 1. Dapatkan posisi kotak Canvas di layar
+            var rect = canvas.getBoundingClientRect();
+
+            // 2. Hitung posisi mouse RELATIF terhadap Canvas
+            // (Posisi Mouse di Layar - Posisi Kiri Canvas)
+            var mouseX = e.clientX - rect.left;
+
+            // 3. Pusatkan Barista di tengah kursor
+            // (Kurangi setengah lebar Barista, sekitar 112px)
+            var posisiBarista = mouseX - 112;
+
+            // 4. BATASAN (Clamping)
+            // Jangan biarkan barista keluar ke kiri (min -50) atau kanan (max 950)
+            if (posisiBarista < -50) posisiBarista = -50;
+            if (posisiBarista > 950) posisiBarista = 950;
+
+            // 5. Terapkan posisi baru
+            barista.style.left = posisiBarista + "px";
+        }
+    }
+</script>

@@ -10,6 +10,8 @@ const Landing = lazy(() => import("./components/Landing"));
 const DashUser = lazy(() => import("./Pages/PortfolioMP"));
 const DashCheck = lazy(() => import("./Pages/AncientPortfolioMP"));
 const Scroll = lazy(() => import("./components/Scroll"));
+const PixelArtPage = lazy(() => import("./Pages/PixelArtPage"));
+const TukuScene = lazy(() => import("./components/TukuScene"));
 
 // const Dashboard = lazy(() => import("./components/Dashboard"));
 
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
   {
     path: "/burhans-portofolio/scroll",
     element: <Scroll />,
+  },
+  {
+    path: "/burhans-portofolio/pixel-art",
+    element: <PixelArtPage />,
+  },
+  {
+    path: "/burhans-portofolio/tuku-scene",
+    element: <TukuScene />,
   },
   // {
   //  path: "/warungneojapan/dashadmin",
