@@ -33,6 +33,26 @@ const eduExperiences = [
 
 const workExperiences = [
   {
+    title: "Web Developer - Part Time",
+    status: "on going" as const,
+    description: [
+      "Pembaruan Website Utama: Dipercaya untuk melanjutkan pengembangan dan pembaruan arsitektur Company Profile Website - ppicurug.ac.id.",
+      "Pengembangan Berkelanjutan: Saat ini melakukan tahap development secara mandiri di local server institusi dengan fokus pada modernisasi antarmuka dan peningkatan performa website. Preview tersedia pada dokumentasi di bagian output.",
+      "Hard Skill: PHP, MySQL, JavaScript, SCSS, Hosting (Shared Hosting/VPS).",
+    ],
+    location:
+      "Politeknik Penerbangan Indonesia Curug, Tangerang (PIP/PPI Curug)",
+    date: "Jun 2026 - Sekarang",
+    images: [],
+    skills: ["php", "mysql", "javascript", "sass", "hosting", "vps management"],
+    output: [
+      {
+        url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd",
+        label: "Drive",
+      },
+    ],
+  },
+  {
     title:
       "Penata Kelola Sistem dan Teknologi Informasi - Internship (Maganghub)",
     status: "done" as const,
