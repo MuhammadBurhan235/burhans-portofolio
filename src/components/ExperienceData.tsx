@@ -36,12 +36,11 @@ const workExperiences = [
     title: "Web Developer - Part Time",
     status: "on going" as const,
     description: [
-      "Pembaruan Website Utama: Dipercaya untuk melanjutkan pengembangan dan pembaruan arsitektur Company Profile Website - ppicurug.ac.id.",
-      "Pengembangan Berkelanjutan: Saat ini melakukan tahap development secara mandiri di local server institusi dengan fokus pada modernisasi antarmuka dan peningkatan performa website. Preview tersedia pada dokumentasi di bagian output.",
-      "Hard Skill: PHP, MySQL, JavaScript, SCSS, Hosting (Shared Hosting/VPS).",
+      "Main Website Revamp: Entrusted to continue the development and architectural update of the official Company Profile Website (ppicurug.ac.id).",
+      "Continuous Development: Currently executing independent development on the institution's local server, focusing on user interface modernization and website performance optimization. A preview is available in the output documentation section below.",
+      "Hard Skills: PHP, MySQL, JavaScript, SCSS, Web Hosting (Shared Hosting/VPS).",
     ],
-    location:
-      "Politeknik Penerbangan Indonesia Curug, Tangerang (PIP/PPI Curug)",
+    location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
     date: "Jun 2026 - Currently",
     images: [],
     skills: ["php", "mysql", "javascript", "sass", "Hosting", "VPS Management"],

@@ -115,7 +115,7 @@ type ExperienceDescription = string | string[];
 type ExperienceStatus = "on going" | "done";
 
 function formatExperienceStatus(status: ExperienceStatus) {
-  return status === "on going" ? "On Going" : "Done";
+  return status === "on going" ? "Ongoing" : "Done";
 }
 
 function getExperienceStatusClassName(status: ExperienceStatus) {
