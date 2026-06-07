@@ -38,6 +38,7 @@ const workExperiences = [
     description: [
       "Main Website Revamp: Entrusted to continue the development and architectural update of the official Company Profile Website (ppicurug.ac.id).",
       "Continuous Development: Currently executing independent development on the institution's local server, focusing on user interface modernization and website performance optimization. A preview is available in the output documentation section below.",
+      "Future-Proof Architecture: Established a clean and scalable system base, empowering the next IT team to seamlessly continue development as part of PPI Curug's broader digital transformation.",
       "Hard Skills: PHP, MySQL, JavaScript, SCSS, Web Hosting (Shared Hosting/VPS).",
     ],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
