@@ -37,6 +37,15 @@ import Figma_LAAK_2 from "./assets/Figma_LAAK_2.webp";
 import LAAK_Logo from "./assets/LAAK_Logo.webp";
 import Evidence_Digital_Poster from "./assets/Evidence_Digital_Poster.webp";
 import Preview_Digital_Poster from "./assets/Preview_Digital_Poster.webp";
+import Maganghub_Certificate from "./assets/Maganghub_Certificate.jpg";
+import Feature_Preview_Pelatihan_1 from "./assets/FeaturePreviews1.png";
+import Feature_Preview_Pelatihan_2 from "./assets/FeaturePreviews2.png";
+import Feature_Preview_Pelatihan_3 from "./assets/FeaturePreviews3.png";
+import Evidence_Pelatihan_1 from "./assets/pelatihan.overthinkingku1.jpg";
+import Evidence_Pelatihan_2 from "./assets/pelatihan.overthinkingku2.jpg";
+import Evidence_Pelatihan_3 from "./assets/pelatihan.overthinkingku3.jpg";
+import Evidence_Pelatihan_4 from "./assets/pelatihan.overthinkingku4.jpg";
+import Evidence_Pelatihan_5 from "./assets/pelatihan.overthinkingku5.jpg";
 
 export const imagess: { [key: string]: string } = {
   Warung: Warung,
@@ -78,4 +87,13 @@ export const imagess: { [key: string]: string } = {
   LAAK_Logo: LAAK_Logo,
   Evidence_Digital_Poster: Evidence_Digital_Poster,
   Preview_Digital_Poster: Preview_Digital_Poster,
+  Maganghub_Certificate: Maganghub_Certificate,
+  Feature_Preview_Pelatihan_1: Feature_Preview_Pelatihan_1,
+  Feature_Preview_Pelatihan_2: Feature_Preview_Pelatihan_2,
+  Feature_Preview_Pelatihan_3: Feature_Preview_Pelatihan_3,
+  Evidence_Pelatihan_1: Evidence_Pelatihan_1,
+  Evidence_Pelatihan_2: Evidence_Pelatihan_2,
+  Evidence_Pelatihan_3: Evidence_Pelatihan_3,
+  Evidence_Pelatihan_4: Evidence_Pelatihan_4,
+  Evidence_Pelatihan_5: Evidence_Pelatihan_5,
 };

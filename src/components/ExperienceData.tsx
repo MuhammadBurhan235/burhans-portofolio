@@ -49,7 +49,17 @@ const workExperiences = [
     location:
       "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug) - Maganghub",
     date: "Nov 2025 - May 2026",
-    images: [],
+    images: [
+      "Maganghub_Certificate",
+      "Feature_Preview_Pelatihan_1",
+      "Feature_Preview_Pelatihan_2",
+      "Feature_Preview_Pelatihan_3",
+      "Evidence_Pelatihan_1",
+      "Evidence_Pelatihan_2",
+      "Evidence_Pelatihan_3",
+      "Evidence_Pelatihan_4",
+      "Evidence_Pelatihan_5",
+    ],
     skills: [
       "php",
       "mysql",
