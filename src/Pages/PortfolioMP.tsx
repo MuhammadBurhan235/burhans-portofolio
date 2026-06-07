@@ -1,10 +1,4 @@
-import {
-  memo,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { memo, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -658,7 +652,7 @@ function DashboardUser() {
                       </a>
                       {/* CV - bawah kanan */}
                       <a
-                        href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing"
+                        href="https://drive.google.com/file/d/1MzqXIsBNJ_3NGdUNTXU9bMsFJw12FqT2/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="absolute right-[-26.5px] bottom-[-17px] bg-white/80 backdrop-blur rounded-lg shadow flex items-center justify-center w-10 h-10 pointer-events-auto hover:bg-green-50 transition"
@@ -715,7 +709,7 @@ function DashboardUser() {
                       </span>
                     </a>
                     <a
-                      href="https://drive.google.com/drive/folders/1Im3MwJmtDB87Hz-401bSVPGamJmTlHJ1?usp=sharing" // Ganti dengan link CV kamu
+                      href="https://drive.google.com/file/d/1MzqXIsBNJ_3NGdUNTXU9bMsFJw12FqT2/view?usp=sharing" // Ganti dengan link CV kamu
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-800 hover:text-green-700 hover:bg-white items-center justify-center flex transition-all duration-150 motion-reduce:transition-none hover:scale-110"
