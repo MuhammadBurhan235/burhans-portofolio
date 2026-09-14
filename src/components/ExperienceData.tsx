@@ -209,6 +209,77 @@ const workExperiences = [
 
 const projectExperiences = [
   {
+    title: "Seaplane Papua - Charter Booking & Pilot Operations App",
+    description: [
+      "Seaplane Papua is a fictional seaplane charter brand created as a portfolio project to showcase a full-stack, PWA-ready travel product.",
+      "The Nuxt application ships two experiences from a single codebase: a public marketing & booking site, and a Pilot Operations dashboard (PWA).",
+      "* Note: The GitHub repository for this project is currently Private.",
+    ],
+    images: [],
+    location: "Fleksibel",
+    date: "14 Aug 2026 - Sekarang",
+    // Skill disesuaikan dengan dominasi Vue (88.3%), SCSS (5%), dan TypeScript (6.3%) ditambah tech stack intinya
+    skills: [
+      "Vue",
+      "TypeScript",
+      "Sass",
+      "Nuxt 4",
+      "Tailwind CSS",
+      "Pinia",
+      "NestJS",
+    ],
+    output: [
+      {
+        url: "https://susiair.overthinkingku.com/",
+        label: "Live Deployment",
+      },
+    ],
+  },
+  {
+    title: "Custom Element WPBakery – PPIC",
+    description: [
+      "A modular WordPress/WPBakery element library built for Politeknik Penerbangan Indonesia Curug (PPIC), giving non-technical staff a drag-and-drop way to manage complex academic directories, catalogs, and institutional pages — without ever touching PHP.",
+      "Ships 100+ custom shortcode elements tailored to the PPIC institutional website.",
+    ],
+    images: [],
+    location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
+    date: "May 2026 - Sekarang",
+    // Skill disesuaikan dengan komposisi repo: PHP (56.7%), HTML (27.2%), CSS (16.1%)
+    skills: ["PHP", "HTML", "CSS", "WordPress", "WPBakery", "Vanilla JS"],
+    output: [
+      {
+        url: "https://ppicurug.ac.id",
+        label: "Live Website",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/custom-element-wpbakery-ppic",
+        label: "GitHub Repository",
+      },
+    ],
+  },
+  {
+    title: "ATLAS — Aviation Training & Learning Application System",
+    description: [
+      "A suite of custom Moodle plugins built on top of Moodle LMS to run the full end-to-end aviation training workflow for Politeknik Penerbangan Indonesia Curug (PPI Curug).",
+      "Features include public course catalog, self-service payment, registration approval, batch/class scheduling, enrollment, attendance, and course completion.",
+    ],
+    images: [],
+    location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
+    date: "Jan 2026 - Sekarang",
+    // Skill disesuaikan dengan komposisi repo: murni PHP (100%) untuk ekosistem Moodle
+    skills: ["PHP", "Moodle LMS", "System Architecture", "MySQL"],
+    output: [
+      {
+        url: "https://pelatihan.overthinkingku.com/",
+        label: "Live (development stage)",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/atlas_moodle_custom_plugin",
+        label: "GitHub Repository",
+      },
+    ],
+  },
+  {
     title: "SA Medika Clinic Website (Frontend Developer)",
     description: [
       "Client: Klinik Sari Asih Medika (SA Medika Tangerang)",

@@ -1,5 +1,13 @@
 import type { ReactNode } from "react";
-import { FaCss3, FaHtml5, FaJs, FaReact, FaSass } from "react-icons/fa";
+import {
+  FaCss3,
+  FaHtml5,
+  FaJs,
+  FaReact,
+  FaSass,
+  FaWordpress,
+  FaVuejs,
+} from "react-icons/fa";
 import {
   SiBootstrap,
   SiLaravel,
@@ -7,6 +15,9 @@ import {
   SiPhp,
   SiTailwindcss,
   SiTypescript,
+  SiNuxtdotjs,
+  SiNestjs,
+  SiMoodle,
 } from "react-icons/si";
 import { imagess } from "../Image";
 
@@ -50,6 +61,36 @@ function defineSkillIconItem(key: string, icon: ReactNode, label: string) {
 }
 
 export const SKILL_ICON_ITEMS = [
+  defineSkillIconItem(
+    "vue",
+    <FaVuejs className="text-emerald-500 text-2xl" />,
+    "Vue.js",
+  ),
+  defineSkillIconItem(
+    "nuxt4", // atau "nuxt"
+    <SiNuxtdotjs className="text-green-600 text-2xl" />,
+    "Nuxt",
+  ),
+  defineSkillIconItem(
+    "nestjs",
+    <SiNestjs className="text-red-600 text-2xl" />,
+    "NestJS",
+  ),
+  defineSkillIconItem(
+    "wordpress",
+    <FaWordpress className="text-blue-600 text-2xl" />,
+    "WordPress",
+  ),
+  defineSkillIconItem(
+    "moodlelms", // canonical form dari "Moodle LMS"
+    <SiMoodle className="text-orange-500 text-2xl" />,
+    "Moodle LMS",
+  ),
+  defineSkillIconItem(
+    "moodle",
+    <SiMoodle className="text-orange-500 text-2xl" />,
+    "Moodle",
+  ),
   defineSkillIconItem(
     "javascript",
     <FaJs className="text-yellow-500 text-2xl" />,
@@ -142,6 +183,10 @@ export const SKILL_ICON_ITEMS = [
 
 // Central registry for skill text labels. Keys can be any raw form; canonicalization handles variants.
 const SKILL_TEXT_LABELS: Record<string, string> = {
+  pinia: "Pinia",
+  wpbakery: "WPBakery",
+  vanillajs: "Vanilla JS",
+  systemarchitecture: "System Architecture",
   "frontend-development": "Frontend Development",
   "lean-ux": "Lean UX",
   "ui-design": "UI Design",
