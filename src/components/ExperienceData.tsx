@@ -209,13 +209,14 @@ const workExperiences = [
 
 const projectExperiences = [
   {
-    title: "Seaplane Papua - Charter Booking & Pilot Operations App",
+    title: "Seaplane Papua - Charter Booking Web App",
     description: [
-      "Proyek portofolio berupa aplikasi full-stack dan PWA-ready untuk merek pemesanan charter pesawat amfibi fiktif (Seaplane Papua).",
-      "Menghadirkan dua ekosistem dari satu basis kode Nuxt: situs publik untuk pencarian rute penerbangan dan checkout multi-langkah (termasuk peta kursi interaktif), serta dasbor Operasi Pilot (PWA) otentikasi untuk melacak jadwal tugas, batas jam terbang regulatori (menggunakan Chart.js), dan masa berlaku dokumen.",
-      "Dibangun dengan antarmuka yang sepenuhnya responsif (sidebar pada desktop yang beradaptasi menjadi bottom navigation bar di mobile) menggunakan Nuxt 4, Pinia, Tailwind CSS, dan SCSS, serta didukung oleh API backend NestJS + Prisma ORM.",
-      "Dioptimalkan dengan standar Progressive Web App (PWA) lengkap dengan service worker dan in-app install banner, lalu di-deploy secara mandiri ke production VPS menggunakan PM2 Node server dan Caddy reverse proxy.",
-      "* Catatan: Repositori GitHub untuk proyek ini saat ini berstatus Private.",
+      "Architected a full-stack Progressive Web App (PWA) for an exclusive seaplane charter service, streamlining the customer journey from destination discovery to ticket booking using Nuxt 4 and a NestJS backend.",
+      "Built an engaging promotional and exploration portal, featuring interactive destination showcases and detailed fleet catalogs designed to drive user conversion.",
+      "Engineered a seamless multi-step checkout flow, highlighting a dynamic, interactive cabin seat map that automatically adapts its layout to various aircraft configurations (Cessna, Twin Otter, Pilatus).",
+      "Delivered a native-like mobile experience by implementing core PWA standards, including custom install banners and robust responsiveness crafted with Tailwind CSS and SCSS.",
+      "Executed end-to-end production deployment on a self-managed Linux VPS, establishing a secure environment using PM2 for Node.js process management and Caddy for reverse proxy routing.",
+      "* Note: The GitHub repository for this project is currently Private to protect backend architecture and business logic.",
     ],
     images: [],
     location: "Fleksibel",
