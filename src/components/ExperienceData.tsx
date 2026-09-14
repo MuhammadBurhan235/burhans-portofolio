@@ -316,7 +316,7 @@ const projectExperiences = [
     ],
     images: ["Evidence_Al_Fath_Web", "Preview_Al_Fath_Web"],
     location: "Fleksibel",
-    date: "Jul 2025 - Sekarang",
+    date: "Jul 2025 - Dec 2025",
     skills: [
       "react",
       "javascript",
