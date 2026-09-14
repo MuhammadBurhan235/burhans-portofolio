@@ -219,8 +219,8 @@ const projectExperiences = [
       "* Note: The GitHub repository for this project is currently Private to protect backend architecture and business logic.",
     ],
     images: [],
-    location: "Fleksibel",
-    date: "14 Aug 2026 - Sekarang",
+    location: "Flexible",
+    date: "14 Aug 2026 - Present",
     skills: [
       "Vue",
       "TypeScript",
@@ -245,7 +245,7 @@ const projectExperiences = [
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
-    date: "May 2026 - Sekarang",
+    date: "May 2026 - Present",
     // Skill disesuaikan dengan komposisi repo: PHP (56.7%), HTML (27.2%), CSS (16.1%)
     skills: ["PHP", "HTML", "CSS", "WordPress", "WPBakery", "Vanilla JS"],
     output: [
@@ -259,7 +259,7 @@ const projectExperiences = [
       },
       {
         url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd?usp=sharing",
-        label: "Dokumentasi Bukti",
+        label: "Evidence",
       },
     ],
   },
@@ -272,7 +272,7 @@ const projectExperiences = [
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
-    date: "May 2026 - Sekarang",
+    date: "May 2026 - Present",
     skills: ["PHP", "HTML", "CSS", "WordPress", "WPBakery", "Vanilla JS"],
     output: [
       {
@@ -293,7 +293,7 @@ const projectExperiences = [
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
-    date: "Jan 2026 - Sekarang",
+    date: "Jan 2026 - Present",
     skills: ["PHP", "Moodle LMS", "System Architecture", "MySQL"],
     output: [
       {
@@ -315,7 +315,7 @@ const projectExperiences = [
       "*This project is not affiliated with the Al Fath organization.",
     ],
     images: ["Evidence_Al_Fath_Web", "Preview_Al_Fath_Web"],
-    location: "Fleksibel",
+    location: "Flexible",
     date: "Jul 2025 - Dec 2025",
     skills: [
       "react",
@@ -340,8 +340,8 @@ const projectExperiences = [
       "GitHub Pages / Portfolio Website: https://muhammadburhan235.github.io/burhans-portofolio/",
     ],
     images: ["Evidence_Project_Porto", "Preview_Porto_1", "Preview_Porto_2"],
-    location: "Fleksibel",
-    date: "Jul 2025 - Sekarang",
+    location: "Flexible",
+    date: "Jul 2025 - Present",
     skills: ["react", "typescript", "tailwindcss"],
     output: [
       {
@@ -361,7 +361,7 @@ const projectExperiences = [
       "Figma: https://www.figma.com/design/Z4NgEAWkwV0N50SeHKspyR/IVANET?node-id=0-1&t=475yQmJf7QDLoFn3-1",
     ],
     images: ["Figma_IVANET"],
-    location: "Fleksibel",
+    location: "Flexible",
     date: "8 Sep 2025 - 23 Sep 2025",
     skills: ["Figma", "UI/UX Design", "Hi-Fi Prototype"],
     output: [
