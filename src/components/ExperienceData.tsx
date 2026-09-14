@@ -272,9 +272,9 @@ const projectExperiences = [
   {
     title: "Custom Element WPBakery – PPIC",
     description: [
-      "Plugin ekstensifikasi / Add-on kustom yang memperluas fungsi WPBakery Page Builder untuk mengelola tata letak dan konten pada Portal Akademik PPIC (ppicurug.ac.id) agar dapat dikelola dan didesain secara drag & drop oleh non-programmer.[cite: 7]",
-      "Dirancang sebagai solusi manajemen konten visual berskala besar, yang mengotomatiskan render katalog data yang kompleks (seperti direktori dosen yang dapat di-filter, galeri, dan katalog pelatihan) dengan mengonversi data mentah dari spreadsheet/CSV menjadi UI yang rapi secara real-time.[cite: 7]",
-      "Diperkaya dengan fitur integrasi multi-file agar satu custom element ini dapat menghasilkan variasi elemen WPBakery yang sangat beragam.[cite: 7]",
+      "Plugin ekstensifikasi / Add-on kustom yang memperluas fungsi WPBakery Page Builder untuk mengelola tata letak dan konten pada Portal Akademik PPIC (ppicurug.ac.id) agar dapat dikelola dan didesain secara drag & drop oleh non-programmer.",
+      "Dirancang sebagai solusi manajemen konten visual berskala besar, yang mengotomatiskan render katalog data yang kompleks (seperti direktori dosen yang dapat di-filter, galeri, dan katalog pelatihan) dengan mengonversi data mentah dari spreadsheet/CSV menjadi UI yang rapi secara real-time.",
+      "Diperkaya dengan fitur integrasi multi-file agar satu custom element ini dapat menghasilkan variasi elemen WPBakery yang sangat beragam.",
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
@@ -294,8 +294,8 @@ const projectExperiences = [
   {
     title: "ATLAS — Aviation Training & Learning Application System",
     description: [
-      "Serangkaian plugin Moodle kustom yang dibangun di atas Moodle LMS untuk menjalankan seluruh alur kerja pelatihan penerbangan end-to-end bagi Politeknik Penerbangan Indonesia Curug (PPI Curug) — mulai dari katalog kursus publik dan pembayaran mandiri, persetujuan pendaftaran, penjadwalan batch/kelas, enrollment peserta, pencatatan kehadiran, hingga penyelesaian kursus.[cite: 8]",
-      "Sistem bawaan Moodle LMS pada dasarnya tidak mendukung alur pelatihan untuk peserta eksternal (katalog publik → pendaftaran berbayar → penjadwalan batch oleh admin → kehadiran → sertifikat). Repositori ini berisi plugin-plugin yang dikembangkan khusus untuk menjembatani celah tersebut, sehingga PPI Curug dapat menerima pendaftaran pelatihan dari institusi/perusahaan penerbangan luar dan menjalankan seluruh siklus pelatihan di dalam satu instans Moodle yang sama.[cite: 8]",
+      "Serangkaian plugin Moodle kustom yang dibangun di atas Moodle LMS untuk menjalankan seluruh alur kerja pelatihan penerbangan end-to-end bagi Politeknik Penerbangan Indonesia Curug (PPI Curug) — mulai dari katalog kursus publik dan pembayaran mandiri, persetujuan pendaftaran, penjadwalan batch/kelas, enrollment peserta, pencatatan kehadiran, hingga penyelesaian kursus.",
+      "Sistem bawaan Moodle LMS pada dasarnya tidak mendukung alur pelatihan untuk peserta eksternal (katalog publik → pendaftaran berbayar → penjadwalan batch oleh admin → kehadiran → sertifikat). Repositori ini berisi plugin-plugin yang dikembangkan khusus untuk menjembatani celah tersebut, sehingga PPI Curug dapat menerima pendaftaran pelatihan dari institusi/perusahaan penerbangan luar dan menjalankan seluruh siklus pelatihan di dalam satu instans Moodle yang sama.",
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
