@@ -272,32 +272,6 @@ const projectExperiences = [
   {
     title: "Custom Element WPBakery – PPIC",
     description: [
-      "A modular WordPress/WPBakery element library built for Politeknik Penerbangan Indonesia Curug (PPIC), giving non-technical staff a drag-and-drop way to manage complex academic directories, catalogs, and institutional pages — without ever touching PHP.",
-      "Ships 100+ custom shortcode elements tailored to the PPIC institutional website.",
-    ],
-    images: [],
-    location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
-    date: "May 2026 - Present",
-    // Skill disesuaikan dengan komposisi repo: PHP (56.7%), HTML (27.2%), CSS (16.1%)
-    skills: ["PHP", "HTML", "CSS", "WordPress", "WPBakery", "Vanilla JS"],
-    output: [
-      {
-        url: "https://ppicurug.ac.id",
-        label: "Live Website",
-      },
-      {
-        url: "https://github.com/MuhammadBurhan235/custom-element-wpbakery-ppic",
-        label: "GitHub Repository",
-      },
-      {
-        url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd?usp=sharing",
-        label: "Evidence",
-      },
-    ],
-  },
-  {
-    title: "Custom Element WPBakery – PPIC",
-    description: [
       "Plugin ekstensifikasi / Add-on kustom yang memperluas fungsi WPBakery Page Builder untuk mengelola tata letak dan konten pada Portal Akademik PPIC (ppicurug.ac.id) agar dapat dikelola dan didesain secara drag & drop oleh non-programmer.[cite: 7]",
       "Dirancang sebagai solusi manajemen konten visual berskala besar, yang mengotomatiskan render katalog data yang kompleks (seperti direktori dosen yang dapat di-filter, galeri, dan katalog pelatihan) dengan mengonversi data mentah dari spreadsheet/CSV menjadi UI yang rapi secara real-time.[cite: 7]",
       "Diperkaya dengan fitur integrasi multi-file agar satu custom element ini dapat menghasilkan variasi elemen WPBakery yang sangat beragam.[cite: 7]",
