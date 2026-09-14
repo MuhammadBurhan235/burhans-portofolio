@@ -211,10 +211,10 @@ const projectExperiences = [
   {
     title: "Seaplane Papua - Charter Booking & Pilot Operations App",
     description: [
-      "Proyek portofolio berupa aplikasi full-stack dan PWA-ready untuk merek pemesanan charter pesawat amfibi fiktif (Seaplane Papua).[cite: 14]",
-      "Menghadirkan dua ekosistem dari satu basis kode Nuxt: situs publik untuk pencarian rute penerbangan dan checkout multi-langkah (termasuk peta kursi interaktif), serta dasbor Operasi Pilot (PWA) otentikasi untuk melacak jadwal tugas, batas jam terbang regulatori (menggunakan Chart.js), dan masa berlaku dokumen.[cite: 14]",
-      "Dibangun dengan antarmuka yang sepenuhnya responsif (sidebar pada desktop yang beradaptasi menjadi bottom navigation bar di mobile) menggunakan Nuxt 4, Pinia, Tailwind CSS, dan SCSS, serta didukung oleh API backend NestJS + Prisma ORM.[cite: 14]",
-      "Dioptimalkan dengan standar Progressive Web App (PWA) lengkap dengan service worker dan in-app install banner, lalu di-deploy secara mandiri ke production VPS menggunakan PM2 Node server dan Caddy reverse proxy.[cite: 14]",
+      "Proyek portofolio berupa aplikasi full-stack dan PWA-ready untuk merek pemesanan charter pesawat amfibi fiktif (Seaplane Papua).",
+      "Menghadirkan dua ekosistem dari satu basis kode Nuxt: situs publik untuk pencarian rute penerbangan dan checkout multi-langkah (termasuk peta kursi interaktif), serta dasbor Operasi Pilot (PWA) otentikasi untuk melacak jadwal tugas, batas jam terbang regulatori (menggunakan Chart.js), dan masa berlaku dokumen.",
+      "Dibangun dengan antarmuka yang sepenuhnya responsif (sidebar pada desktop yang beradaptasi menjadi bottom navigation bar di mobile) menggunakan Nuxt 4, Pinia, Tailwind CSS, dan SCSS, serta didukung oleh API backend NestJS + Prisma ORM.",
+      "Dioptimalkan dengan standar Progressive Web App (PWA) lengkap dengan service worker dan in-app install banner, lalu di-deploy secara mandiri ke production VPS menggunakan PM2 Node server dan Caddy reverse proxy.",
       "* Catatan: Repositori GitHub untuk proyek ini saat ini berstatus Private.",
     ],
     images: [],
