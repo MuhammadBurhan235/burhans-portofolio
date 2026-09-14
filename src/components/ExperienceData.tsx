@@ -48,8 +48,16 @@ const workExperiences = [
     skills: ["php", "mysql", "javascript", "sass", "Hosting", "VPS Management"],
     output: [
       {
+        url: "https://ppicurug.ac.id",
+        label: "PPI Curug Official Website",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/custom-element-wpbakery-ppic",
+        label: "Custom Element WPBakery Plugin GitHub Repository",
+      },
+      {
         url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd",
-        label: "Drive",
+        label: "Documentation and Evidence of web ppicurug.ac.id Development",
       },
     ],
   },
@@ -99,6 +107,10 @@ const workExperiences = [
     ],
     output: [
       {
+        url: "https://ppicurug.ac.id",
+        label: "PPI Curug Official Website",
+      },
+      {
         url: "https://lms.ppicurug.ac.id",
         label: "ATLAS Development Preview",
       },
@@ -116,7 +128,7 @@ const workExperiences = [
       },
       {
         url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd",
-        label: "Evidence of web ppicurug.ac.id",
+        label: "Documentation and Evidence of web ppicurug.ac.id Development",
       },
     ],
   },
