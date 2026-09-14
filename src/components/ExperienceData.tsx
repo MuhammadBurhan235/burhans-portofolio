@@ -58,6 +58,7 @@ const workExperiences = [
       "Penata Kelola Sistem dan Teknologi Informasi - Internship (Maganghub)",
     status: "done" as const,
     description: [
+      "The Certificate of Completion is in the media section.",
       "Hard Skills: PHP, MySQL, JavaScript, SCSS, Hosting (Shared Hosting/Linux VPS), Moodle (LMS), WordPress, Open Journal System (OJS), VPS Management, Web Security, System Architecture (ERD), Git.",
       "(Project 1) Learning Management System (LMS) Development: Designed and developed ATLAS (Aviation Training & Learning Application System), an end-to-end Moodle-based application to digitize the registration and training processes between PPIC and partner institutions. The development process included designing business processes (Flowcharts), system architecture, and database relationships (ERD), up to the implementation stage and full configuration on Hostinger web hosting. (Preview Link: ATLAS Website Preview)",
       "(Project 1) Custom Moodle Plugin Development: Created the All-in-1 Flow feature and independently built a centralized scheduling system plugin ready to be installed on Moodle. This innovation successfully simplified the training management workflow and effectively replaced the manual recording system that previously used spreadsheets. An overview can be seen at the following link.",
@@ -100,6 +101,22 @@ const workExperiences = [
       {
         url: "https://lms.ppicurug.ac.id",
         label: "ATLAS Development Preview",
+      },
+      {
+        url: "https://journal.ppicurug.ac.id/",
+        label: "Journal PPI Curug Website",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/atlas_moodle_custom_plugin",
+        label: "Atlas Moodle Custom Plugin Repository",
+      },
+      {
+        url: "https://drive.google.com/drive/folders/1EkxuYC1bw-e7EV6wWqjnM7g3VP7BM45g",
+        label: "Soft Skills certificate obtained in this program",
+      },
+      {
+        url: "https://drive.google.com/drive/folders/1Ii3paiCxLpaD8X9lguBuQZn8lMMjaUwd",
+        label: "Evidence of web ppicurug.ac.id",
       },
     ],
   },
