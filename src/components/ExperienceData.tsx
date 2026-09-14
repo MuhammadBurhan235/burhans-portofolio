@@ -211,14 +211,15 @@ const projectExperiences = [
   {
     title: "Seaplane Papua - Charter Booking & Pilot Operations App",
     description: [
-      "Seaplane Papua is a fictional seaplane charter brand created as a portfolio project to showcase a full-stack, PWA-ready travel product.",
-      "The Nuxt application ships two experiences from a single codebase: a public marketing & booking site, and a Pilot Operations dashboard (PWA).",
-      "* Note: The GitHub repository for this project is currently Private.",
+      "Proyek portofolio berupa aplikasi full-stack dan PWA-ready untuk merek pemesanan charter pesawat amfibi fiktif (Seaplane Papua).[cite: 14]",
+      "Menghadirkan dua ekosistem dari satu basis kode Nuxt: situs publik untuk pencarian rute penerbangan dan checkout multi-langkah (termasuk peta kursi interaktif), serta dasbor Operasi Pilot (PWA) otentikasi untuk melacak jadwal tugas, batas jam terbang regulatori (menggunakan Chart.js), dan masa berlaku dokumen.[cite: 14]",
+      "Dibangun dengan antarmuka yang sepenuhnya responsif (sidebar pada desktop yang beradaptasi menjadi bottom navigation bar di mobile) menggunakan Nuxt 4, Pinia, Tailwind CSS, dan SCSS, serta didukung oleh API backend NestJS + Prisma ORM.[cite: 14]",
+      "Dioptimalkan dengan standar Progressive Web App (PWA) lengkap dengan service worker dan in-app install banner, lalu di-deploy secara mandiri ke production VPS menggunakan PM2 Node server dan Caddy reverse proxy.[cite: 14]",
+      "* Catatan: Repositori GitHub untuk proyek ini saat ini berstatus Private.",
     ],
     images: [],
     location: "Fleksibel",
     date: "14 Aug 2026 - Sekarang",
-    // Skill disesuaikan dengan dominasi Vue (88.3%), SCSS (5%), dan TypeScript (6.3%) ditambah tech stack intinya
     skills: [
       "Vue",
       "TypeScript",
@@ -230,7 +231,7 @@ const projectExperiences = [
     ],
     output: [
       {
-        url: "https://susiair.overthinkingku.com/",
+        url: "http://seaplanepapua.overthinkingku.com/",
         label: "Live Deployment",
       },
     ],
@@ -258,49 +259,45 @@ const projectExperiences = [
     ],
   },
   {
-    title: "ATLAS — Aviation Training & Learning Application System",
+    title: "Custom Element WPBakery – PPIC",
     description: [
-      "A suite of custom Moodle plugins built on top of Moodle LMS to run the full end-to-end aviation training workflow for Politeknik Penerbangan Indonesia Curug (PPI Curug).",
-      "Features include public course catalog, self-service payment, registration approval, batch/class scheduling, enrollment, attendance, and course completion.",
+      "Plugin ekstensifikasi / Add-on kustom yang memperluas fungsi WPBakery Page Builder untuk mengelola tata letak dan konten pada Portal Akademik PPIC (ppicurug.ac.id) agar dapat dikelola dan didesain secara drag & drop oleh non-programmer.[cite: 7]",
+      "Dirancang sebagai solusi manajemen konten visual berskala besar, yang mengotomatiskan render katalog data yang kompleks (seperti direktori dosen yang dapat di-filter, galeri, dan katalog pelatihan) dengan mengonversi data mentah dari spreadsheet/CSV menjadi UI yang rapi secara real-time.[cite: 7]",
+      "Diperkaya dengan fitur integrasi multi-file agar satu custom element ini dapat menghasilkan variasi elemen WPBakery yang sangat beragam.[cite: 7]",
     ],
     images: [],
     location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
-    date: "Jan 2026 - Sekarang",
-    // Skill disesuaikan dengan komposisi repo: murni PHP (100%) untuk ekosistem Moodle
-    skills: ["PHP", "Moodle LMS", "System Architecture", "MySQL"],
+    date: "May 2026 - Sekarang",
+    skills: ["PHP", "HTML", "CSS", "WordPress", "WPBakery", "Vanilla JS"],
     output: [
       {
-        url: "https://pelatihan.overthinkingku.com/",
-        label: "Live (development stage)",
+        url: "https://ppicurug.ac.id",
+        label: "Live Website",
       },
       {
-        url: "https://github.com/MuhammadBurhan235/atlas_moodle_custom_plugin",
+        url: "https://github.com/MuhammadBurhan235/custom-element-wpbakery-ppic",
         label: "GitHub Repository",
       },
     ],
   },
   {
-    title: "SA Medika Clinic Website (Frontend Developer)",
+    title: "ATLAS — Aviation Training & Learning Application System",
     description: [
-      "Client: Klinik Sari Asih Medika (SA Medika Tangerang)",
-      "Contributed as one of the Frontend Developers (Hard Skills: HTML, CSS, SCSS, Javascript, PHP)",
-      "Live Website: https://samedika.com/",
+      "Serangkaian plugin Moodle kustom yang dibangun di atas Moodle LMS untuk menjalankan seluruh alur kerja pelatihan penerbangan end-to-end bagi Politeknik Penerbangan Indonesia Curug (PPI Curug) — mulai dari katalog kursus publik dan pembayaran mandiri, persetujuan pendaftaran, penjadwalan batch/kelas, enrollment peserta, pencatatan kehadiran, hingga penyelesaian kursus.[cite: 8]",
+      "Sistem bawaan Moodle LMS pada dasarnya tidak mendukung alur pelatihan untuk peserta eksternal (katalog publik → pendaftaran berbayar → penjadwalan batch oleh admin → kehadiran → sertifikat). Repositori ini berisi plugin-plugin yang dikembangkan khusus untuk menjembatani celah tersebut, sehingga PPI Curug dapat menerima pendaftaran pelatihan dari institusi/perusahaan penerbangan luar dan menjalankan seluruh siklus pelatihan di dalam satu instans Moodle yang sama.[cite: 8]",
     ],
-    images: ["Preview_Web_Klinik", "Evidence_Web_Klinik"],
-    location: "Klinik SA Medika, Tangerang",
-    date: "Aug 2025 - Sekarang",
-    skills: [
-      "html",
-      "css",
-      "sass",
-      "javascript",
-      "php",
-      "frontend-development",
-    ],
+    images: [],
+    location: "Indonesian Civil Aviation Polytechnic - Curug (PPI Curug)",
+    date: "Jan 2026 - Sekarang",
+    skills: ["PHP", "Moodle LMS", "System Architecture", "MySQL"],
     output: [
       {
-        url: "https://samedika.com/",
-        label: "https://samedika.com/",
+        url: "https://lms.ppicurug.ac.id",
+        label: "Live (Tahap Pengembangan)",
+      },
+      {
+        url: "https://github.com/MuhammadBurhan235/atlas_moodle_custom_plugin",
+        label: "Atlas Moodle Custom Plugin",
       },
     ],
   },
